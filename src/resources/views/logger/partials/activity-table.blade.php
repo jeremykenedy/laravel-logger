@@ -116,13 +116,32 @@ if (isset($hoverable) && $hoverable === true) {
                         </span>
                     </td>
                     <td>
+
+
+
                         @if($hoverable)
-                            {{$activity->route}}
+
+
+{{--                             {{$activity->route}} --}}
+
+{{ showCleanRoutUrl($activity->route) }}
+
+
                         @else
+
+
+
                             <a href="@if($activity->route != '/')/@endif{{$activity->route}}">
                                 {{$activity->route}}
                             </a>
+
+
+
                         @endif
+
+
+
+
                     </td>
                     <td>
                         {{ $activity->ipAddress }}
@@ -222,3 +241,7 @@ if (isset($hoverable) && $hoverable === true) {
         </tbody>
     </table>
 </div>
+
+@if(config('LaravelLogger.loggerPaginationEnabled'))
+    {!! $activities->render() !!}
+@endif

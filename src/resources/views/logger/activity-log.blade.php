@@ -29,10 +29,7 @@
                             @if(config('LaravelLogger.enableSubMenu'))
                                 <small>
                                     <sup class="label label-default">
-                                        {{count($activities)}}
-                                        <span class="hidden-sms">
-                                            @lang('LaravelLogger::laravel-logger.dashboard.subtitle')
-                                        </span>
+                                        {{ $totalActivities }} @lang('LaravelLogger::laravel-logger.dashboard.subtitle')
                                     </sup>
                                 </small>
                                 <div class="btn-group pull-right btn-group-xs">
@@ -59,7 +56,7 @@
                                 </div>
                             @else
                                 <span class="pull-right label label-default">
-                                    {{count($activities)}}
+                                    {{ $totalActivities }}
                                     <span class="hidden-sms">
                                         @lang('LaravelLogger::laravel-logger.dashboard.subtitle')
                                     </span>

@@ -42,7 +42,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Laravel Logger Databales Settings
+    | Laravel Logger Pagination Settings
+    |--------------------------------------------------------------------------
+    */
+    'loggerPaginationEnabled' => env('LARAVEL_LOGGER_PAGINATION_ENABLED', true),
+    'loggerPaginationPerPage' => env('LARAVEL_LOGGER_PAGINATION_PER_PAGE', 25),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Laravel Logger Databales Settings - Not recommended with pagination.
     |--------------------------------------------------------------------------
     */
 
@@ -57,7 +65,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'enableSubMenu'     => env('LARAVEL_LOGGER_DASHBOARD_MENU_ENABLED', true),
+    'enableSubMenu'     => env('LARAVEL_LOGGER_DASHBOARD_MENU_ENABLED', false),
     'enableDrillDown'   => env('LARAVEL_LOGGER_DASHBOARD_DRILLABLE', true),
 
     /*

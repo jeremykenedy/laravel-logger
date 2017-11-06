@@ -297,6 +297,9 @@
                     <ul class="list-group">
                         <li class="list-group-item list-group-item-info active">
                             @lang('LaravelLogger::laravel-logger.drilldown.title-user-activity')
+                            <span class="badge">
+                                {{ $totalUserActivities }} @lang('LaravelLogger::laravel-logger.dashboard.subtitle')
+                            </span>
                         </li>
                         <li class="list-group-item">
                             @include('LaravelLogger::logger.partials.activity-table', ['activities' => $userActivities])
@@ -318,7 +321,5 @@
             @include('LaravelLogger::scripts.datatables')
         @endif
     @endif
-
-    {{-- @include('scripts.show-more-less') --}}
 
 @endsection

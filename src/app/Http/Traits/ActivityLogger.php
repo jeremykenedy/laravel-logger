@@ -58,7 +58,7 @@ trait ActivityLogger
             'description'   => $description,
             'userType'      => $userType,
             'userId'        => $userId,
-            'route'         => \Request::decodedPath(),
+            'route'         => \Request::fullUrl(),
             'ipAddress'     => \Request::ip(),
             'userAgent'     => \Request::userAgent(),
             'locale'        => \Request::header('accept-language'),

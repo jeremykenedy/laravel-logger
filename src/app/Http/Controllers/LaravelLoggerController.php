@@ -30,8 +30,13 @@ class LaravelLoggerController extends Controller
      */
     public function showAccessLog()
     {
-
-        $activities = Activity::orderBy('created_at', 'desc')->get();
+        if (config('LaravelLogger.loggerPaginationEnabled')) {
+            $activities = Activity::orderBy('created_at', 'desc')->paginate(config('LaravelLogger.loggerPaginationPerPage'));
+            $totalActivities = $activities->total();
+        } else {
+            $activities = Activity::orderBy('created_at', 'desc')->get();
+            $totalActivities = $activities->count();
+        }
 
         $activities->map(function ($activity) {
             $eventTime = Carbon::parse($activity->updated_at);
@@ -43,7 +48,12 @@ class LaravelLoggerController extends Controller
             return $activity;
         });
 
-        return View('LaravelLogger::logger.activity-log', compact('activities'));
+        $data = [
+            'activities'        => $activities,
+            'totalActivities'   => $totalActivities,
+        ];
+
+        return View('LaravelLogger::logger.activity-log', $data);
     }
 
     /**
@@ -62,9 +72,17 @@ class LaravelLoggerController extends Controller
         $eventTime = Carbon::parse($activity->created_at);
         $timePassed = $eventTime->diffForHumans();
 
-        $userActivities = Activity::where('userId', $activity->userId)
-                       ->orderBy('created_at', 'desc')
-                       ->get();
+        if (config('LaravelLogger.loggerPaginationEnabled')) {
+            $userActivities = Activity::where('userId', $activity->userId)
+                           ->orderBy('created_at', 'desc')
+                           ->paginate(config('LaravelLogger.loggerPaginationPerPage'));
+            $totalUserActivities = $userActivities->total();
+        } else {
+            $userActivities = Activity::where('userId', $activity->userId)
+                           ->orderBy('created_at', 'desc')
+                           ->get();
+            $totalUserActivities = $userActivities->count();
+        }
 
         $userActivities->map(function ($userActivity) {
             $eventTime = Carbon::parse($userActivity->updated_at);
@@ -77,13 +95,14 @@ class LaravelLoggerController extends Controller
         });
 
         $data  = [
-            'activity'          => $activity,
-            'userDetails'       => $userDetails,
-            'ipAddressDetails'  => $ipAddressDetails,
-            'timePassed'        => $timePassed,
-            'userAgentDetails'  => $userAgentDetails,
-            'langDetails'       => $langDetails,
-            'userActivities'    => $userActivities,
+            'activity'              => $activity,
+            'userDetails'           => $userDetails,
+            'ipAddressDetails'      => $ipAddressDetails,
+            'timePassed'            => $timePassed,
+            'userAgentDetails'      => $userAgentDetails,
+            'langDetails'           => $langDetails,
+            'userActivities'        => $userActivities,
+            'totalUserActivities'   => $totalUserActivities,
         ];
 
         return View('LaravelLogger::logger.activity-log-item', $data);

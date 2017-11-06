@@ -70,11 +70,11 @@ class Activity extends Model
     protected $casts = [
         'description'   => 'string',
         'user'          => 'integer',
-        'route'         => 'string',
+        'route'         => 'url',
         'ipAddress'     => 'ipAddress',
         'userAgent'     => 'string',
         'locale'        => 'string',
-        'referer'       => 'string',
+        'referer'       => 'url',
         'methodType'    => 'string',
     ];
 
@@ -128,13 +128,13 @@ class Activity extends Model
         return array_merge([
             'description'   => 'required|string',
             'userType'      => 'required|string',
-            'userId'        => 'integer',
-            'route'         => 'string',
-            'ipAddress'     => 'ip',
-            'userAgent'     => 'string',
-            'locale'        => 'string',
-            'referer'       => 'string',
-            'methodType'    => 'string',
+            'userId'        => 'nullable|integer',
+            'route'         => 'nullable|url',
+            'ipAddress'     => 'nullable|ip',
+            'userAgent'     => 'nullable|string',
+            'locale'        => 'nullable|string',
+            'referer'       => 'nullable|url',
+            'methodType'    => 'nullable|string',
         ],
         $merge);
     }
