@@ -1,0 +1,35 @@
+{
+    "name": "jeremykenedy/laravel-logger",
+    "description": "Laravel Logger Package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jeremykenedy",
+            "email": "jeremykenedy@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.0.0",
+        "jaybizzle/laravel-crawler-detect": "1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "jeremykenedy\\LaravelLogger\\": "src/"
+        },
+        "files": [
+            "src/app/Logic/Helpers/Helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "jeremykenedy\\LaravelLogger\\LaravelLoggerServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable"
+}
