@@ -8,7 +8,6 @@
 
 TODO:
 5. Readme
-7. Release
 
 
 ```
