@@ -13,6 +13,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Laravel Logger Roles Settings - (laravel roles not required if false)
+    |--------------------------------------------------------------------------
+    */
+
+    'rolesEnabled' => env('LARAVEL_LOGGER_ROLES_ENABLED', true),
+    'rolesMiddlware' => env('LARAVEL_LOGGER_ROLES_MIDDLWARE', 'role:admin'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Enable/Disable Laravel Logger Middlware
     |--------------------------------------------------------------------------
     */
@@ -83,5 +92,29 @@ return [
     */
 
     'enablePackageFlashMessageBlade' => env('LARAVEL_LOGGER_FLASH_MESSAGE_BLADE_ENABLED', true),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Laravel Logger Dependencies - allows for easier builds into other projects
+    |--------------------------------------------------------------------------
+    */
+
+    // jQuery
+    'enablejQueryCDN'           => env('LARAVEL_LOGGER_JQUERY_CDN_ENABLED', true),
+    'JQueryCDN'                 => env('LARAVEL_LOGGER_JQUERY_CDN_URL', 'https://code.jquery.com/jquery-2.2.4.min.js'),
+
+    // Blade Extension Placement
+    'enableBladeCssPlacement'   => env('LARAVEL_LOGGER_BLADE_CSS_PLACEMENT_ENABLED', false),
+    'enableBladeJsPlacement'    => env('LARAVEL_LOGGER_BLADE_JS_PLACEMENT_ENABLED', false),
+
+    // Bootstrap
+    'enableBootstrapCssCDN'      => env('LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_ENABLED', true),
+    'bootstrapCssCDN'            => env('LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_URL', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'),
+    'enableBootstrapJsCDN'      => env('LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_ENABLED', true),
+    'bootstrapJsCDN'            => env('LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_URL', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'),
+
+    // Font Awesome
+    'enableFontAwesomeCDN'      => env('LARAVEL_LOGGER_FONT_AWESOME_CDN_ENABLED', true),
+    'fontAwesomeCDN'            => env('LARAVEL_LOGGER_FONT_AWESOME_CDN_URL', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'),
 
 ];

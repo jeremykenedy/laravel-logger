@@ -13,6 +13,9 @@ class LaravelLoggerController extends Controller
 {
     use IpAddressDetails, UserAgentDetails;
 
+    private $_rolesEnabled;
+    private $_rolesMiddlware;
+
     /**
      * Create a new controller instance.
      *
@@ -21,6 +24,13 @@ class LaravelLoggerController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
+        $this->_rolesEnabled = config('LaravelLogger.rolesEnabled');
+        $this->_rolesMiddlware = config('LaravelLogger.rolesMiddlware');
+
+        if ($this->_rolesEnabled) {
+            $this->middleware($this->_rolesMiddlware);
+        }
     }
 
     /**

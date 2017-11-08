@@ -7,10 +7,7 @@
 
 
 TODO:
-3. User Scaffolding Enabled Logic
-4. User Roles Scaffolding Logic
 5. Readme
-6. Unit Tests
 7. Release
 
 

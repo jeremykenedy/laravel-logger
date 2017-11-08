@@ -1,5 +1,15 @@
+
+
+@if(config('LaravelLogger.enableBootstrapCssCDN'))
+    <link rel="stylesheet" type="text/css" href="{{config('LaravelLogger.bootstrapCssCDN')}}">
+@endif
+
 @if(config('LaravelLogger.loggerDatatables'))
     <link rel="stylesheet" type="text/css" href="{{config('LaravelLogger.loggerDatatablesCSScdn')}}">
+@endif
+
+@if(config('LaravelLogger.enableFontAwesomeCDN'))
+    <link rel="stylesheet" type="text/css" href="{{config('LaravelLogger.fontAwesomeCDN')}}">
 @endif
 
 <style type="text/css" media="screen">
@@ -12,7 +22,6 @@
     .list-group {
         margin-bottom: 0;
     }
-
 
     .dropdown-menu > li button {
         padding: 3px 20px;

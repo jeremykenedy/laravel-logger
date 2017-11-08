@@ -4,9 +4,13 @@
     @lang('LaravelLogger::laravel-logger.drilldown.title', ['id' => $activity->id])
 @endsection
 
-@section('template_linked_css')
+@if(config('LaravelLogger.enableBladeJsPlacement'))
+    @section('template_linked_css')
+        @include('LaravelLogger::partials.styles')
+    @endsection
+@else
     @include('LaravelLogger::partials.styles')
-@endsection
+@endif
 
 @php
     switch ($activity->userType) {
@@ -263,11 +267,15 @@
                                                 </a>
                                             </dd>
 
-                                            <dt>@lang('LaravelLogger::laravel-logger.drilldown.list-group.labels.userFulltName')</dt>
-                                            <dd>{{$userDetails->last_name}}, {{$userDetails->first_name}}</dd>
+                                            @if($userDetails->last_name || $userDetails->first_name)
+                                                <dt>@lang('LaravelLogger::laravel-logger.drilldown.list-group.labels.userFulltName')</dt>
+                                                <dd>{{$userDetails->last_name}}, {{$userDetails->first_name}}</dd>
+                                            @endif
 
-                                            <dt>@lang('LaravelLogger::laravel-logger.drilldown.list-group.labels.userSignupIp')</dt>
-                                            <dd>{{$userDetails->signup_ip_address}}</dd>
+                                            @if($userDetails->signup_ip_address)
+                                                <dt>@lang('LaravelLogger::laravel-logger.drilldown.list-group.labels.userSignupIp')</dt>
+                                                <dd>{{$userDetails->signup_ip_address}}</dd>
+                                            @endif
 
                                             <dt>@lang('LaravelLogger::laravel-logger.drilldown.list-group.labels.userCreatedAt')</dt>
                                             <dd>{{$userDetails->created_at}}</dd>
@@ -312,7 +320,17 @@
   </div>
 @endsection
 
-@section('template_scripts')
+@if(config('LaravelLogger.enableBladeJsPlacement'))
+    @section('footer_scripts')
+@endif
+
+    @if(config('LaravelLogger.enablejQueryCDN'))
+        <script type="text/javascript" src="{{ config('LaravelLogger.JQueryCDN') }}"></script>
+    @endif
+
+    @if(config('LaravelLogger.enableBootstrapJsCDN'))
+        <script type="text/javascript" src="{{ config('LaravelLogger.bootstrapJsCDN') }}"></script>
+    @endif
 
     @if(config('LaravelLogger.loggerDatatables'))
         @if (count($activities) > 10)
@@ -320,4 +338,6 @@
         @endif
     @endif
 
-@endsection
+@if(config('LaravelLogger.enableBladeJsPlacement'))
+    @endsection
+@endif

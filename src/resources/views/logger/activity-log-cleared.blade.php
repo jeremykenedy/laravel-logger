@@ -4,9 +4,13 @@
     @lang('LaravelLogger::laravel-logger.dashboardCleared.title')
 @endsection
 
-@section('template_linked_css')
+@if(config('LaravelLogger.enableBladeJsPlacement'))
+    @section('template_linked_css')
+        @include('LaravelLogger::partials.styles')
+    @endsection
+@else
     @include('LaravelLogger::partials.styles')
-@endsection
+@endif
 
 @section('content')
 
@@ -69,7 +73,17 @@
 
 @endsection
 
-@section('footer_scripts')
+@if(config('LaravelLogger.enableBladeJsPlacement'))
+    @section('footer_scripts')
+@endif
+
+    @if(config('LaravelLogger.enablejQueryCDN'))
+        <script type="text/javascript" src="{{ config('LaravelLogger.JQueryCDN') }}"></script>
+    @endif
+
+    @if(config('LaravelLogger.enableBootstrapJsCDN'))
+        <script type="text/javascript" src="{{ config('LaravelLogger.bootstrapJsCDN') }}"></script>
+    @endif
 
     @include('LaravelLogger::scripts.confirm-modal', ['formTrigger' => '#confirmDelete'])
     @include('LaravelLogger::scripts.confirm-modal', ['formTrigger' => '#confirmRestore'])
@@ -85,4 +99,6 @@
         @include('LaravelLogger::scripts.tooltip')
     @endif
 
-@endsection
+@if(config('LaravelLogger.enableBladeJsPlacement'))
+    @endsection
+@endif
