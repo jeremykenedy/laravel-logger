@@ -5,21 +5,17 @@
 @endsection
 
 @section('template_linked_css')
-    @if(config('LaravelLogger.loggerDatatables'))
-        <link rel="stylesheet" type="text/css" href="{{config('LaravelLogger.loggerDatatablesCSScdn')}}">
-    @endif
-    <style type="text/css" media="screen">
-        .clickable-row:hover {
-          cursor: pointer;
-        }
-        .table-responsive {
-            border: none;
-        }
-    </style>
+    @include('LaravelLogger::partials.styles')
 @endsection
 
 @section('content')
+
     <div class="container-fluid">
+
+        @if(config('LaravelLogger.enablePackageFlashMessageBlade'))
+            @include('LaravelLogger::partials.form-status')
+        @endif
+
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-default">
@@ -41,13 +37,10 @@
                                     </button>
                                     <ul class="dropdown-menu">
                                         <li>
-                                            <a href="#">
-                                                <i class="fa fa-fw fa-eraser" aria-hidden="true"></i>
-                                                @lang('LaravelLogger::laravel-logger.dashboard.menu.clear')
-                                            </a>
+                                            @include('LaravelLogger::forms.clear-activity-log')
                                         </li>
                                         <li>
-                                            <a href="#">
+                                            <a href="{{route('cleared')}}">
                                                 <i class="fa fa-fw fa-history" aria-hidden="true"></i>
                                                 @lang('LaravelLogger::laravel-logger.dashboard.menu.show')
                                             </a>
@@ -62,26 +55,24 @@
                                     </span>
                                 </span>
                             @endif
+
                         </div>
                     </div>
-
                     <div class="panel-body">
-
                         @include('LaravelLogger::logger.partials.activity-table', ['activities' => $activities, 'hoverable' => true])
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- @include('modals.modal-delete') --}}
+    @include('LaravelLogger::modals.confirm-modal', ['formTrigger' => 'confirmDelete', 'modalClass' => 'danger', 'actionBtnIcon' => 'fa-trash-o'])
 
 @endsection
 
 @section('footer_scripts')
 
-    {{-- @include('scripts.delete-modal-script')--}}
+    @include('LaravelLogger::scripts.confirm-modal', ['formTrigger' => '#confirmDelete'])
 
     @if(config('LaravelLogger.loggerDatatables'))
         @if (count($activities) > 10)

@@ -65,7 +65,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'enableSubMenu'     => env('LARAVEL_LOGGER_DASHBOARD_MENU_ENABLED', false),
+    'enableSubMenu'     => env('LARAVEL_LOGGER_DASHBOARD_MENU_ENABLED', true),
     'enableDrillDown'   => env('LARAVEL_LOGGER_DASHBOARD_DRILLABLE', true),
 
     /*
@@ -75,5 +75,13 @@ return [
     */
 
     'logDBActivityLogFailuresToFile'     => env('LARAVEL_LOGGER_LOG_RECORD_FAILURES_TO_FILE', true),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Laravel Logger Flash Messages
+    |--------------------------------------------------------------------------
+    */
+
+    'enablePackageFlashMessageBlade' => env('LARAVEL_LOGGER_FLASH_MESSAGE_BLADE_ENABLED', true),
 
 ];

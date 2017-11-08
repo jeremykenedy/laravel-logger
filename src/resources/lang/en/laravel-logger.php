@@ -43,15 +43,16 @@ return [
             'route'         => 'Route',
             'ipAddress'     => 'Ip <span class="hidden-sm hidden-xs">Address</span>',
             'agent'         => '<span class="hidden-sm hidden-xs">User </span>Agent',
+            'deleteDate'    => '<span class="hidden-sm hidden-xs">Date </span>Deleted',
         ],
 
         'menu'      => [
             'alt'           => 'Activity Log Menu',
-            'clear'         => 'Clear Access Log',
+            'clear'         => 'Clear Activity Log',
             'show'          => 'Show Cleared Logs',
+            'back'          => 'Back to Activity Log',
         ],
     ],
-
 
     /*
     |--------------------------------------------------------------------------
@@ -98,6 +99,68 @@ return [
             ],
         ],
 
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Laravel Logger Modals
+    |--------------------------------------------------------------------------
+    */
+
+    'modals' => [
+        'shared' => [
+            'btnCancel'     => 'Cancel',
+            'btnConfirm'    => 'Confirm',
+        ],
+        'clearLog' => [
+            'title'     => 'Clear Activity Log',
+            'message'   => 'Are you sure you want to clear the activity log?',
+        ],
+        'deleteLog' => [
+            'title'     => 'Permanently Delete Activity Log',
+            'message'   => 'Are you sure you want to permanently DELETE the activity log?',
+        ],
+        'restoreLog' => [
+            'title'     => 'Restore Cleared Activity Log',
+            'message'   => 'Are you sure you want to restore the cleared activity logs?',
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Laravel Logger Flash Messages
+    |--------------------------------------------------------------------------
+    */
+
+   'messages' => [
+        'logClearedSuccessfuly' => 'Activity log cleared successfully',
+        'logDestroyedSuccessfuly' => 'Activity log deleted successfully',
+        'logRestoredSuccessfuly' => 'Activity log restored successfully',
+   ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Laravel Logger Cleared Dashboard Language Lines
+    |--------------------------------------------------------------------------
+    */
+
+    'dashboardCleared' => [
+        'title'     => 'Cleared Activity Logs',
+        'subtitle'  => 'Cleared Events',
+
+        'menu'      => [
+            'deleteAll'  => 'Delete All Activity Logs',
+            'restoreAll' => 'Restore All Activity Logs',
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Laravel Logger Pagination Language Lines
+    |--------------------------------------------------------------------------
+    */
+    'pagination' => [
+        'countText'     => 'Showing :firstItem - :lastItem of :total results <small>(:perPage per page)</small>',
     ],
 
 ];

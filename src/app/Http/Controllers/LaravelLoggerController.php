@@ -24,6 +24,28 @@ class LaravelLoggerController extends Controller
     }
 
     /**
+     * Add additional details to a collections
+     *
+     * @param  collection $collectionItems
+     *
+     * @return collection
+     */
+    private function mapAdditionalDetails($collectionItems)
+    {
+        $collectionItems->map(function ($collectionItem) {
+            $eventTime = Carbon::parse($collectionItem->updated_at);
+            $collectionItem['timePassed'] = $eventTime->diffForHumans();
+            $collectionItem['userAgentDetails'] = UserAgentDetails::details($collectionItem->useragent);
+            $collectionItem['langDetails'] = UserAgentDetails::localeLang($collectionItem->locale);
+            $collectionItem['userDetails'] = config('LaravelLogger.defaultUserModel')::find($collectionItem->userId);
+
+            return $collectionItem;
+        });
+
+        return $collectionItems;
+    }
+
+    /**
      * Show the activities log dashboard.
      *
      * @return \Illuminate\Http\Response
@@ -38,15 +60,7 @@ class LaravelLoggerController extends Controller
             $totalActivities = $activities->count();
         }
 
-        $activities->map(function ($activity) {
-            $eventTime = Carbon::parse($activity->updated_at);
-            $activity['timePassed'] = $eventTime->diffForHumans();
-            $activity['userAgentDetails'] = UserAgentDetails::details($activity->useragent);
-            $activity['langDetails'] = UserAgentDetails::localeLang($activity->locale);
-            $activity['userDetails'] = config('LaravelLogger.defaultUserModel')::find($activity->userId);
-
-            return $activity;
-        });
+        self::mapAdditionalDetails($activities);
 
         $data = [
             'activities'        => $activities,
@@ -84,15 +98,7 @@ class LaravelLoggerController extends Controller
             $totalUserActivities = $userActivities->count();
         }
 
-        $userActivities->map(function ($userActivity) {
-            $eventTime = Carbon::parse($userActivity->updated_at);
-            $userActivity['timePassed'] = $eventTime->diffForHumans();
-            $userActivity['userAgentDetails'] = UserAgentDetails::details($userActivity->useragent);
-            $userActivity['langDetails'] = UserAgentDetails::localeLang($userActivity->locale);
-            $userActivity['userDetails'] = config('LaravelLogger.defaultUserModel')::find($userActivity->userId);
-
-            return $userActivity;
-        });
+        self::mapAdditionalDetails($userActivities);
 
         $data  = [
             'activity'              => $activity,
@@ -103,10 +109,136 @@ class LaravelLoggerController extends Controller
             'langDetails'           => $langDetails,
             'userActivities'        => $userActivities,
             'totalUserActivities'   => $totalUserActivities,
+            'isClearedEntry'        => false,
         ];
 
         return View('LaravelLogger::logger.activity-log-item', $data);
+    }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function clearActivityLog(Request $request)
+    {
+        $activities = Activity::all();
+        foreach ($activities as $activity) {
+            $activity->delete();
+        }
+
+        return redirect('activity')->with('success', trans('LaravelLogger::laravel-logger.messages.logClearedSuccessfuly'));
+    }
+
+    /**
+     * Show the cleared activity log - softdeleted records
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showClearedActivityLog()
+    {
+        if (config('LaravelLogger.loggerPaginationEnabled')) {
+            $activities = Activity::onlyTrashed()
+                ->orderBy('created_at', 'desc')
+                ->paginate(config('LaravelLogger.loggerPaginationPerPage'));
+            $totalActivities = $activities->total();
+        } else {
+            $activities = Activity::onlyTrashed()
+                ->orderBy('created_at', 'desc')
+                ->get();
+            $totalActivities = $activities->count();
+        }
+
+        self::mapAdditionalDetails($activities);
+
+        $data = [
+            'activities'        => $activities,
+            'totalActivities'   => $totalActivities,
+        ];
+
+        return View('LaravelLogger::logger.activity-log-cleared', $data);
+    }
+
+    /**
+     * Show an individual cleared (soft deleted) activity log entry.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showClearedAccessLogEntry(Request $request, $id)
+    {
+        $activity = self::getClearedActvity($id);
+
+        $userDetails = config('LaravelLogger.defaultUserModel')::find($activity->userId);
+        $userAgentDetails = UserAgentDetails::details($activity->useragent);
+        $ipAddressDetails = IpAddressDetails::checkIP($activity->ipAddress);
+        $langDetails = UserAgentDetails::localeLang($activity->locale);
+        $eventTime = Carbon::parse($activity->created_at);
+        $timePassed = $eventTime->diffForHumans();
+
+        $data  = [
+            'activity'              => $activity,
+            'userDetails'           => $userDetails,
+            'ipAddressDetails'      => $ipAddressDetails,
+            'timePassed'            => $timePassed,
+            'userAgentDetails'      => $userAgentDetails,
+            'langDetails'           => $langDetails,
+            'isClearedEntry'        => true,
+        ];
+
+        return View('LaravelLogger::logger.activity-log-item', $data);
+    }
+
+    /**
+     * Get Cleared (Soft Deleted) Activity - Helper Method.
+     *
+     * @param int $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    private static function getClearedActvity($id)
+    {
+        $activity = Activity::onlyTrashed()->where('id', $id)->get();
+        if (count($activity) != 1) {
+            return abort(404);
+        }
+
+        return $activity[0];
+    }
+
+    /**
+     * Destroy the specified resource from storage.
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroyActivityLog(Request $request)
+    {
+        $activities = Activity::onlyTrashed()->get();
+        foreach ($activities as $activity) {
+            $activity->forceDelete();
+        }
+
+        return redirect('activity')->with('success', trans('LaravelLogger::laravel-logger.messages.logDestroyedSuccessfuly'));
+    }
+
+    /**
+     * Restore the specified resource from soft deleted storage.
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function restoreClearedActivityLog(Request $request)
+    {
+        $activities = Activity::onlyTrashed()->get();
+        foreach ($activities as $activity) {
+            $activity->restore();
+        }
+
+        return redirect('activity')->with('success', trans('LaravelLogger::laravel-logger.messages.logRestoredSuccessfuly'));
     }
 
 }

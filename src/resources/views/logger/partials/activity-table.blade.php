@@ -1,9 +1,18 @@
 @php
+
+$drilldownStatus = config('LaravelLogger.enableDrillDown');
+$prependUrl = '/activity/log/';
+
 if (isset($hoverable) && $hoverable === true) {
     $hoverable = true;
 } else {
     $hoverable = false;
 }
+
+if (Request::is('activity/cleared')) {
+    $prependUrl = '/activity/cleared/log/';
+}
+
 @endphp
 
 <div class="table-responsive activity-table">
@@ -46,11 +55,17 @@ if (isset($hoverable) && $hoverable === true) {
                     <i class="fa fa-laptop fa-fw" aria-hidden="true"></i>
                     @lang('LaravelLogger::laravel-logger.dashboard.labels.agent')
                 </th>
+                @if(Request::is('activity/cleared'))
+                    <th>
+                        <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>
+                        @lang('LaravelLogger::laravel-logger.dashboard.labels.deleteDate')
+                    </th>
+                @endif
             </tr>
         </thead>
         <tbody>
             @foreach($activities as $activity)
-                <tr @if(config('LaravelLogger.enableDrillDown') && $hoverable) class="clickable-row" data-href="/activity/log/{{$activity->id}}" data-toggle="tooltip" title="{{trans('LaravelLogger::laravel-logger.tooltips.viewRecord')}}" @endif>
+                <tr @if($drilldownStatus && $hoverable) class="clickable-row" data-href="{{$prependUrl . $activity->id}}" data-toggle="tooltip" title="{{trans('LaravelLogger::laravel-logger.tooltips.viewRecord')}}" @endif >
                     <td>
                         <small>
                             {{ $activity->id }}
@@ -95,11 +110,11 @@ if (isset($hoverable) && $hoverable === true) {
                                     break;
 
                                 case 'post':
-                                    $methodClass = 'primary';
+                                    $methodClass = 'warning';
                                     break;
 
                                 case 'put':
-                                    $methodClass = 'caution';
+                                    $methodClass = 'warning';
                                     break;
 
                                 case 'delete':
@@ -116,32 +131,13 @@ if (isset($hoverable) && $hoverable === true) {
                         </span>
                     </td>
                     <td>
-
-
-
                         @if($hoverable)
-
-
-{{--                             {{$activity->route}} --}}
-
-{{ showCleanRoutUrl($activity->route) }}
-
-
+                            {{ showCleanRoutUrl($activity->route) }}
                         @else
-
-
-
                             <a href="@if($activity->route != '/')/@endif{{$activity->route}}">
                                 {{$activity->route}}
                             </a>
-
-
-
                         @endif
-
-
-
-
                     </td>
                     <td>
                         {{ $activity->ipAddress }}
@@ -236,6 +232,11 @@ if (isset($hoverable) && $hoverable === true) {
                             </small>
                         </sup>
                     </td>
+                    @if(Request::is('activity/cleared'))
+                        <td>
+                            {{ $activity->deleted_at }}
+                        </td>
+                    @endif
                 </tr>
             @endforeach
         </tbody>
@@ -243,5 +244,12 @@ if (isset($hoverable) && $hoverable === true) {
 </div>
 
 @if(config('LaravelLogger.loggerPaginationEnabled'))
-    {!! $activities->render() !!}
+    <div class="text-center">
+        <div>
+            {!! $activities->render() !!}
+        </div>
+        <p>
+            @lang('LaravelLogger::laravel-logger.pagination.countText', ['firstItem' => $activities->firstItem(), 'lastItem' => $activities->lastItem(), 'total' => $activities->total(), 'perPage' => $activities->perPage()])
+        </p>
+    </div>
 @endif

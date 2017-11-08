@@ -5,20 +5,7 @@
 @endsection
 
 @section('template_linked_css')
-    @if(config('LaravelLogger.loggerDatatables'))
-        <link rel="stylesheet" type="text/css" href="{{config('LaravelLogger.loggerDatatablesCSScdn')}}">
-    @endif
-    <style type="text/css">
-        .list-group {
-            margin-bottom: 0;
-        }
-        .clickable-row:hover {
-          cursor: pointer;
-        }
-        .table-responsive {
-            border: none;
-        }
-    </style>
+    @include('LaravelLogger::partials.styles')
 @endsection
 
 @php
@@ -129,10 +116,18 @@
 
 @section('content')
 <div class="container-fluid">
-    <div class="panel panel-default">
+
+    @if(config('LaravelLogger.enablePackageFlashMessageBlade'))
+        @include('LaravelLogger::partials.form-status')
+    @endif
+
+    <div class="panel @if($isClearedEntry) panel-danger @else panel-default @endif">
         <div class="panel-heading">
             @lang('LaravelLogger::laravel-logger.drilldown.title', ['id' => $activity->id])
-            <a href="/activity/" class="btn btn-info btn-xs pull-right">
+
+
+
+            <a href="@if($isClearedEntry) {{route('cleared')}} @else {{route('activity')}} @endif" class="btn @if($isClearedEntry) btn-default @else btn-info @endif btn-xs pull-right">
                 <i class="fa fa-fw fa-mail-reply" aria-hidden="true"></i>
                 @lang('LaravelLogger::laravel-logger.drilldown.buttons.back')
             </a>
@@ -144,7 +139,7 @@
 
                         <div class="col-md-6 col-lg-4">
                             <ul class="list-group">
-                                <li class="list-group-item list-group-item-info active">
+                                <li class="list-group-item @if($isClearedEntry) list-group-item-danger @else active @endif">
                                     @lang('LaravelLogger::laravel-logger.drilldown.title-details')
                                 </li>
                                 <li class="list-group-item">
@@ -214,7 +209,7 @@
 
                         <div class="col-md-6 col-lg-4">
                             <ul class="list-group">
-                                <li class="list-group-item list-group-item-info active">
+                                <li class="list-group-item @if($isClearedEntry) list-group-item-danger @else active @endif">
                                     @lang('LaravelLogger::laravel-logger.drilldown.title-ip-details')
                                 </li>
                                 <li class="list-group-item">
@@ -241,7 +236,7 @@
 
                         <div class="col-md-12 col-lg-4">
                             <ul class="list-group">
-                                <li class="list-group-item list-group-item-info active">
+                                <li class="list-group-item @if($isClearedEntry) list-group-item-danger @else active @endif">
                                     @lang('LaravelLogger::laravel-logger.drilldown.title-user-details')
                                 </li>
                                 <li class="list-group-item">
@@ -292,22 +287,25 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <ul class="list-group">
-                        <li class="list-group-item list-group-item-info active">
-                            @lang('LaravelLogger::laravel-logger.drilldown.title-user-activity')
-                            <span class="badge">
-                                {{ $totalUserActivities }} @lang('LaravelLogger::laravel-logger.dashboard.subtitle')
-                            </span>
-                        </li>
-                        <li class="list-group-item">
-                            @include('LaravelLogger::logger.partials.activity-table', ['activities' => $userActivities])
-                        </li>
-                    </ul>
-                    <br />
+
+            @if(!$isClearedEntry)
+                <div class="row">
+                    <div class="col-xs-12">
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-info">
+                                @lang('LaravelLogger::laravel-logger.drilldown.title-user-activity')
+                                <span class="badge">
+                                    {{ $totalUserActivities }} @lang('LaravelLogger::laravel-logger.dashboard.subtitle')
+                                </span>
+                            </li>
+                            <li class="list-group-item">
+                                @include('LaravelLogger::logger.partials.activity-table', ['activities' => $userActivities])
+                            </li>
+                        </ul>
+                        <br />
+                    </div>
                 </div>
-            </div>
+            @endif
 
         </div>
     </div>
