@@ -38,7 +38,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'defaultUserModel' => env('LARAVEL_LOGGER_USER_MODEL', 'App\Models\User'),
+    'defaultUserModel' => env('LARAVEL_LOGGER_USER_MODEL', 'App\User'),
 
     /*
     |--------------------------------------------------------------------------
