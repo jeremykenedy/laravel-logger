@@ -71,6 +71,11 @@ return [
             'back'      => '<span class="hidden-xs hidden-sm">Back to </span><span class="hidden-xs">Activity Log</span>',
         ],
 
+        'labels' => [
+            'userRoles'     => 'User Roles',
+            'userLevel'     => 'Level',
+        ],
+
         'list-group' => [
             'labels'    => [
                 'id'            => 'Activity Log ID:',

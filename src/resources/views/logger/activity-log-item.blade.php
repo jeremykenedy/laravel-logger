@@ -257,6 +257,37 @@
                                             <dt>@lang('LaravelLogger::laravel-logger.drilldown.list-group.labels.userId')</dt>
                                             <dd>{{$userDetails->id}}</dd>
 
+                                            @if(config('LaravelLogger.rolesEnabled'))
+
+                                                <dt>@lang('LaravelLogger::laravel-logger.drilldown.labels.userRoles')</dt>
+
+                                                  @foreach ($userDetails->roles as $user_role)
+
+                                                    @if ($user_role->name == 'User')
+                                                      @php $labelClass = 'primary' @endphp
+
+                                                    @elseif ($user_role->name == 'Admin')
+                                                      @php $labelClass = 'warning' @endphp
+
+                                                    @elseif ($user_role->name == 'Unverified')
+                                                      @php $labelClass = 'danger' @endphp
+
+                                                    @else
+                                                      @php $labelClass = 'default' @endphp
+
+                                                    @endif
+
+                                                    <dd>
+                                                        <span class="label label-{{$labelClass}}">
+                                                            {{ $user_role->name }} - @lang('LaravelLogger::laravel-logger.drilldown.labels.userLevel') {{ $user_role->level }}
+                                                        </span>
+                                                    </dd>
+
+                                                  @endforeach
+
+                                            @endif
+
+
                                             <dt>@lang('LaravelLogger::laravel-logger.drilldown.list-group.labels.userName')</dt>
                                             <dd>{{$userDetails->name}}</dd>
 
