@@ -17,7 +17,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'rolesEnabled' => env('LARAVEL_LOGGER_ROLES_ENABLED', true),
+    'rolesEnabled' => env('LARAVEL_LOGGER_ROLES_ENABLED', false),
     'rolesMiddlware' => env('LARAVEL_LOGGER_ROLES_MIDDLWARE', 'role:admin'),
 
     /*
