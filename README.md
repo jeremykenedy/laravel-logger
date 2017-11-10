@@ -59,7 +59,7 @@ Laravel logger can work out the box with or without the following roles packages
 
 ### Requirements
 * [Laravel 5.1, 5.2, 5.3, 5.4, or 5.5+](https://laravel.com/docs/installation)
-* [jaybizzle/laravel-crawler-detect](https://github.com/JayBizzle/Laravel-Crawler-Detect) included dependency in composer.json
+* [jaybizzle/laravel-crawler-detect](https://github.com/JayBizzle/Laravel-Crawler-Detect) included dependency in composer.json (for crawler detection)
 
 ### Installation Instructions
 1. From your projects root folder in terminal run:
