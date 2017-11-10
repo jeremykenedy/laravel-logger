@@ -30,6 +30,7 @@
         outline: none;
         width: 100%;
         text-align: left;
+        white-space: nowrap;
     }
     .dropdown-menu > li button:hover {
         background: rgba(0,0,0,.04);
