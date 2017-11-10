@@ -55,6 +55,7 @@ Laravel logger can work out the box with or without the following roles packages
 |Activity log can be cleared, restored, and destroyed using eloquent softdeletes|
 |Cleared activity logs can be viewed and have drilldown ability|
 |Uses font awesome, cdn assets can be optionally called in configuration|
+|Uses [Geoplugin API](http://www.geoplugin.com/) for drilldown IP meta information|
 |Lots of [configuration](#configuration) options|
 
 ### Requirements
