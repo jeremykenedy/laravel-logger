@@ -20,7 +20,6 @@
 - [File Tree](#file-tree)
 - [License](#license)
 
-
 ### About
 Laravel logger is an activity event logger for your laravel application. It comes out the box with ready to use with dashboard to view your activity. Laravel logger can be added as a middleware or called through a trait. This package is easily configurable and customizable.
 
@@ -35,7 +34,28 @@ Laravel logger can work out the box with or without the following roles packages
 
 | Laravel Logger Features  |
 | :------------ |
-||
+|Logs login page visits|
+|Logs user logins|
+|Logs user logouts|
+|Routing Events can recording using middleware|
+|Records activity timestamps|
+|Records activity description|
+|Records activity user type with crawler detection.|
+|Records activity Method|
+|Records activity Route|
+|Records activity Ip Address|
+|Records activity User Agent|
+|Records activity Browser Language|
+|Records activity referrer|
+|Activity panel dashboard|
+|Individual activity drilldown report dashboard|
+|Activity Drilldown looks up Id Address meta information|
+|Activity Drilldown shows user roles if enabled|
+|Activity Drilldown shows associated user events|
+|Activity log can be cleared, restored, and destroyed using eloquent softdeletes|
+|Cleared activity logs can be viewed and have drilldown ability|
+|Uses font awesome, cdn assets can be optionally called in configuration|
+|Lots of [configuration](#configuration) options|
 
 ### Requirements
 * [Laravel 5.1, 5.2, 5.3, 5.4, or 5.5+](https://laravel.com/docs/installation)
@@ -62,7 +82,17 @@ Register the package with laravel in `config/app.php` under `providers` with the
     ];
 ```
 
-3. Optionally publish the packages views, config file, assets, and language files by running the following from your projects root folder:
+3. Run the migration to add the table to record the activities to:
+
+```php
+    php artisan migrate
+```
+
+* Note: If you want to specify a different table or connection make sure you update your `.env` file with the needed configuration variables.
+
+4. Optionally Update your `.env` file and associated settings (see [Environment File](#environment-file) section)
+
+5. Optionally publish the packages views, config file, assets, and language files by running the following from your projects root folder:
 
 ```bash
     php artisan vendor:publish --tag=laravellogger
@@ -76,7 +106,7 @@ Or you can variables to your `.env` file.
 ##### Environment File
 Here are the `.env` file variables available:
 
-```
+```bash
 LARAVEL_LOGGER_DATABASE_CONNECTION=mysql
 LARAVEL_LOGGER_DATABASE_TABLE=laravel_logger_activity
 LARAVEL_LOGGER_ROLES_ENABLED=true
@@ -107,11 +137,15 @@ LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_URL=https://maxcdn.bootstrapcdn.com/bootstrap/3
 
 ##### Middleware Usage
 Events for laravel authentication scaffolding are listened for as providers and are enabled via middleware.
-You can add events to your routes and controllers via the `activity` middleware.
+You can add events to your routes and controllers via the middleware:
+
+```php
+activity
+```
 
 Example to start recording page views using middlware in `web.php`:
 
-```
+```php
 Route::group(['middleware' => ['web', 'activity']], function () {
     Route::get('/', 'WelcomeController@welcome')->name('welcome');
 });
@@ -125,12 +159,14 @@ When using the trait you can customize the event description.
 
 To use the trait:
 1. Include the call in the head of your class file:
-```
+
+```php
     use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 ```
 
 2. Include the trait call in the opening of your class:
-```
+
+```php
     use ActivityLogger;
 ```
 
@@ -148,10 +184,20 @@ To use the trait:
 * ```/activity/cleared/log/{id}```
 
 ### Screenshots
-![ALT](URL)
+![dashboard](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/1-dashboard.jpg)
+![drilldown](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/2-drilldown.jpg)
+![confirm-clear](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/3-confirm-clear.jpg)
+![log-cleared-msg](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/4-log-cleared-msg.jpg)
+![cleared-log](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/5-cleared-log.jpg)
+![confirm-restore](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/5-confirm-restore.jpg)
+![confirm-destroy](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/6-confirm-destroy.jpg)
+![success-destroy](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/7-success-destroy.jpg)
+![success-restored](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/8-success-restored.jpg)
+![cleared-drilldown](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/9-cleared-drilldown.jpg)
 
 ### File Tree
-```
+
+```bash
 ├── .gitignore
 ├── CODE_OF_CONDUCT.md
 ├── LICENSE
