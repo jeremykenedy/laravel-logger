@@ -10,9 +10,26 @@
 - [Features](#features)
 - [Requirements](#requirements)
 - [Installation Instructions](#installation-instructions)
+- [Configuration](#configuration)
+    - [Environment File](#environment-file)
+- [Usage](#usage)
+    - [Authentication Middleware Usage](#authentication-middleware-usage)
+    - [Trait Usage](#trait-usage)
+- [Routes](#routes)
+- [Screenshots](#screenshots)
+- [File Tree](#file-tree)
+- [License](#license)
+
 
 ### About
 Laravel logger is an activity event logger for your laravel application. It comes out the box with ready to use with dashboard to view your activity. Laravel logger can be added as a middleware or called through a trait. This package is easily configurable and customizable.
+
+Laravel logger can work out the box with or without the following roles packages:
+* [jeremykenedy/laravel-roles](https://github.com/jeremykenedy/laravel-roles)
+* [spatie/laravel-permission](https://github.com/spatie/laravel-permission)
+* [Zizaco/entrust](https://github.com/Zizaco/entrust)
+* [romanbican/roles](https://github.com/romanbican/roles)
+* [ultraware/roles](https://github.com/ultraware/roles)
 
 ### Features
 
@@ -20,12 +37,11 @@ Laravel logger is an activity event logger for your laravel application. It come
 | :------------ |
 ||
 
-## Requirements
+### Requirements
 * [Laravel 5.1, 5.2, 5.3, 5.4, or 5.5+](https://laravel.com/docs/installation)
-
+* [jaybizzle/laravel-crawler-detect](https://github.com/JayBizzle/Laravel-Crawler-Detect) included dependency in composer.json
 
 ### Installation Instructions
-
 1. From your projects root folder in terminal run:
 
 ```bash
@@ -46,34 +62,163 @@ Register the package with laravel in `config/app.php` under `providers` with the
     ];
 ```
 
-3. Publish the packages views, config file, assets, and language files by running the following from your projects root folder:
+3. Optionally publish the packages views, config file, assets, and language files by running the following from your projects root folder:
 
 ```bash
     php artisan vendor:publish --tag=laravellogger
 ```
 
+### Configuration
+Laravel Logger can be configured in directly in `/config/laravel-logger.php` if you published the assets.
+Or you can variables to your `.env` file.
 
 
+##### Environment File
+Here are the `.env` file variables available:
 
+```
+LARAVEL_LOGGER_DATABASE_CONNECTION=mysql
+LARAVEL_LOGGER_DATABASE_TABLE=laravel_logger_activity
+LARAVEL_LOGGER_ROLES_ENABLED=true
+LARAVEL_LOGGER_ROLES_MIDDLWARE=role:admin
+LARAVEL_LOGGER_ROLE_MODEL=jeremykenedy\LaravelRoles\Models\Role
+LARAVEL_LOGGER_MIDDLEWARE_ENABLED=true
+LARAVEL_LOGGER_USER_MODEL=App\Models\User
+LARAVEL_LOGGER_PAGINATION_ENABLED=true
+LARAVEL_LOGGER_PAGINATION_PER_PAGE=25
+LARAVEL_LOGGER_DATATABLES_ENABLED=true
+LARAVEL_LOGGER_DASHBOARD_MENU_ENABLED=true
+LARAVEL_LOGGER_DASHBOARD_DRILLABLE=true
+LARAVEL_LOGGER_LOG_RECORD_FAILURES_TO_FILE=true
+LARAVEL_LOGGER_FLASH_MESSAGE_BLADE_ENABLED=true
+LARAVEL_LOGGER_JQUERY_CDN_ENABLED=true
+LARAVEL_LOGGER_JQUERY_CDN_URL=https://code.jquery.com/jquery-2.2.4.min.js
+LARAVEL_LOGGER_BLADE_CSS_PLACEMENT_ENABLED=false
+LARAVEL_LOGGER_BLADE_JS_PLACEMENT_ENABLED=false
+LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_ENABLED=true
+LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_URL=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
+LARAVEL_LOGGER_FONT_AWESOME_CDN_ENABLED=true
+LARAVEL_LOGGER_FONT_AWESOME_CDN_URL=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css
+LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_ENABLED=true
+LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_URL=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
+```
 
+### Usage
 
+##### Middleware Usage
+Events for laravel authentication scaffolding are listened for as providers and are enabled via middleware.
+You can add events to your routes and controllers via the `activity` middleware.
 
+Example to start recording page views using middlware in `web.php`:
 
+```
+Route::group(['middleware' => ['web', 'activity']], function () {
+    Route::get('/', 'WelcomeController@welcome')->name('welcome');
+});
+```
 
+This middlware can be enabled/disabled in the configuration settings.
 
+##### Trait Usage
+Events can be recorded directly by using the trait.
+When using the trait you can customize the event description.
 
+To use the trait:
+1. Include the call in the head of your class file:
+```
+    use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
+```
 
+2. Include the trait call in the opening of your class:
+```
+    use ActivityLogger;
+```
 
+3. You can record the activity my calling the traits method:
+```
+    ActivityLogger::activity("Logging this activity.");
+```
 
+### Routes
+##### Laravel Activity Dashbaord Routes
 
+* ```/activity```
+* ```/activity/cleared```
+* ```/activity/log/{id}```
+* ```/activity/cleared/log/{id}```
 
+### Screenshots
+![ALT](URL)
 
+### File Tree
+```
+├── .gitignore
+├── CODE_OF_CONDUCT.md
+├── LICENSE
+├── README.md
+├── composer.json
+└── src
+    ├── .env.example
+    ├── LaravelLoggerServiceProvider.php
+    ├── app
+    │   ├── Http
+    │   │   ├── Controllers
+    │   │   │   └── LaravelLoggerController.php
+    │   │   ├── Middleware
+    │   │   │   └── LogActivity.php
+    │   │   └── Traits
+    │   │       ├── ActivityLogger.php
+    │   │       ├── IpAddressDetails.php
+    │   │       └── UserAgentDetails.php
+    │   ├── Listeners
+    │   │   ├── LogAuthenticated.php
+    │   │   ├── LogAuthenticationAttempt.php
+    │   │   ├── LogFailedLogin.php
+    │   │   ├── LogLockout.php
+    │   │   ├── LogPasswordReset.php
+    │   │   ├── LogSuccessfulLogin.php
+    │   │   └── LogSuccessfulLogout.php
+    │   ├── Logic
+    │   │   └── helpers.php
+    │   └── Models
+    │       └── Activity.php
+    ├── config
+    │   └── laravel-logger.php
+    ├── database
+    │   └── migrations
+    │       └── 2017_11_04_103444_create_laravel_logger_activity_table.php
+    ├── resources
+    │   ├── lang
+    │   │   └── en
+    │   │       └── laravel-logger.php
+    │   └── views
+    │       ├── forms
+    │       │   ├── clear-activity-log.blade.php
+    │       │   ├── delete-activity-log.blade.php
+    │       │   └── restore-activity-log.blade.php
+    │       ├── logger
+    │       │   ├── activity-log-cleared.blade.php
+    │       │   ├── activity-log-item.blade.php
+    │       │   ├── activity-log.blade.php
+    │       │   └── partials
+    │       │       └── activity-table.blade.php
+    │       ├── modals
+    │       │   └── confirm-modal.blade.php
+    │       ├── partials
+    │       │   ├── form-status.blade.php
+    │       │   └── styles.blade.php
+    │       └── scripts
+    │           ├── clickable-row.blade.php
+    │           ├── confirm-modal.blade.php
+    │           ├── datatables.blade.php
+    │           └── tooltip.blade.php
+    └── routes
+        └── web.php
+```
 
+* Tree command can be installed using brew: `brew install tree`
+* File tree generated using command `tree -a -I '.git|node_modules|vendor|storage|tests`
 
-Laravel logger can work out the box with or without the following roles packages:
-* [jeremykenedy/laravel-roles](https://github.com/jeremykenedy/laravel-roles)
-* [spatie/laravel-permission](https://github.com/spatie/laravel-permission)
-* [Zizaco/entrust](https://github.com/Zizaco/entrust)
-* [romanbican/roles](https://github.com/romanbican/roles)
-* [ultraware/roles](https://github.com/ultraware/roles)
+### License
+Laravel-logger is licensed under the MIT license. Enjoy!
 

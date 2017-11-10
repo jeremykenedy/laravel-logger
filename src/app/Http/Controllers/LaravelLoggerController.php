@@ -49,19 +49,6 @@ class LaravelLoggerController extends Controller
             $collectionItem['langDetails'] = UserAgentDetails::localeLang($collectionItem->locale);
             $collectionItem['userDetails'] = config('LaravelLogger.defaultUserModel')::find($collectionItem->userId);
 
-
-
-if (config('LaravelLogger.rolesEnabled')) {
-
-
-//dd('hey');
-
-//config('LaravelLogger.roleModel')
-
-}
-
-
-
             return $collectionItem;
         });
 
