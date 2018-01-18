@@ -29,7 +29,7 @@ class CreateLaravelLoggerActivityTable extends Migration
                 $table->ipAddress('ipAddress')->nullable();
                 $table->text('userAgent')->nullable();
                 $table->string('locale')->nullable();
-                $table->string('referer')->nullable();
+                $table->longText('referer')->nullable();
                 $table->string('methodType')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
