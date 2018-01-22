@@ -83,7 +83,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'logDBActivityLogFailuresToFile'     => env('LARAVEL_LOGGER_LOG_RECORD_FAILURES_TO_FILE', true),
+    'logDBActivityLogFailuresToFile' => env('LARAVEL_LOGGER_LOG_RECORD_FAILURES_TO_FILE', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -108,8 +108,8 @@ return [
     'enableBladeJsPlacement'    => env('LARAVEL_LOGGER_BLADE_JS_PLACEMENT_ENABLED', false),
 
     // Bootstrap
-    'enableBootstrapCssCDN'      => env('LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_ENABLED', true),
-    'bootstrapCssCDN'            => env('LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_URL', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'),
+    'enableBootstrapCssCDN'     => env('LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_ENABLED', true),
+    'bootstrapCssCDN'           => env('LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_URL', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'),
     'enableBootstrapJsCDN'      => env('LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_ENABLED', true),
     'bootstrapJsCDN'            => env('LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_URL', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'),
 

@@ -165,7 +165,7 @@ return [
     |--------------------------------------------------------------------------
     */
     'pagination' => [
-        'countText'     => 'Showing :firstItem - :lastItem of :total results <small>(:perPage per page)</small>',
+        'countText' => 'Showing :firstItem - :lastItem of :total results <small>(:perPage per page)</small>',
     ],
 
 ];
