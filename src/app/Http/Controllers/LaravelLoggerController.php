@@ -2,16 +2,19 @@
 
 namespace jeremykenedy\LaravelLogger\App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controller as BaseController;
 use jeremykenedy\LaravelLogger\App\Http\Traits\IpAddressDetails;
 use jeremykenedy\LaravelLogger\App\Http\Traits\UserAgentDetails;
 use jeremykenedy\LaravelLogger\App\Models\Activity;
-use Illuminate\Http\Request;
 
-class LaravelLoggerController extends Controller
+class LaravelLoggerController extends BaseController
 {
-    use IpAddressDetails, UserAgentDetails;
+    use AuthorizesRequests, DispatchesJobs, IpAddressDetails, UserAgentDetails, ValidatesRequests;
 
     private $_rolesEnabled;
     private $_rolesMiddlware;
