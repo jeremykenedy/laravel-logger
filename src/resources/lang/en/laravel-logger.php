@@ -138,9 +138,9 @@ return [
     */
 
    'messages' => [
-        'logClearedSuccessfuly' => 'Activity log cleared successfully',
+        'logClearedSuccessfuly'   => 'Activity log cleared successfully',
         'logDestroyedSuccessfuly' => 'Activity log deleted successfully',
-        'logRestoredSuccessfuly' => 'Activity log restored successfully',
+        'logRestoredSuccessfuly'  => 'Activity log restored successfully',
    ],
 
     /*

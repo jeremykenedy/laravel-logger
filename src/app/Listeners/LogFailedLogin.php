@@ -2,10 +2,7 @@
 
 namespace jeremykenedy\LaravelLogger\App\Listeners;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Failed;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 
 class LogFailedLogin
@@ -25,13 +22,14 @@ class LogFailedLogin
     /**
      * Handle the event.
      *
-     * @param  Failed  $event
+     * @param Failed $event
+     *
      * @return void
      */
     public function handle(Failed $event)
     {
         if (config('LaravelLogger.logFailedAuthAttempts')) {
-            ActivityLogger::activity("Failed Login Attempt");
+            ActivityLogger::activity('Failed Login Attempt');
         }
     }
 }

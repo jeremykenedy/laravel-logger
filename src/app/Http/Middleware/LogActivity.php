@@ -3,7 +3,6 @@
 namespace jeremykenedy\LaravelLogger\App\Http\Middleware;
 
 use Closure;
-use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 
@@ -14,7 +13,7 @@ class LogActivity
     /**
      * Handle an incoming request.
      *
-     * @param Request $request
+     * @param Request  $request
      * @param \Closure $next
      *
      * @return mixed
