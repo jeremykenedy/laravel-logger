@@ -4,6 +4,7 @@ if (!function_exists('showCleanRoutUrl'))
 {
     /**
      * Clean the url for the front end to display
+     *
      * @param  string $link
      * @return echo string
      */

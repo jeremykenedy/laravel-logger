@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends(config('LaravelLogger.loggerBladeExtended'))
 
 @section('template_title')
     @lang('LaravelLogger::laravel-logger.dashboardCleared.title')
@@ -83,6 +83,10 @@
 
     @if(config('LaravelLogger.enableBootstrapJsCDN'))
         <script type="text/javascript" src="{{ config('LaravelLogger.bootstrapJsCDN') }}"></script>
+    @endif
+
+    @if(config('LaravelLogger.enablePopperJsCDN'))
+        <script type="text/javascript" src="{{ config('LaravelLogger.popperJsCDN') }}"></script>
     @endif
 
     @include('LaravelLogger::scripts.confirm-modal', ['formTrigger' => '#confirmDelete'])

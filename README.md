@@ -1,4 +1,4 @@
-# Laravel Logger
+# Laravel Activity Logger
 
 [![Latest Stable Version](https://poser.pugx.org/jeremykenedy/laravel-logger/v/stable)](https://packagist.org/packages/jeremykenedy/laravel-logger)
 [![Total Downloads](https://poser.pugx.org/jeremykenedy/laravel-logger/downloads)](https://packagist.org/packages/jeremykenedy/laravel-logger)
@@ -32,7 +32,7 @@ Laravel logger can work out the box with or without the following roles packages
 
 ### Features
 
-| Laravel Logger Features  |
+| Laravel Activity Logger Features  |
 | :------------ |
 |Logs login page visits|
 |Logs user logins|
@@ -60,7 +60,7 @@ Laravel logger can work out the box with or without the following roles packages
 |Lots of [configuration](#configuration) options|
 
 ### Requirements
-* [Laravel 5.1, 5.2, 5.3, 5.4, or 5.5+](https://laravel.com/docs/installation)
+* [Laravel 5.1, 5.2, 5.3, 5.4, 5.5, and 5.6+](https://laravel.com/docs/installation)
 * [jaybizzle/laravel-crawler-detect](https://github.com/JayBizzle/Laravel-Crawler-Detect) included dependency in composer.json (for crawler detection)
 
 ### Installation Instructions
@@ -101,7 +101,7 @@ Register the package with laravel in `config/app.php` under `providers` with the
 ```
 
 ### Configuration
-Laravel Logger can be configured in directly in `/config/laravel-logger.php` if you published the assets.
+Laravel Activity Logger can be configured in directly in `/config/laravel-logger.php` if you published the assets.
 Or you can variables to your `.env` file.
 
 
@@ -128,11 +128,12 @@ LARAVEL_LOGGER_JQUERY_CDN_URL=https://code.jquery.com/jquery-2.2.4.min.js
 LARAVEL_LOGGER_BLADE_CSS_PLACEMENT_ENABLED=false
 LARAVEL_LOGGER_BLADE_JS_PLACEMENT_ENABLED=false
 LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_ENABLED=true
-LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_URL=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js
+LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_URL=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js
 LARAVEL_LOGGER_FONT_AWESOME_CDN_ENABLED=true
 LARAVEL_LOGGER_FONT_AWESOME_CDN_URL=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css
 LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_ENABLED=true
-LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_URL=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css
+LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_URL=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css
+LARAVEL_LOGGER_POPPER_JS_CDN_URL=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js
 ```
 
 ### Usage

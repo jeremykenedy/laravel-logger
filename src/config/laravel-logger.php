@@ -95,23 +95,42 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Blade settings
+    |--------------------------------------------------------------------------
+    */
+
+    // The parent Blade file
+    'loggerBladeExtended'       => 'layouts.app',
+
+    // Switch Between bootstrap 3 `panel` and bootstrap 4 `card` classes
+    'bootstapVersion'           => '4',
+
+    // Additional Card classes for styling -
+    // See: https://getbootstrap.com/docs/4.0/components/card/#background-and-color
+    // Example classes: 'text-white bg-primary mb-3'
+    'bootstrapCardClasses'          => '',
+
+    // Blade Extension Placement
+    'enableBladeCssPlacement'   => env('LARAVEL_LOGGER_BLADE_CSS_PLACEMENT_ENABLED', false),
+    'enableBladeJsPlacement'    => env('LARAVEL_LOGGER_BLADE_JS_PLACEMENT_ENABLED', false),
+
+    /*
+    |--------------------------------------------------------------------------
     | Laravel Logger Dependencies - allows for easier builds into other projects
     |--------------------------------------------------------------------------
     */
 
     // jQuery
     'enablejQueryCDN'           => env('LARAVEL_LOGGER_JQUERY_CDN_ENABLED', true),
-    'JQueryCDN'                 => env('LARAVEL_LOGGER_JQUERY_CDN_URL', 'https://code.jquery.com/jquery-2.2.4.min.js'),
-
-    // Blade Extension Placement
-    'enableBladeCssPlacement'   => env('LARAVEL_LOGGER_BLADE_CSS_PLACEMENT_ENABLED', false),
-    'enableBladeJsPlacement'    => env('LARAVEL_LOGGER_BLADE_JS_PLACEMENT_ENABLED', false),
+    'JQueryCDN'                 => env('LARAVEL_LOGGER_JQUERY_CDN_URL', 'https://code.jquery.com/jquery-3.2.1.slim.min.js'),
 
     // Bootstrap
     'enableBootstrapCssCDN'     => env('LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_ENABLED', true),
-    'bootstrapCssCDN'           => env('LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_URL', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'),
+    'bootstrapCssCDN'           => env('LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_URL', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'),
     'enableBootstrapJsCDN'      => env('LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_ENABLED', true),
-    'bootstrapJsCDN'            => env('LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_URL', 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'),
+    'bootstrapJsCDN'            => env('LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_URL', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'),
+    'enablePopperJsCDN'         => env('LARAVEL_LOGGER_POPPER_JS_CDN_ENABLED', true),
+    'popperJsCDN'               => env('LARAVEL_LOGGER_POPPER_JS_CDN_URL', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js'),
 
     // Font Awesome
     'enableFontAwesomeCDN'      => env('LARAVEL_LOGGER_FONT_AWESOME_CDN_ENABLED', true),

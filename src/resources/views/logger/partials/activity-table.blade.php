@@ -16,7 +16,7 @@ if (Request::is('activity/cleared')) {
 @endphp
 
 <div class="table-responsive activity-table">
-    <table class="table table-striped table-condensed @if(config('LaravelLogger.enableDrillDown') && $hoverable) table-hover @endif data-table">
+    <table class="table table-striped table-condensed table-sm @if(config('LaravelLogger.enableDrillDown') && $hoverable) table-hover @endif data-table">
         <thead>
             <tr>
                 <th>
