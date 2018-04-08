@@ -1,0 +1,31 @@
+language: php
+sudo: required
+dist: trusty
+group: edge
+
+php:
+  - 7.0
+  - 7.1
+  - 7.2
+  - nightly
+
+sudo: false
+
+services:
+  - mysql
+
+before_script:
+  - mysql -u root -e 'create database laravellogger;'
+  - curl -s http://getcomposer.org/installer | php
+  - php composer.phar install
+  - composer create-project --prefer-dist laravel/laravel laravellogger
+  - cp .env.travis laravellogger/.env
+  - cd laravellogger
+  - composer self-update
+  - composer install --prefer-source --no-interaction
+  - composer require jeremykenedy/laravel-logger
+  - php artisan key:generate
+  - php artisan vendor:publish --tag=laravellogger
+  - php artisan make:auth
+  - composer dump-autoload
+  - php artisan clear-compiled
