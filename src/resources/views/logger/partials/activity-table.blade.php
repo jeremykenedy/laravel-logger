@@ -98,7 +98,7 @@ if (Request::is('activity/cleared')) {
                             }
 
                         @endphp
-                        <span class="label label-{{$userTypeClass}}">
+                        <span class="badge badge-{{$userTypeClass}}">
                             {{$userLabel}}
                         </span>
                     </td>
@@ -126,7 +126,7 @@ if (Request::is('activity/cleared')) {
                                     break;
                             }
                         @endphp
-                        <span class="label label-{{$methodClass}}">
+                        <span class="badge badge-{{$methodClass}}">
                             {{ $activity->methodType }}
                         </span>
                     </td>

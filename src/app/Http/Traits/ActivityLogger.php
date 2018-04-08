@@ -12,7 +12,9 @@ trait ActivityLogger
 {
     /**
      * Laravel Logger Log Activity
+     *
      * @param  string $description
+     *
      * @return void
      */
     public static function activity($description = null)
@@ -80,7 +82,9 @@ trait ActivityLogger
 
 /**
  * Store activity entry to database
+ *
  * @param  array $data
+ *
  * @return void
  */
     private static function storeActivity($data)

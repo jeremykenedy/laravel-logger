@@ -39,7 +39,7 @@ class LaravelLoggerController extends BaseController
     /**
      * Add additional details to a collections
      *
-     * @param  collection $collectionItems
+     * @param collection $collectionItems
      *
      * @return collection
      */
@@ -85,6 +85,9 @@ class LaravelLoggerController extends BaseController
 
     /**
      * Show an individual activity log entry.
+     *
+     * @param Request $request
+     * @param int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -177,6 +180,9 @@ class LaravelLoggerController extends BaseController
     /**
      * Show an individual cleared (soft deleted) activity log entry.
      *
+     * @param Request $request
+     * @param int $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function showClearedAccessLogEntry(Request $request, $id)
@@ -253,5 +259,4 @@ class LaravelLoggerController extends BaseController
 
         return redirect('activity')->with('success', trans('LaravelLogger::laravel-logger.messages.logRestoredSuccessfuly'));
     }
-
 }

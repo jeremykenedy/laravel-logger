@@ -12,6 +12,22 @@
     @include('LaravelLogger::partials.styles')
 @endif
 
+@php
+    switch (config('LaravelLogger.bootstapVersion')) {
+        case '4':
+            $containerClass = 'card';
+            $containerHeaderClass = 'card-header';
+            $containerBodyClass = 'card-body';
+            break;
+        case '3':
+        default:
+            $containerClass = 'panel panel-default';
+            $containerHeaderClass = 'panel-heading';
+            $containerBodyClass = 'panel-body';
+    }
+    $bootstrapCardClasses = (is_null(config('LaravelLogger.bootstrapCardClasses')) ? '' : config('LaravelLogger.bootstrapCardClasses'));
+@endphp
+
 @section('content')
 
     <div class="container-fluid">
@@ -22,16 +38,15 @@
 
         <div class="row">
             <div class="col-sm-12">
-                <div class="panel panel-danger">
-                    <div class="panel-heading">
-                        <div style="display: flesx; justify-content: spacse-between; align-items: censter;">
-
-                            @lang('LaravelLogger::laravel-logger.dashboardCleared.title')
-
-                            <sup class="label">
-                                {{ $totalActivities }} @lang('LaravelLogger::laravel-logger.dashboardCleared.subtitle')
-                            </sup>
-
+                <div class="{{ $containerClass }} {{ $bootstrapCardClasses }}">
+                    <div class="{{ $containerHeaderClass }}">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>
+                                @lang('LaravelLogger::laravel-logger.dashboardCleared.title')
+                                <sup class="label">
+                                    {{ $totalActivities }} @lang('LaravelLogger::laravel-logger.dashboardCleared.subtitle')
+                                </sup>
+                            </span>
                             <div class="btn-group pull-right btn-group-xs">
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-ellipsis-v fa-fw" aria-hidden="true"></i>
@@ -39,24 +54,39 @@
                                         @lang('LaravelLogger::laravel-logger.dashboard.menu.alt')
                                     </span>
                                 </button>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a href="{{route('activity')}}">
+                                @if(config('LaravelLogger.bootstapVersion') == '4')
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a href="{{route('activity')}}" class="dropdown-item">
                                             <span class="text-primary">
                                                 <i class="fa fa-fw fa-mail-reply" aria-hidden="true"></i>
                                                 @lang('LaravelLogger::laravel-logger.dashboard.menu.back')
                                             </span>
                                         </a>
-                                    </li>
-                                    @if($totalActivities)
-                                        <li>
+                                        @if($totalActivities)
                                             @include('LaravelLogger::forms.delete-activity-log')
-                                        </li>
-                                        <li>
                                             @include('LaravelLogger::forms.restore-activity-log')
+                                        @endif
+                                    </div>
+                                @else
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a href="{{route('activity')}}">
+                                                <span class="text-primary">
+                                                    <i class="fa fa-fw fa-mail-reply" aria-hidden="true"></i>
+                                                    @lang('LaravelLogger::laravel-logger.dashboard.menu.back')
+                                                </span>
+                                            </a>
                                         </li>
-                                    @endif
-                                </ul>
+                                        @if($totalActivities)
+                                            <li>
+                                                @include('LaravelLogger::forms.delete-activity-log')
+                                            </li>
+                                            <li>
+                                                @include('LaravelLogger::forms.restore-activity-log')
+                                            </li>
+                                        @endif
+                                    </ul>
+                                @endif
                             </div>
                         </div>
                     </div>

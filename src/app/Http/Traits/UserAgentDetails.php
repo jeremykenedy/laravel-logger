@@ -4,6 +4,13 @@ namespace jeremykenedy\LaravelLogger\App\Http\Traits;
 
 trait UserAgentDetails
 {
+    /**
+     * Get the user's agents details
+     *
+     * @param $ua
+     *
+     * @return array
+     */
     public static function details($ua)
     {
         $ua = is_null($ua) ? $_SERVER['HTTP_USER_AGENT'] : $ua;
@@ -41,7 +48,6 @@ trait UserAgentDetails
                numbers 31.0.1234.122 becomes 31.0, while a "normal" 3 digit version number
                like 10.2.1 would stay 10.2.1, 11.0 stays 11.0. Non-match stays what it is.
             */
-
             if (preg_match("/^[\d]+\.[\d]+(?:\.[\d]{0,2}$)?/",$ua_array[4],$matches))
             {
                 $return['version'] = $matches[0];
@@ -85,9 +91,16 @@ trait UserAgentDetails
         return $return;
     }
 
+    /**
+     * Return the locales language from PHP's Local
+     * http://php.net/manual/en/class.locale.php
+     * http://php.net/manual/en/locale.acceptfromhttp.php
+     *
+     * @param string $locale
+     * @return string (Example: "en_US")
+     */
     public static function localeLang($locale)
     {
         return \Locale::acceptFromHttp($locale);
     }
-
 }

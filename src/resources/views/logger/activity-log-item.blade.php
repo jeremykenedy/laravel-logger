@@ -13,6 +13,20 @@
 @endif
 
 @php
+    switch (config('LaravelLogger.bootstapVersion')) {
+        case '4':
+            $containerClass = 'card';
+            $containerHeaderClass = 'card-header';
+            $containerBodyClass = 'card-body';
+            break;
+        case '3':
+        default:
+            $containerClass = 'panel panel-default';
+            $containerHeaderClass = 'panel-heading';
+            $containerBodyClass = 'panel-body';
+    }
+    $bootstrapCardClasses = (is_null(config('LaravelLogger.bootstrapCardClasses')) ? '' : config('LaravelLogger.bootstrapCardClasses'));
+
     switch ($activity->userType) {
         case trans('LaravelLogger::laravel-logger.userTypes.registered'):
             $userTypeClass = 'success';
@@ -126,19 +140,17 @@
     @endif
 
     <div class="panel @if($isClearedEntry) panel-danger @else panel-default @endif">
-        <div class="panel-heading">
+        <div class="{{ $containerClass }} @if($isClearedEntry) panel-danger @else panel-default @endif">
+        <div class="{{ $containerHeaderClass }} @if($isClearedEntry) bg-danger text-white @else @endif" >
             @lang('LaravelLogger::laravel-logger.drilldown.title', ['id' => $activity->id])
-
-
-
-            <a href="@if($isClearedEntry) {{route('cleared')}} @else {{route('activity')}} @endif" class="btn @if($isClearedEntry) btn-default @else btn-info @endif btn-xs pull-right">
+            <a href="@if($isClearedEntry) {{route('cleared')}} @else {{route('activity')}} @endif" class="btn @if($isClearedEntry) btn-default @else btn-info @endif btn-sm pull-right">
                 <i class="fa fa-fw fa-mail-reply" aria-hidden="true"></i>
                 @lang('LaravelLogger::laravel-logger.drilldown.buttons.back')
             </a>
         </div>
-        <div class="panel-body">
+        <div class="{{ $containerBodyClass }}">
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-12 col-12">
                     <div class="row">
 
                         <div class="col-md-6 col-lg-4">
@@ -194,7 +206,7 @@
 
                                         <dt>@lang('LaravelLogger::laravel-logger.drilldown.list-group.labels.methodType')</dt>
                                         <dd>
-                                            <span class="label label-{{$methodClass}}">
+                                            <span class="badge badge-{{$methodClass}}">
                                                 {{ $activity->methodType }}
                                             </span>
                                         </dd>
@@ -247,7 +259,7 @@
                                     <dl class="dl-horizontal">
                                         <dt>@lang('LaravelLogger::laravel-logger.drilldown.list-group.labels.userType')</dt>
                                         <dd>
-                                            <span class="label label-{{$userTypeClass}}">
+                                            <span class="badge badge-{{$userTypeClass}}">
                                                 {{$activity->userType}}
                                             </span>
                                         </dd>
@@ -278,7 +290,7 @@
                                                     @endif
 
                                                     <dd>
-                                                        <span class="label label-{{$labelClass}}">
+                                                        <span class="badge badge-{{$labelClass}}">
                                                             {{ $user_role->name }} - @lang('LaravelLogger::laravel-logger.drilldown.labels.userLevel') {{ $user_role->level }}
                                                         </span>
                                                     </dd>
@@ -329,7 +341,7 @@
 
             @if(!$isClearedEntry)
                 <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 col-12">
                         <ul class="list-group">
                             <li class="list-group-item list-group-item-info">
                                 @lang('LaravelLogger::laravel-logger.drilldown.title-user-activity')
