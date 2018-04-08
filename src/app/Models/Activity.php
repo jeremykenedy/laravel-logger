@@ -16,7 +16,7 @@ class Activity extends Model
      */
     protected $table;
 
-   /**
+    /**
      * The connection name for the model.
      *
      * @var string
@@ -47,7 +47,7 @@ class Activity extends Model
     protected $dates = [
         'created_at',
         'updated_at',
-        'deleted_at'
+        'deleted_at',
     ];
 
     /**
@@ -119,11 +119,11 @@ class Activity extends Model
     /**
      * Get a validator for an incoming Request.
      *
-     * @param  array $merge (rules to optionally merge)
+     * @param array $merge (rules to optionally merge)
      *
      * @return array
      */
-    public static function rules($merge=[])
+    public static function rules($merge = [])
     {
         return array_merge([
             'description'   => 'required|string',

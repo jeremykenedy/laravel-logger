@@ -3,9 +3,9 @@
 namespace jeremykenedy\LaravelLogger\App\Http\Controllers;
 
 use Carbon\Carbon;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use jeremykenedy\LaravelLogger\App\Http\Traits\IpAddressDetails;
@@ -37,7 +37,7 @@ class LaravelLoggerController extends BaseController
     }
 
     /**
-     * Add additional details to a collections
+     * Add additional details to a collections.
      *
      * @param collection $collectionItems
      *
@@ -87,7 +87,7 @@ class LaravelLoggerController extends BaseController
      * Show an individual activity log entry.
      *
      * @param Request $request
-     * @param int $id
+     * @param int     $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -116,7 +116,7 @@ class LaravelLoggerController extends BaseController
 
         self::mapAdditionalDetails($userActivities);
 
-        $data  = [
+        $data = [
             'activity'              => $activity,
             'userDetails'           => $userDetails,
             'ipAddressDetails'      => $ipAddressDetails,
@@ -149,7 +149,7 @@ class LaravelLoggerController extends BaseController
     }
 
     /**
-     * Show the cleared activity log - softdeleted records
+     * Show the cleared activity log - softdeleted records.
      *
      * @return \Illuminate\Http\Response
      */
@@ -181,7 +181,7 @@ class LaravelLoggerController extends BaseController
      * Show an individual cleared (soft deleted) activity log entry.
      *
      * @param Request $request
-     * @param int $id
+     * @param int     $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -196,7 +196,7 @@ class LaravelLoggerController extends BaseController
         $eventTime = Carbon::parse($activity->created_at);
         $timePassed = $eventTime->diffForHumans();
 
-        $data  = [
+        $data = [
             'activity'              => $activity,
             'userDetails'           => $userDetails,
             'ipAddressDetails'      => $ipAddressDetails,

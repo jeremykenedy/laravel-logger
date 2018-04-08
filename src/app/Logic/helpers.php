@@ -1,11 +1,11 @@
 <?php
 
-if (!function_exists('showCleanRoutUrl'))
-{
+if (!function_exists('showCleanRoutUrl')) {
     /**
-     * Clean the url for the front end to display
+     * Clean the url for the front end to display.
      *
-     * @param  string $link
+     * @param string $link
+     *
      * @return echo string
      */
     function showCleanRoutUrl($link)
@@ -16,7 +16,7 @@ if (!function_exists('showCleanRoutUrl'))
             $routeUrl .= $parsedUrl['path'];
         }
         if (isset($parsedUrl['query'])) {
-            $routeUrl .= '?' . $parsedUrl['query'];
+            $routeUrl .= '?'.$parsedUrl['query'];
         }
         echo $routeUrl;
     }
