@@ -2,10 +2,7 @@
 
 namespace jeremykenedy\LaravelLogger\App\Listeners;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Auth\Events\Login;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 
 class LogSuccessfulLogin
@@ -25,13 +22,14 @@ class LogSuccessfulLogin
     /**
      * Handle the event.
      *
-     * @param  Login  $event
+     * @param Login $event
+     *
      * @return void
      */
     public function handle(Login $event)
     {
         if (config('LaravelLogger.logSuccessfulLogin')) {
-            ActivityLogger::activity("Logged In");
+            ActivityLogger::activity('Logged In');
         }
     }
 }

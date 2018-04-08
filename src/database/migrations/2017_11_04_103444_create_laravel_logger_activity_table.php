@@ -1,9 +1,9 @@
 <?php
 
-use jeremykenedy\LaravelLogger\App\Models\Activity;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+use jeremykenedy\LaravelLogger\App\Models\Activity;
 
 class CreateLaravelLoggerActivityTable extends Migration
 {
@@ -14,10 +14,10 @@ class CreateLaravelLoggerActivityTable extends Migration
      */
     public function up()
     {
-        $activity       = new Activity;
-        $connection     = $activity->getConnectionName();
-        $table          = $activity->getTableName();
-        $tableCheck     = Schema::connection($connection)->hasTable($table);
+        $activity = new Activity();
+        $connection = $activity->getConnectionName();
+        $table = $activity->getTableName();
+        $tableCheck = Schema::connection($connection)->hasTable($table);
 
         if (!$tableCheck) {
             Schema::connection($connection)->create($table, function (Blueprint $table) {
@@ -44,9 +44,9 @@ class CreateLaravelLoggerActivityTable extends Migration
      */
     public function down()
     {
-        $activity       = new Activity;
-        $connection     = $activity->getConnectionName();
-        $table          = $activity->getTableName();
+        $activity = new Activity();
+        $connection = $activity->getConnectionName();
+        $table = $activity->getTableName();
 
         Schema::connection($connection)->dropIfExists($table);
     }

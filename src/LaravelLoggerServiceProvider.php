@@ -59,7 +59,7 @@ class LaravelLoggerServiceProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        $router->middlewareGroup('activity',[LogActivity::class]);
+        $router->middlewareGroup('activity', [LogActivity::class]);
         $this->loadTranslationsFrom(__DIR__.'/resources/lang/', 'LaravelLogger');
     }
 
@@ -79,7 +79,7 @@ class LaravelLoggerServiceProvider extends ServiceProvider
     }
 
     /**
-     * Get the list of listeners and events
+     * Get the list of listeners and events.
      *
      * @return array
      */
@@ -89,7 +89,7 @@ class LaravelLoggerServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register the list of listeners and events
+     * Register the list of listeners and events.
      *
      * @return void
      */
@@ -125,6 +125,5 @@ class LaravelLoggerServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/lang' => base_path('resources/lang/vendor/laravel-logger'),
         ], $publishTag);
-
     }
 }
