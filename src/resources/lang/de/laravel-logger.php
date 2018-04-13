@@ -138,9 +138,9 @@ return [
     */
 
    'messages' => [
-        'logClearedSuccessfuly' => 'Aktivitätslog erfolgreich geleert',
+        'logClearedSuccessfuly'   => 'Aktivitätslog erfolgreich geleert',
         'logDestroyedSuccessfuly' => 'Aktivitätslog erfolgreich gelöscht',
-        'logRestoredSuccessfuly' => 'Aktivitätslog erfolgreich wiederhergestellt',
+        'logRestoredSuccessfuly'  => 'Aktivitätslog erfolgreich wiederhergestellt',
    ],
 
     /*
