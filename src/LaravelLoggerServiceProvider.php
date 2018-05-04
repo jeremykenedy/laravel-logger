@@ -119,11 +119,11 @@ class LaravelLoggerServiceProvider extends ServiceProvider
         ], $publishTag);
 
         $this->publishes([
-            __DIR__.'/resources/views' => base_path('resources/views/vendor/' . $publishTag),
+            __DIR__.'/resources/views' => base_path('resources/views/vendor/'.$publishTag),
         ], $publishTag);
 
         $this->publishes([
-            __DIR__.'/resources/lang' => base_path('resources/lang/vendor/' . $publishTag),
+            __DIR__.'/resources/lang' => base_path('resources/lang/vendor/'.$publishTag),
         ], $publishTag);
     }
 }
