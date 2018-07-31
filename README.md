@@ -275,7 +275,7 @@ To use the trait:
 
 ### Opening an Issue
 Before opening an issue there are a couple of considerations:
-* If you did not **star this repo** *I will close your issue immediatly without consideration.* **My time is valuable**.
+* If you did not **star this repo** *I will close your issue immediatly without consideration.*
 * **Read the instructions** and make sure all steps were *followed correctly*.
 * **Check** that the issue is not *specific to your development environment* setup.
 * **Provide** *duplication steps*.
