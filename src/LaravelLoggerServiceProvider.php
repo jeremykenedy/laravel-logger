@@ -73,7 +73,11 @@ class LaravelLoggerServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         $this->loadViewsFrom(__DIR__.'/resources/views/', 'LaravelLogger');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
-        $this->mergeConfigFrom(__DIR__.'/config/laravel-logger.php', 'LaravelLogger');
+        if (file_exists(config_path('laravel-logger.php'))) {
+            $this->mergeConfigFrom(config_path('laravel-logger.php'), 'LaravelLogger');
+        } else {
+            $this->mergeConfigFrom(__DIR__.'/config/laravel-logger.php', 'LaravelLogger');
+        }
         $this->registerEventListeners();
         $this->publishFiles();
     }
