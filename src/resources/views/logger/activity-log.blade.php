@@ -4,7 +4,7 @@
     @lang('LaravelLogger::laravel-logger.dashboard.title')
 @endsection
 
-@if(config('LaravelLogger.enableBladeJsPlacement'))
+@if(config('LaravelLogger.enableBladeCssPlacement'))
     @section('template_linked_css')
         @include('LaravelLogger::partials.styles')
     @endsection
