@@ -27,6 +27,7 @@ return [
     */
 
     'loggerMiddlewareEnabled' => env('LARAVEL_LOGGER_MIDDLEWARE_ENABLED', true),
+    'loggerMiddlewareExcept' => env('LARAVEL_LOGGER_MIDDLEWARE_EXCEPT', []),
 
     /*
     |--------------------------------------------------------------------------
