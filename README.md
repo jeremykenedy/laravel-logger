@@ -131,8 +131,9 @@ LARAVEL_LOGGER_LOG_RECORD_FAILURES_TO_FILE=true
 LARAVEL_LOGGER_FLASH_MESSAGE_BLADE_ENABLED=true
 LARAVEL_LOGGER_JQUERY_CDN_ENABLED=true
 LARAVEL_LOGGER_JQUERY_CDN_URL=https://code.jquery.com/jquery-2.2.4.min.js
-LARAVEL_LOGGER_BLADE_CSS_PLACEMENT_ENABLED=false
-LARAVEL_LOGGER_BLADE_JS_PLACEMENT_ENABLED=false
+LARAVEL_LOGGER_BLADE_PLACEMENT=yield                    #option: yield or stack
+LARAVEL_LOGGER_BLADE_PLACEMENT_CSS=template_linked_css  #placement name
+LARAVEL_LOGGER_BLADE_PLACEMENT_JS=footer_scripts        #placement name
 LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_ENABLED=true
 LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_URL=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js
 LARAVEL_LOGGER_FONT_AWESOME_CDN_ENABLED=true
@@ -261,7 +262,8 @@ To use the trait:
     │       │   └── confirm-modal.blade.php
     │       ├── partials
     │       │   ├── form-status.blade.php
-    │       │   └── styles.blade.php
+    │       │   ├── styles.blade.php
+    |       |   └── scripts.blade.php
     │       └── scripts
     │           ├── clickable-row.blade.php
     │           ├── confirm-modal.blade.php

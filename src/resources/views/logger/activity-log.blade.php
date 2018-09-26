@@ -1,16 +1,42 @@
 @extends(config('LaravelLogger.loggerBladeExtended'))
 
+@if(config('LaravelLogger.bladePlacement') == 'yield')
+    @section(config('LaravelLogger.bladePlacementCss'))
+@elseif (config('LaravelLogger.bladePlacement') == 'stack')
+    @push(config('LaravelLogger.bladePlacementCss'))
+@endif
+
+    @include('LaravelLogger::partials.styles')
+
+@if(config('LaravelLogger.bladePlacement') == 'yield')
+    @endsection
+@elseif (config('LaravelLogger.bladePlacement') == 'stack')
+    @endpush
+@endif
+
+@if(config('LaravelLogger.bladePlacement') == 'yield')
+    @section(config('LaravelLogger.bladePlacementJs'))
+@elseif (config('LaravelLogger.bladePlacement') == 'stack')
+    @push(config('LaravelLogger.bladePlacementJs'))
+@endif
+
+    @include('LaravelLogger::partials.scripts')
+    @include('LaravelLogger::scripts.confirm-modal', ['formTrigger' => '#confirmDelete'])
+
+    @if(config('LaravelLogger.enableDrillDown'))
+        @include('LaravelLogger::scripts.clickable-row')
+        @include('LaravelLogger::scripts.tooltip')
+    @endif
+
+@if(config('LaravelLogger.bladePlacement') == 'yield')
+    @endsection
+@elseif (config('LaravelLogger.bladePlacement') == 'stack')
+    @endpush
+@endif
+
 @section('template_title')
     @lang('LaravelLogger::laravel-logger.dashboard.title')
 @endsection
-
-@if(config('LaravelLogger.enableBladeCssPlacement'))
-    @section('template_linked_css')
-        @include('LaravelLogger::partials.styles')
-    @endsection
-@else
-    @include('LaravelLogger::partials.styles')
-@endif
 
 @php
     switch (config('LaravelLogger.bootstapVersion')) {
@@ -106,36 +132,3 @@
     @include('LaravelLogger::modals.confirm-modal', ['formTrigger' => 'confirmDelete', 'modalClass' => 'danger', 'actionBtnIcon' => 'fa-trash-o'])
 
 @endsection
-
-@if(config('LaravelLogger.enableBladeJsPlacement'))
-    @section('footer_scripts')
-@endif
-
-    @if(config('LaravelLogger.enablejQueryCDN'))
-        <script type="text/javascript" src="{{ config('LaravelLogger.JQueryCDN') }}"></script>
-    @endif
-
-    @if(config('LaravelLogger.enableBootstrapJsCDN'))
-        <script type="text/javascript" src="{{ config('LaravelLogger.bootstrapJsCDN') }}"></script>
-    @endif
-
-    @if(config('LaravelLogger.enablePopperJsCDN'))
-        <script type="text/javascript" src="{{ config('LaravelLogger.popperJsCDN') }}"></script>
-    @endif
-
-    @include('LaravelLogger::scripts.confirm-modal', ['formTrigger' => '#confirmDelete'])
-
-    @if(config('LaravelLogger.loggerDatatables'))
-        @if (count($activities) > 10)
-            @include('LaravelLogger::scripts.datatables')
-        @endif
-    @endif
-
-    @if(config('LaravelLogger.enableDrillDown'))
-        @include('LaravelLogger::scripts.clickable-row')
-        @include('LaravelLogger::scripts.tooltip')
-    @endif
-
-@if(config('LaravelLogger.enableBladeJsPlacement'))
-    @endsection
-@endif
