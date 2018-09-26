@@ -27,6 +27,7 @@ return [
     */
 
     'loggerMiddlewareEnabled' => env('LARAVEL_LOGGER_MIDDLEWARE_ENABLED', true),
+    'loggerMiddlewareExcept' => array_filter(explode(",", trim(env('LARAVEL_LOGGER_MIDDLEWARE_EXCEPT')))),
 
     /*
     |--------------------------------------------------------------------------
@@ -111,8 +112,9 @@ return [
     'bootstrapCardClasses'          => '',
 
     // Blade Extension Placement
-    'enableBladeCssPlacement'   => env('LARAVEL_LOGGER_BLADE_CSS_PLACEMENT_ENABLED', false),
-    'enableBladeJsPlacement'    => env('LARAVEL_LOGGER_BLADE_JS_PLACEMENT_ENABLED', false),
+    'bladePlacement'            => env('LARAVEL_LOGGER_BLADE_PLACEMENT', 'yield'),
+    'bladePlacementCss'         => env('LARAVEL_LOGGER_BLADE_PLACEMENT_CSS', 'template_linked_css'),
+    'bladePlacementJs'          => env('LARAVEL_LOGGER_BLADE_PLACEMENT_JS', 'footer_scripts'),
 
     /*
     |--------------------------------------------------------------------------
