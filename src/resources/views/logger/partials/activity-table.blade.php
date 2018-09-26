@@ -130,7 +130,7 @@ if (Request::is('activity/cleared')) {
                             {{ $activity->methodType }}
                         </span>
                     </td>
-                    <td>
+                    <td class="ellipsis">
                         @if($hoverable)
                             {{ showCleanRoutUrl($activity->route) }}
                         @else

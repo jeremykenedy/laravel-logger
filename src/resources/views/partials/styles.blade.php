@@ -19,6 +19,14 @@
     .table-responsive {
         border: none;
     }
+
+    .activity-table > table > tbody td.ellipsis {
+        max-width: 350px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
     .list-group {
         margin-bottom: 0;
     }
