@@ -1,16 +1,36 @@
 @extends(config('LaravelLogger.loggerBladeExtended'))
 
+@if(config('LaravelLogger.bladePlacement') == 'yield')
+    @section(config('LaravelLogger.bladePlacementCss'))
+@elseif (config('LaravelLogger.bladePlacement') == 'stack')
+    @push(config('LaravelLogger.bladePlacementCss'))
+@endif
+
+        @include('LaravelLogger::partials.styles')
+
+@if(config('LaravelLogger.bladePlacement') == 'yield')
+    @endsection
+@elseif (config('LaravelLogger.bladePlacement') == 'stack')
+    @endpush
+@endif
+
+@if(config('LaravelLogger.bladePlacement') == 'yield')
+    @section(config('LaravelLogger.bladePlacementJs'))
+@elseif (config('LaravelLogger.bladePlacement') == 'stack')
+    @push(config('LaravelLogger.bladePlacementJs'))
+@endif
+
+        @include('LaravelLogger::partials.scripts')
+
+@if(config('LaravelLogger.bladePlacement') == 'yield')
+    @endsection
+@elseif (config('LaravelLogger.bladePlacement') == 'stack')
+    @endpush
+@endif
+
 @section('template_title')
     @lang('LaravelLogger::laravel-logger.drilldown.title', ['id' => $activity->id])
 @endsection
-
-@if(config('LaravelLogger.enableBladeCssPlacement'))
-    @section('template_linked_css')
-        @include('LaravelLogger::partials.styles')
-    @endsection
-@else
-    @include('LaravelLogger::partials.styles')
-@endif
 
 @php
     switch (config('LaravelLogger.bootstapVersion')) {
@@ -362,29 +382,3 @@
     </div>
   </div>
 @endsection
-
-@if(config('LaravelLogger.enableBladeJsPlacement'))
-    @section('footer_scripts')
-@endif
-
-    @if(config('LaravelLogger.enablejQueryCDN'))
-        <script type="text/javascript" src="{{ config('LaravelLogger.JQueryCDN') }}"></script>
-    @endif
-
-    @if(config('LaravelLogger.enableBootstrapJsCDN'))
-        <script type="text/javascript" src="{{ config('LaravelLogger.bootstrapJsCDN') }}"></script>
-    @endif
-
-    @if(config('LaravelLogger.enablePopperJsCDN'))
-        <script type="text/javascript" src="{{ config('LaravelLogger.popperJsCDN') }}"></script>
-    @endif
-
-    @if(config('LaravelLogger.loggerDatatables'))
-        @if (count($userActivities) > 10)
-            @include('LaravelLogger::scripts.datatables')
-        @endif
-    @endif
-
-@if(config('LaravelLogger.enableBladeJsPlacement'))
-    @endsection
-@endif
