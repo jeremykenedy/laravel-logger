@@ -30,7 +30,8 @@ class LogActivity
     /**
      * Determine if the request has a URI that should log.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
+     *
      * @return bool
      */
     protected function shouldLog($request)
