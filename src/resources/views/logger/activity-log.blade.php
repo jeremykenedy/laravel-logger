@@ -35,7 +35,7 @@
 @endif
 
 @section('template_title')
-    @lang('LaravelLogger::laravel-logger.dashboard.title')
+    {{ trans('LaravelLogger::laravel-logger.dashboard.title') }}
 @endsection
 
 @php
@@ -71,10 +71,10 @@
                             @if(config('LaravelLogger.enableSubMenu'))
 
                                 <span>
-                                    @lang('LaravelLogger::laravel-logger.dashboard.title')
+                                    {!! trans('LaravelLogger::laravel-logger.dashboard.title') !!}
                                     <small>
                                         <sup class="label label-default">
-                                            {{ $totalActivities }} @lang('LaravelLogger::laravel-logger.dashboard.subtitle')
+                                            {{ $totalActivities }} {!! trans('LaravelLogger::laravel-logger.dashboard.subtitle') !!}
                                         </sup>
                                     </small>
                                 </span>
@@ -83,7 +83,7 @@
                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa fa-ellipsis-v fa-fw" aria-hidden="true"></i>
                                         <span class="sr-only">
-                                            @lang('LaravelLogger::laravel-logger.dashboard.menu.alt')
+                                            {!! trans('LaravelLogger::laravel-logger.dashboard.menu.alt') !!}
                                         </span>
                                     </button>
                                     @if(config('LaravelLogger.bootstapVersion') == '4')
@@ -91,7 +91,7 @@
                                             @include('LaravelLogger::forms.clear-activity-log')
                                             <a href="{{route('cleared')}}" class="dropdown-item">
                                                 <i class="fa fa-fw fa-history" aria-hidden="true"></i>
-                                                @lang('LaravelLogger::laravel-logger.dashboard.menu.show')
+                                                {!! trans('LaravelLogger::laravel-logger.dashboard.menu.show') !!}
                                             </a>
                                         </div>
                                     @else
@@ -102,7 +102,7 @@
                                             <li class="dropdown-item">
                                                 <a href="{{route('cleared')}}">
                                                     <i class="fa fa-fw fa-history" aria-hidden="true"></i>
-                                                    @lang('LaravelLogger::laravel-logger.dashboard.menu.show')
+                                                    {!! trans('LaravelLogger::laravel-logger.dashboard.menu.show') !!}
                                                 </a>
                                             </li>
                                         </ul>
@@ -110,11 +110,11 @@
                                 </div>
 
                             @else
-                                @lang('LaravelLogger::laravel-logger.dashboard.title')
+                                {!! trans('LaravelLogger::laravel-logger.dashboard.title') !!}
                                 <span class="pull-right label label-default">
                                     {{ $totalActivities }}
                                     <span class="hidden-sms">
-                                        @lang('LaravelLogger::laravel-logger.dashboard.subtitle')
+                                        {!! trans('LaravelLogger::laravel-logger.dashboard.subtitle') !!}
                                     </span>
                                 </span>
                             @endif
