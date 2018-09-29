@@ -20,7 +20,7 @@
     @push(config('LaravelLogger.bladePlacementJs'))
 @endif
 
-    @include('LaravelLogger::partials.scripts')
+    @include('LaravelLogger::partials.scripts', ['activities' => $activities])
     @include('LaravelLogger::scripts.confirm-modal', ['formTrigger' => '#confirmDelete'])
 
     @if(config('LaravelLogger.enableDrillDown'))

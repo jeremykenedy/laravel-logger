@@ -12,7 +12,7 @@
 @endif
 
 @if(config('LaravelLogger.loggerDatatables'))
-    @if (count($userActivities) > 10)
+    @if (count($activities) > 10)
         @include('LaravelLogger::scripts.datatables')
     @endif
 @endif

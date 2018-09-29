@@ -20,7 +20,7 @@
     @push(config('LaravelLogger.bladePlacementJs'))
 @endif
 
-        @include('LaravelLogger::partials.scripts')
+        @include('LaravelLogger::partials.scripts', ['activities' => $userActivities])
 
 @if(config('LaravelLogger.bladePlacement') == 'yield')
     @endsection
