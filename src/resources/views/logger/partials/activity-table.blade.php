@@ -22,43 +22,43 @@ if (Request::is('activity/cleared')) {
                 <th>
                     <i class="fa fa-database fa-fw" aria-hidden="true"></i>
                     <span class="hidden-sm hidden-xs">
-                        @lang('LaravelLogger::laravel-logger.dashboard.labels.id')
+                        {!! trans('LaravelLogger::laravel-logger.dashboard.labels.id') !!}
                     </span>
                 </th>
                 <th>
                     <i class="fa fa-clock-o fa-fw" aria-hidden="true"></i>
-                    @lang('LaravelLogger::laravel-logger.dashboard.labels.time')
+                    {!! trans('LaravelLogger::laravel-logger.dashboard.labels.time') !!}
                 </th>
                 <th>
                     <i class="fa fa-file-text-o fa-fw" aria-hidden="true"></i>
-                    @lang('LaravelLogger::laravel-logger.dashboard.labels.description')
+                    {!! trans('LaravelLogger::laravel-logger.dashboard.labels.description') !!}
                 </th>
                 <th>
                     <i class="fa fa-user-o fa-fw" aria-hidden="true"></i>
-                    @lang('LaravelLogger::laravel-logger.dashboard.labels.user')
+                    {!! trans('LaravelLogger::laravel-logger.dashboard.labels.user') !!}
                 </th>
                 <th>
                     <i class="fa fa-truck fa-fw" aria-hidden="true"></i>
                     <span class="hidden-sm hidden-xs">
-                        @lang('LaravelLogger::laravel-logger.dashboard.labels.method')
+                        {!! trans('LaravelLogger::laravel-logger.dashboard.labels.method') !!}
                     </span>
                 </th>
                 <th>
                     <i class="fa fa-map-o fa-fw" aria-hidden="true"></i>
-                    @lang('LaravelLogger::laravel-logger.dashboard.labels.route')
+                    {!! trans('LaravelLogger::laravel-logger.dashboard.labels.route') !!}
                 </th>
                 <th>
                     <i class="fa fa-map-marker fa-fw" aria-hidden="true"></i>
-                    @lang('LaravelLogger::laravel-logger.dashboard.labels.ipAddress')
+                    {!! trans('LaravelLogger::laravel-logger.dashboard.labels.ipAddress') !!}
                 </th>
                 <th>
                     <i class="fa fa-laptop fa-fw" aria-hidden="true"></i>
-                    @lang('LaravelLogger::laravel-logger.dashboard.labels.agent')
+                    {!! trans('LaravelLogger::laravel-logger.dashboard.labels.agent') !!}
                 </th>
                 @if(Request::is('activity/cleared'))
                     <th>
                         <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>
-                        @lang('LaravelLogger::laravel-logger.dashboard.labels.deleteDate')
+                        {!! trans('LaravelLogger::laravel-logger.dashboard.labels.deleteDate') !!}
                     </th>
                 @endif
             </tr>
@@ -249,7 +249,7 @@ if (Request::is('activity/cleared')) {
             {!! $activities->render() !!}
         </div>
         <p>
-            @lang('LaravelLogger::laravel-logger.pagination.countText', ['firstItem' => $activities->firstItem(), 'lastItem' => $activities->lastItem(), 'total' => $activities->total(), 'perPage' => $activities->perPage()])
+            {!! trans('LaravelLogger::laravel-logger.pagination.countText', ['firstItem' => $activities->firstItem(), 'lastItem' => $activities->lastItem(), 'total' => $activities->total(), 'perPage' => $activities->perPage()]) !!}
         </p>
     </div>
 @endif

@@ -37,7 +37,7 @@
 
 
 @section('template_title')
-    @lang('LaravelLogger::laravel-logger.dashboardCleared.title')
+    {{ trans('LaravelLogger::laravel-logger.dashboardCleared.title') }}
 @endsection
 
 @php
@@ -70,16 +70,16 @@
                     <div class="{{ $containerHeaderClass }}">
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <span>
-                                @lang('LaravelLogger::laravel-logger.dashboardCleared.title')
+                                {!! trans('LaravelLogger::laravel-logger.dashboardCleared.title') !!}
                                 <sup class="label">
-                                    {{ $totalActivities }} @lang('LaravelLogger::laravel-logger.dashboardCleared.subtitle')
+                                    {{ $totalActivities }} {!! trans('LaravelLogger::laravel-logger.dashboardCleared.subtitle') !!}
                                 </sup>
                             </span>
                             <div class="btn-group pull-right btn-group-xs">
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa fa-ellipsis-v fa-fw" aria-hidden="true"></i>
                                     <span class="sr-only">
-                                        @lang('LaravelLogger::laravel-logger.dashboard.menu.alt')
+                                        {!! trans('LaravelLogger::laravel-logger.dashboard.menu.alt') !!}
                                     </span>
                                 </button>
                                 @if(config('LaravelLogger.bootstapVersion') == '4')
@@ -87,7 +87,7 @@
                                         <a href="{{route('activity')}}" class="dropdown-item">
                                             <span class="text-primary">
                                                 <i class="fa fa-fw fa-mail-reply" aria-hidden="true"></i>
-                                                @lang('LaravelLogger::laravel-logger.dashboard.menu.back')
+                                                {!! trans('LaravelLogger::laravel-logger.dashboard.menu.back') !!}
                                             </span>
                                         </a>
                                         @if($totalActivities)
@@ -101,7 +101,7 @@
                                             <a href="{{route('activity')}}">
                                                 <span class="text-primary">
                                                     <i class="fa fa-fw fa-mail-reply" aria-hidden="true"></i>
-                                                    @lang('LaravelLogger::laravel-logger.dashboard.menu.back')
+                                                    {!! trans('LaravelLogger::laravel-logger.dashboard.menu.back') !!}
                                                 </span>
                                             </a>
                                         </li>
