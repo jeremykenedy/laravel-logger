@@ -26,8 +26,8 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'loggerMiddlewareEnabled' => env('LARAVEL_LOGGER_MIDDLEWARE_ENABLED', true),
-    'loggerMiddlewareExcept' => array_filter(explode(',', trim(env('LARAVEL_LOGGER_MIDDLEWARE_EXCEPT')))),
+    'loggerMiddlewareEnabled'   => env('LARAVEL_LOGGER_MIDDLEWARE_ENABLED', true),
+    'loggerMiddlewareExcept'    => array_filter(explode(',', trim(env('LARAVEL_LOGGER_MIDDLEWARE_EXCEPT')))),
 
     /*
     |--------------------------------------------------------------------------
@@ -101,15 +101,15 @@ return [
     */
 
     // The parent Blade file
-    'loggerBladeExtended'       => 'layouts.app',
+    'loggerBladeExtended'       => env('LARAVEL_LOGGER_LAYOUT', 'layouts.app'),
 
     // Switch Between bootstrap 3 `panel` and bootstrap 4 `card` classes
-    'bootstapVersion'           => '4',
+    'bootstapVersion'           =>  env('LARAVEL_LOGGER_BOOTSTRAP_VERSION', '4'),
 
     // Additional Card classes for styling -
     // See: https://getbootstrap.com/docs/4.0/components/card/#background-and-color
     // Example classes: 'text-white bg-primary mb-3'
-    'bootstrapCardClasses'          => '',
+    'bootstrapCardClasses'      => '',
 
     // Blade Extension Placement
     'bladePlacement'            => env('LARAVEL_LOGGER_BLADE_PLACEMENT', 'yield'),

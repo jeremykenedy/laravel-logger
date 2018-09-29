@@ -118,7 +118,6 @@ LARAVEL_LOGGER_DATABASE_CONNECTION=mysql
 LARAVEL_LOGGER_DATABASE_TABLE=laravel_logger_activity
 LARAVEL_LOGGER_ROLES_ENABLED=true
 LARAVEL_LOGGER_ROLES_MIDDLWARE=role:admin
-LARAVEL_LOGGER_ROLE_MODEL=jeremykenedy\LaravelRoles\Models\Role
 LARAVEL_LOGGER_MIDDLEWARE_ENABLED=true
 LARAVEL_LOGGER_MIDDLEWARE_EXCEPT=
 LARAVEL_LOGGER_USER_MODEL=App\User
@@ -129,18 +128,21 @@ LARAVEL_LOGGER_DASHBOARD_MENU_ENABLED=true
 LARAVEL_LOGGER_DASHBOARD_DRILLABLE=true
 LARAVEL_LOGGER_LOG_RECORD_FAILURES_TO_FILE=true
 LARAVEL_LOGGER_FLASH_MESSAGE_BLADE_ENABLED=true
+LARAVEL_LOGGER_LAYOUT=layouts.app
+LARAVEL_LOGGER_BOOTSTRAP_VERSION=4
+LARAVEL_LOGGER_BLADE_PLACEMENT=stack                    #option: yield or stack
+LARAVEL_LOGGER_BLADE_PLACEMENT_CSS=css-header           #placement name
+LARAVEL_LOGGER_BLADE_PLACEMENT_JS=scripts-footer        #placement name
 LARAVEL_LOGGER_JQUERY_CDN_ENABLED=true
 LARAVEL_LOGGER_JQUERY_CDN_URL=https://code.jquery.com/jquery-2.2.4.min.js
-LARAVEL_LOGGER_BLADE_PLACEMENT=yield                    #option: yield or stack
-LARAVEL_LOGGER_BLADE_PLACEMENT_CSS=template_linked_css  #placement name
-LARAVEL_LOGGER_BLADE_PLACEMENT_JS=footer_scripts        #placement name
-LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_ENABLED=true
-LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_URL=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js
-LARAVEL_LOGGER_FONT_AWESOME_CDN_ENABLED=true
-LARAVEL_LOGGER_FONT_AWESOME_CDN_URL=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css
 LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_ENABLED=true
 LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_URL=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css
+LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_ENABLED=true
+LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_URL=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js
+LARAVEL_LOGGER_POPPER_JS_CDN_ENABLED=true
 LARAVEL_LOGGER_POPPER_JS_CDN_URL=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js
+LARAVEL_LOGGER_FONT_AWESOME_CDN_ENABLED=true
+LARAVEL_LOGGER_FONT_AWESOME_CDN_URL=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css
 ```
 
 ### Usage
@@ -262,8 +264,8 @@ To use the trait:
     │       │   └── confirm-modal.blade.php
     │       ├── partials
     │       │   ├── form-status.blade.php
-    │       │   ├── styles.blade.php
-    |       |   └── scripts.blade.php
+    │       │   ├── scripts.blade.php
+    |       |   └── styles.blade.php
     │       └── scripts
     │           ├── clickable-row.blade.php
     │           ├── confirm-modal.blade.php
