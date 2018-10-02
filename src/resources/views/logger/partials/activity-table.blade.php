@@ -126,7 +126,7 @@ if (Request::is('activity/cleared')) {
                                     break;
                             }
                         @endphp
-                        <span class="badge badge-{{$methodClass}}">
+                        <span class="badge badge-{{ $methodClass }}">
                             {{ $activity->methodType }}
                         </span>
                     </td>
@@ -134,7 +134,7 @@ if (Request::is('activity/cleared')) {
                         @if($hoverable)
                             {{ showCleanRoutUrl($activity->route) }}
                         @else
-                            <a href="@if($activity->route != '/')/@endif{{$activity->route}}">
+                            <a href="{{ $activity->route }}">
                                 {{$activity->route}}
                             </a>
                         @endif
