@@ -20,8 +20,8 @@
         border: none;
     }
 
-    table > tbody td.ellipsis {
-        max-width: 350px;
+    div.activity-table table > tbody > tr > td {
+        max-width: 300px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
