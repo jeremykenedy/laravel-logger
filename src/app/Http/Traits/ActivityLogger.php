@@ -100,9 +100,9 @@ trait ActivityLogger
             'methodType'    => $data['methodType'],
         ]);
     }
-    
+
     /**
-     * Prepare Error Message (add the actual value of the error field)
+     * Prepare Error Message (add the actual value of the error field).
      *
      * @param $validator
      * @param $data
