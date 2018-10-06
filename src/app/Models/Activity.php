@@ -70,11 +70,11 @@ class Activity extends Model
     protected $casts = [
         'description'   => 'string',
         'user'          => 'integer',
-        'route'         => 'url',
+        'route'         => 'string',
         'ipAddress'     => 'ipAddress',
         'userAgent'     => 'string',
         'locale'        => 'string',
-        'referer'       => 'url',
+        'referer'       => 'string',
         'methodType'    => 'string',
     ];
 
@@ -133,7 +133,7 @@ class Activity extends Model
             'ipAddress'     => 'nullable|ip',
             'userAgent'     => 'nullable|string',
             'locale'        => 'nullable|string',
-            'referer'       => 'nullable|url',
+            'referer'       => 'nullable|string',
             'methodType'    => 'nullable|string',
         ],
         $merge);
