@@ -68,7 +68,13 @@ if (Request::is('activity/cleared')) {
                 <tr @if($drilldownStatus && $hoverable) class="clickable-row" data-href="{{$prependUrl . $activity->id}}" data-toggle="tooltip" title="{{trans('LaravelLogger::laravel-logger.tooltips.viewRecord')}}" @endif >
                     <td>
                         <small>
-                            {{ $activity->id }}
+                            @if($hoverable)
+                                {{ $activity->id }}
+                            @else
+                                <a href="{{$prependUrl . $activity->id}}">
+                                    {{ $activity->id }}
+                                </a>
+                            @endif
                         </small>
                     </td>
                     <td>
