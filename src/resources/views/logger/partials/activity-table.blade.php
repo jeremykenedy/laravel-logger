@@ -77,7 +77,7 @@ if (Request::is('activity/cleared')) {
                             @endif
                         </small>
                     </td>
-                    <td>
+                    <td title="{{ $activity->created_at }}">
                         {{ $activity->timePassed }}
                     </td>
                     <td>
