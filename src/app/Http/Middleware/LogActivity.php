@@ -36,7 +36,7 @@ class LogActivity
      */
     protected function shouldLog($request)
     {
-        foreach (config('LaravelLogger.loggerMiddlewareExcept') as $except) {
+        foreach (config('LaravelLogger.loggerMiddlewareExcept', []) as $except) {
             if ($except !== '/') {
                 $except = trim($except, '/');
             }
