@@ -116,7 +116,7 @@ class LaravelLoggerServiceProvider extends ServiceProvider
      */
     private function publishFiles()
     {
-        $publishTag = 'laravellogger';
+        $publishTag = 'LaravelLogger';
 
         $this->publishes([
             __DIR__.'/config/laravel-logger.php' => base_path('config/laravel-logger.php'),
