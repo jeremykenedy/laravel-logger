@@ -113,7 +113,7 @@ Or you can variables to your `.env` file.
 ##### Environment File
 Here are the `.env` file variables available:
 
-```bash
+```dotenv
 LARAVEL_LOGGER_DATABASE_CONNECTION=mysql
 LARAVEL_LOGGER_DATABASE_TABLE=laravel_logger_activity
 LARAVEL_LOGGER_ROLES_ENABLED=true
@@ -121,6 +121,7 @@ LARAVEL_LOGGER_ROLES_MIDDLWARE=role:admin
 LARAVEL_LOGGER_MIDDLEWARE_ENABLED=true
 LARAVEL_LOGGER_MIDDLEWARE_EXCEPT=
 LARAVEL_LOGGER_USER_MODEL=App\User
+LARAVEL_LOGGER_DISABLE_ROUTES=false
 LARAVEL_LOGGER_PAGINATION_ENABLED=true
 LARAVEL_LOGGER_PAGINATION_PER_PAGE=25
 LARAVEL_LOGGER_DATATABLES_ENABLED=true
@@ -194,6 +195,38 @@ To use the trait:
 * ```/activity/cleared```
 * ```/activity/log/{id}```
 * ```/activity/cleared/log/{id}```
+
+#### Custom package routes
+If you wish to change the route paths, names or other options you can disable the default routes in your `.env` file by setting
+```dotenv
+LARAVEL_LOGGER_DISABLE_ROUTES=true
+```
+
+If you are on an existing install, you will also need update your `laravel-logger.php` config file to add the config option:
+```php
+'disableRoutes' => env('LARAVEL_LOGGER_DISABLE_ROUTES', false),
+```
+
+You can then add the routes directly to your application's `routes/web.php` file, and customise as required.
+
+```php
+Route::group(['prefix' => 'activity', 'namespace' => 'jeremykenedy\LaravelLogger\App\Http\Controllers', 'middleware' => ['web', 'auth', 'activity']], function () {
+
+    // Dashboards
+    Route::get('/', 'LaravelLoggerController@showAccessLog')->name('activity');
+    Route::get('/cleared', ['uses' => 'LaravelLoggerController@showClearedActivityLog'])->name('cleared');
+
+    // Drill Downs
+    Route::get('/log/{id}', 'LaravelLoggerController@showAccessLogEntry');
+    Route::get('/cleared/log/{id}', 'LaravelLoggerController@showClearedAccessLogEntry');
+
+    // Forms
+    Route::delete('/clear-activity', ['uses' => 'LaravelLoggerController@clearActivityLog'])->name('clear-activity');
+    Route::delete('/destroy-activity', ['uses' => 'LaravelLoggerController@destroyActivityLog'])->name('destroy-activity');
+    Route::post('/restore-log', ['uses' => 'LaravelLoggerController@restoreClearedActivityLog'])->name('restore-activity');
+});
+```
+
 
 ### Screenshots
 ![dashboard](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/1-dashboard.jpg)

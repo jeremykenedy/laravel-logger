@@ -52,6 +52,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Disable automatic Laravel Logger routes
+    | If you want to customise the routes the package uses, set this to true.
+    | For more information, see the README.
+    |--------------------------------------------------------------------------
+    */
+
+    'disableRoutes' => env('LARAVEL_LOGGER_DISABLE_ROUTES', false),
+
+    /*
+    |--------------------------------------------------------------------------
     | Laravel Logger Pagination Settings
     |--------------------------------------------------------------------------
     */

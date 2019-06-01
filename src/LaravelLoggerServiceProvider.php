@@ -8,6 +8,8 @@ use jeremykenedy\LaravelLogger\App\Http\Middleware\LogActivity;
 
 class LaravelLoggerServiceProvider extends ServiceProvider
 {
+    const DISABLE_DEFAULT_ROUTES_CONFIG = 'laravel-logger.disableRoutes';
+
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -70,14 +72,19 @@ class LaravelLoggerServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->loadRoutesFrom(__DIR__.'/routes/web.php');
-        $this->loadViewsFrom(__DIR__.'/resources/views/', 'LaravelLogger');
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
         if (file_exists(config_path('laravel-logger.php'))) {
             $this->mergeConfigFrom(config_path('laravel-logger.php'), 'LaravelLogger');
         } else {
             $this->mergeConfigFrom(__DIR__.'/config/laravel-logger.php', 'LaravelLogger');
         }
+
+        if (!config(self::DISABLE_DEFAULT_ROUTES_CONFIG, false)) {
+            $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+        }
+
+        $this->loadViewsFrom(__DIR__.'/resources/views/', 'LaravelLogger');
+        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+
         $this->registerEventListeners();
         $this->publishFiles();
     }
