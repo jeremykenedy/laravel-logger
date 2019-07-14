@@ -42,6 +42,27 @@ return [
     'logSuccessfulLogin'    => true,    // Successful Login
     'logSuccessfulLogout'   => true,    // Successful Logout
 
+
+     /*
+    |--------------------------------------------------------------------------
+    | Laravel Logger Search Enable/Disable
+    |--------------------------------------------------------------------------
+    */
+    'disableSearch'      => env('LARAVEL_LOGGER_SEARCH_ENABLE', 'false'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Laravel Logger Search Parameters
+    |--------------------------------------------------------------------------
+    */
+    'descriptionSearch'      => env('LARAVEL_LOGGER_DESCRIPTION_SEARCH', 'true'),
+    'userSearch'      => env('LARAVEL_LOGGER_USER_SEARCH', 'true'),
+    'methodSearch'      => env('LARAVEL_LOGGER_METHOD_SEARCH', 'true'),
+    'routeSearch'      => env('LARAVEL_LOGGER_ROUTE_SEARCH', 'true'),
+    'ipAddressSearch'      => env('LARAVEL_LOGGER_IP_ADDRESS_SEARCH', 'true'),
+
+    
+
     /*
     |--------------------------------------------------------------------------
     | Laravel Default User Model

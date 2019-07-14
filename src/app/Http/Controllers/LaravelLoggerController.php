@@ -63,21 +63,33 @@ class LaravelLoggerController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function showAccessLog()
+    public function showAccessLog(Request $request)
     {
         if (config('LaravelLogger.loggerPaginationEnabled')) {
-            $activities = Activity::orderBy('created_at', 'desc')->paginate(config('LaravelLogger.loggerPaginationPerPage'));
+            $activities = Activity::orderBy('created_at', 'desc');
+            if (config('LaravelLogger.disableSearch')) {
+                $activities = $this->searchActivityLog($activities,$request);
+            }
+            $activities = $activities->paginate(config('LaravelLogger.loggerPaginationPerPage'));
             $totalActivities = $activities->total();
         } else {
-            $activities = Activity::orderBy('created_at', 'desc')->get();
+            $activities = Activity::orderBy('created_at', 'desc');
+
+            if (config('LaravelLogger.disableSearch')) {
+                $activities = $this->searchActivityLog($activities,$request);
+            }
+            $activities = $activities->get();
             $totalActivities = $activities->count();
         }
 
         self::mapAdditionalDetails($activities);
 
+        $users = config('LaravelLogger.defaultUserModel')::all();
+
         $data = [
             'activities'        => $activities,
             'totalActivities'   => $totalActivities,
+            'users'             => $users,
         ];
 
         return View('LaravelLogger::logger.activity-log', $data);
@@ -104,13 +116,13 @@ class LaravelLoggerController extends BaseController
 
         if (config('LaravelLogger.loggerPaginationEnabled')) {
             $userActivities = Activity::where('userId', $activity->userId)
-                           ->orderBy('created_at', 'desc')
-                           ->paginate(config('LaravelLogger.loggerPaginationPerPage'));
+            ->orderBy('created_at', 'desc')
+            ->paginate(config('LaravelLogger.loggerPaginationPerPage'));
             $totalUserActivities = $userActivities->total();
         } else {
             $userActivities = Activity::where('userId', $activity->userId)
-                           ->orderBy('created_at', 'desc')
-                           ->get();
+            ->orderBy('created_at', 'desc')
+            ->get();
             $totalUserActivities = $userActivities->count();
         }
 
@@ -157,13 +169,13 @@ class LaravelLoggerController extends BaseController
     {
         if (config('LaravelLogger.loggerPaginationEnabled')) {
             $activities = Activity::onlyTrashed()
-                ->orderBy('created_at', 'desc')
-                ->paginate(config('LaravelLogger.loggerPaginationPerPage'));
+            ->orderBy('created_at', 'desc')
+            ->paginate(config('LaravelLogger.loggerPaginationPerPage'));
             $totalActivities = $activities->total();
         } else {
             $activities = Activity::onlyTrashed()
-                ->orderBy('created_at', 'desc')
-                ->get();
+            ->orderBy('created_at', 'desc')
+            ->get();
             $totalActivities = $activities->count();
         }
 
@@ -259,4 +271,38 @@ class LaravelLoggerController extends BaseController
 
         return redirect('activity')->with('success', trans('LaravelLogger::laravel-logger.messages.logRestoredSuccessfuly'));
     }
+
+    /**
+     * Search the activity log according to specific criteria
+     *
+     * @param query
+     * @param request
+     *
+     * @return filtered query
+     */
+    public function searchActivityLog($query,$requeset)
+    {
+     if (config('LaravelLogger.descriptionSearch') && $requeset->get('description')) {
+        $query->where('description','like','%'.$requeset->get('description').'%');
+    }
+
+
+    if (config('LaravelLogger.userSearch') && $requeset->get('user')) {
+        $query->where('userId','=',$requeset->get('user'));
+    }
+
+    if (config('LaravelLogger.methodSearch') && $requeset->get('method')) {
+        $query->where('methodType','=',$requeset->get('method'));
+    }
+
+    if (config('LaravelLogger.routeSearch') && $requeset->get('route')) {
+        $query->where('route','like','%'.$requeset->get('route').'%');
+    }
+
+    if (config('LaravelLogger.ipAddressSearch') && $requeset->get('ip_address')) {
+        $query->where('ipAddress','like','%'.$requeset->get('ip_address').'%');
+    }
+
+    return $query;
+}
 }
