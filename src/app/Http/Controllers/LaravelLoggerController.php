@@ -283,7 +283,7 @@ class LaravelLoggerController extends BaseController
     public function searchActivityLog($query, $requeset)
     {
         if (config('LaravelLogger.descriptionSearch') && $requeset->get('description')) {
-            $query->where('description' , 'like', '%'.$requeset->get('description').'%');
+            $query->where('description', 'like', '%'.$requeset->get('description').'%');
         }
 
 
