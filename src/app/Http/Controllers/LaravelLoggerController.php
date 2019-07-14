@@ -283,26 +283,26 @@ class LaravelLoggerController extends BaseController
     public function searchActivityLog($query, $requeset)
     {
         if (config('LaravelLogger.descriptionSearch') && $requeset->get('description')) {
-        $query->where('description' ,'like', '%'.$requeset->get('description').'%');
+            $query->where('description' , 'like', '%'.$requeset->get('description').'%');
         }
 
 
         if (config('LaravelLogger.userSearch') && $requeset->get('user')) {
-        $query->where('userId', '=', $requeset->get('user'));
+            $query->where('userId', '=', $requeset->get('user'));
         }
 
         if (config('LaravelLogger.methodSearch') && $requeset->get('method')) {
-        $query->where('methodType', '=', $requeset->get('method'));
+            $query->where('methodType', '=', $requeset->get('method'));
         }
 
         if (config('LaravelLogger.routeSearch') && $requeset->get('route')) {
-        $query->where('route', 'like', '%'.$requeset->get('route').'%');
+            $query->where('route', 'like', '%'.$requeset->get('route').'%');
         }
 
         if (config('LaravelLogger.ipAddressSearch') && $requeset->get('ip_address')) {
-        $query->where('ipAddress', 'like', '%'.$requeset->get('ip_address').'%');
+            $query->where('ipAddress', 'like', '%'.$requeset->get('ip_address').'%');
         }
 
-    return $query;
-}
+        return $query;
+    }
 }
