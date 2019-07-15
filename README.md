@@ -232,8 +232,6 @@ Route::group(['prefix' => 'activity', 'namespace' => 'jeremykenedy\LaravelLogger
 
 ### Search
 
-# Logger dynamic search
-
 adding dynamic search fields (description , user, URL , method and ip address)
 
 ##### .env file
