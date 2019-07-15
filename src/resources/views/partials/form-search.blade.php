@@ -1,11 +1,11 @@
 <form action="{{route('activity')}}" method="get">
 	<div class="row">
-		@if(config('LaravelLogger.descriptionSearch'))
+		@if(in_array('description',explode(',', config('LaravelLogger.searchFields'))))
 		<div class="col">
 			<input type="text" name="description" value="{{request()->get('description') ? request()->get('description'):null}}" class="form-control" placeholder="Description">
 		</div>
 		@endif
-		@if(config('LaravelLogger.userSearch'))
+		@if(in_array('user',explode(',', config('LaravelLogger.searchFields'))))
 		<div class="col">
 			<select class="form-control" name="user">
 				<option value="" selected>All</option>
@@ -15,7 +15,7 @@
 			</select>
 		</div>
 		@endif
-		@if(config('LaravelLogger.methodSearch'))
+		@if(in_array('method',explode(',', config('LaravelLogger.searchFields'))))
 		<div class="col">
 			<select class="form-control" name="method">
 				<option value="" selected>All</option>
@@ -31,19 +31,19 @@
 			</select>
 		</div>
 		@endif
-		@if(config('LaravelLogger.routeSearch'))
+		@if(in_array('route',explode(',', config('LaravelLogger.searchFields'))))
 		<div class="col">
 			<input type="text" name="route" class="form-control" value="{{request()->get('route') ? request()->get('route'):null}}" placeholder="Route">
 		</div>
 		@endif
-		@if(config('LaravelLogger.ipAddressSearch'))
+		@if(in_array('ip',explode(',', config('LaravelLogger.searchFields'))))
 		<div class="col">
 			<input type="text" name="ip_address" class="form-control" value="{{request()->get('ip_address') ? request()->get('ip_address'):null}}" placeholder="Ip Address">
 		</div>
 		@endif
 	</div>
 	<br>
-	@if(config('LaravelLogger.descriptionSearch') ||config('LaravelLogger.userSearch') ||config('LaravelLogger.methodSearch') || config('LaravelLogger.routeSearch') || config('LaravelLogger.ipAddressSearch'))
+	@if(in_array('description',explode(',', config('LaravelLogger.searchFields')))||in_array('user',explode(',', config('LaravelLogger.searchFields'))) ||in_array('method',explode(',', config('LaravelLogger.searchFields'))) || in_array('route',explode(',', config('LaravelLogger.searchFields'))) || in_array('ip',explode(',', config('LaravelLogger.searchFields'))))
 	<div class="row">
 		<input type="submit" class="btn btn-primary" style="margin-left: 800px;" value="Search">
 	</div>
