@@ -13,7 +13,8 @@
 - [About](#about)
 - [Features](#features)
 - [Requirements](#requirements)
-- [Installation Instructions](#installation-instructions)
+- [Laravel Installation Instructions](#laravel-installation-instructions)
+- [Lumen Installation Instructions](#lumen-installation-instructions)
 - [Configuration](#configuration)
     - [Environment File](#environment-file)
 - [Usage](#usage)
@@ -69,7 +70,7 @@ Laravel logger can work out the box with or without the following roles packages
 * [Laravel 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, and 5.7+](https://laravel.com/docs/installation)
 * [jaybizzle/laravel-crawler-detect](https://github.com/JayBizzle/Laravel-Crawler-Detect) included dependency in composer.json (for crawler detection)
 
-### Installation Instructions
+### Laravel Installation Instructions
 1. From your projects root folder in terminal run:
 
 ```bash
