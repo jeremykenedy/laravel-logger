@@ -2,7 +2,8 @@
 
 namespace jeremykenedy\LaravelLogger\App\Http\Traits;
 
-use Crawler;
+use Jaybizzle\LaravelCrawlerDetect\Facades\LaravelCrawlerDetect as Crawler;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Log;
 use jeremykenedy\LaravelLogger\App\Models\Activity;
 use Validator;
@@ -23,16 +24,16 @@ trait ActivityLogger
 
         if (\Auth::check()) {
             $userType = trans('LaravelLogger::laravel-logger.userTypes.registered');
-            $userId = \Request::user()->id;
+            $userId = Request::user()->id;
         }
 
         if (Crawler::isCrawler()) {
             $userType = trans('LaravelLogger::laravel-logger.userTypes.crawler');
-            $description = $userType.' '.trans('LaravelLogger::laravel-logger.verbTypes.crawled').' '.\Request::fullUrl();
+            $description = $userType.' '.trans('LaravelLogger::laravel-logger.verbTypes.crawled').' '.Request::fullUrl();
         }
 
         if (!$description) {
-            switch (strtolower(\Request::method())) {
+            switch (strtolower(Request::method())) {
                 case 'post':
                     $verb = trans('LaravelLogger::laravel-logger.verbTypes.created');
                     break;
@@ -52,19 +53,19 @@ trait ActivityLogger
                     break;
             }
 
-            $description = $verb.' '.\Request::path();
+            $description = $verb.' '.Request::path();
         }
 
         $data = [
             'description'   => $description,
             'userType'      => $userType,
             'userId'        => $userId,
-            'route'         => \Request::fullUrl(),
-            'ipAddress'     => \Request::ip(),
-            'userAgent'     => \Request::header('user-agent'),
-            'locale'        => \Request::header('accept-language'),
-            'referer'       => \Request::header('referer'),
-            'methodType'    => \Request::method(),
+            'route'         => Request::fullUrl(),
+            'ipAddress'     => Request::ip(),
+            'userAgent'     => Request::header('user-agent'),
+            'locale'        => Request::header('accept-language'),
+            'referer'       => Request::header('referer'),
+            'methodType'    => Request::method(),
         ];
 
         // Validation Instance

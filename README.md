@@ -105,6 +105,42 @@ Register the package with laravel in `config/app.php` under `providers` with the
     php artisan vendor:publish --tag=LaravelLogger
 ```
 
+### Lumen Installation Instructions
+# This installs laravel-logger without the GUI
+
+1. From your projects root folder in terminal run:
+
+```bash
+    composer require jeremykenedy/laravel-logger
+```
+
+2. Register the package
+
+Register the package with laravel in `bootstrap/app.php` with the following:
+
+```php
+    $app->register(\Jaybizzle\LaravelCrawlerDetect\LaravelCrawlerDetectServiceProvider::class);
+    $app->configure('laravel-logger');
+    $app->register(\jeremykenedy\LaravelLogger\LaravelLoggerServiceProvider::class);
+    $app->routeMiddleware(['activity' => \jeremykenedy\LaravelLogger\App\Http\Middleware\LogActivity::class, ]);
+```
+
+3. Copy the configuration file at [config/laravel-logger.php](config/laravel-logger.php) to your `config/` directory
+
+
+4. Run the migration to add the table to record the activities to:
+
+```php
+    php artisan migrate
+```
+
+* Note: If you want to specify a different table or connection make sure you update your `.env` file with the needed configuration variables.
+
+5. Optionally Update your `.env` file and associated settings (see [Environment File](#environment-file) section)
+
+
+
+
 ### Configuration
 Laravel Activity Logger can be configured in directly in `/config/laravel-logger.php` if you published the assets.
 Or you can variables to your `.env` file.
