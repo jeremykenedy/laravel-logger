@@ -20,6 +20,7 @@
     - [Authentication Middleware Usage](#authentication-middleware-usage)
     - [Trait Usage](#trait-usage)
 - [Routes](#routes)
+- [Search](#search)
 - [Screenshots](#screenshots)
 - [File Tree](#file-tree)
 - [Opening an Issue](#opening-an-issue)
@@ -125,6 +126,8 @@ LARAVEL_LOGGER_DISABLE_ROUTES=false
 LARAVEL_LOGGER_PAGINATION_ENABLED=true
 LARAVEL_LOGGER_PAGINATION_PER_PAGE=25
 LARAVEL_LOGGER_DATATABLES_ENABLED=true
+LARAVEL_LOGGER_ENABLE_SEARCH=true
+LARAVEL_LOGGER_SEARCH_FIELDS=description,user,method,route,ip
 LARAVEL_LOGGER_DASHBOARD_MENU_ENABLED=true
 LARAVEL_LOGGER_DASHBOARD_DRILLABLE=true
 LARAVEL_LOGGER_LOG_RECORD_FAILURES_TO_FILE=true
@@ -227,6 +230,21 @@ Route::group(['prefix' => 'activity', 'namespace' => 'jeremykenedy\LaravelLogger
 });
 ```
 
+### Search
+
+adding dynamic search fields (description , user, URL , method and ip address)
+
+##### .env file
+add these configurations to your .env file to control the logging search
+```
+LARAVEL_LOGGER_ENABLE_SEARCH=true
+// you can customize your search using these options [description,user,method,route,ip]
+LARAVEL_LOGGER_SEARCH_FIELDS=description,user,method,route,ip
+```
+by default all search fields are enabled when you enable the search with this one line configuration 
+```
+LARAVEL_LOGGER_SEARCH_ENABLE=true
+```
 
 ### Screenshots
 ![dashboard](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/1-dashboard.jpg)
@@ -297,6 +315,7 @@ Route::group(['prefix' => 'activity', 'namespace' => 'jeremykenedy\LaravelLogger
     │       │   └── confirm-modal.blade.php
     │       ├── partials
     │       │   ├── form-status.blade.php
+    │       │   ├── form-search.blade.php
     │       │   ├── scripts.blade.php
     |       |   └── styles.blade.php
     │       └── scripts
