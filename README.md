@@ -106,7 +106,7 @@ Register the package with laravel in `config/app.php` under `providers` with the
 ```
 
 ### Lumen Installation Instructions
-# This installs laravel-logger without the GUI
+##### This installs laravel-logger without the GUI
 
 1. From your projects root folder in terminal run:
 
@@ -126,6 +126,8 @@ Register the package with laravel in `bootstrap/app.php` with the following:
 ```
 
 3. Copy the configuration file at [config/laravel-logger.php](config/laravel-logger.php) to your `config/` directory
+
+##### Set LARAVEL_LOGGER_DISABLE_ROUTES=true in your .env file!
 
 
 4. Run the migration to add the table to record the activities to:
