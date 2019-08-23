@@ -261,7 +261,9 @@ LARAVEL_LOGGER_SEARCH_ENABLE=true
 ### File Tree
 
 ```bash
+├── .env.travis
 ├── .gitignore
+├── .travis.yml
 ├── CODE_OF_CONDUCT.md
 ├── LICENSE
 ├── README.md
@@ -298,6 +300,8 @@ LARAVEL_LOGGER_SEARCH_ENABLE=true
     │       └── 2017_11_04_103444_create_laravel_logger_activity_table.php
     ├── resources
     │   ├── lang
+    │   │   ├── de
+    │   │   │   └── laravel-logger.php
     │   │   └── en
     │   │       └── laravel-logger.php
     │   └── views
@@ -314,11 +318,12 @@ LARAVEL_LOGGER_SEARCH_ENABLE=true
     │       ├── modals
     │       │   └── confirm-modal.blade.php
     │       ├── partials
-    │       │   ├── form-status.blade.php
     │       │   ├── form-search.blade.php
+    │       │   ├── form-status.blade.php
     │       │   ├── scripts.blade.php
-    |       |   └── styles.blade.php
+    │       │   └── styles.blade.php
     │       └── scripts
+    │           ├── add-title-attribute.blade.php
     │           ├── clickable-row.blade.php
     │           ├── confirm-modal.blade.php
     │           ├── datatables.blade.php
@@ -328,7 +333,7 @@ LARAVEL_LOGGER_SEARCH_ENABLE=true
 ```
 
 * Tree command can be installed using brew: `brew install tree`
-* File tree generated using command `tree -a -I '.git|node_modules|vendor|storage|tests`
+* File tree generated using command `tree -a -I '.git|node_modules|vendor|storage|tests'`
 
 ### Opening an Issue
 Before opening an issue there are a couple of considerations:
