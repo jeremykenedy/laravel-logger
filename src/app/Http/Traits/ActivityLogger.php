@@ -2,9 +2,9 @@
 
 namespace jeremykenedy\LaravelLogger\App\Http\Traits;
 
-use Jaybizzle\LaravelCrawlerDetect\Facades\LaravelCrawlerDetect as Crawler;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Request;
+use Jaybizzle\LaravelCrawlerDetect\Facades\LaravelCrawlerDetect as Crawler;
 use jeremykenedy\LaravelLogger\App\Models\Activity;
 use Validator;
 

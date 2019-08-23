@@ -125,7 +125,7 @@ Register the package with laravel in `bootstrap/app.php` with the following:
     $app->routeMiddleware(['activity' => \jeremykenedy\LaravelLogger\App\Http\Middleware\LogActivity::class, ]);
 ```
 
-3. Copy the configuration file at [config/laravel-logger.php](config/laravel-logger.php) to your `config/` directory
+3. Copy the configuration file [laravel-logger.php](src/config/laravel-logger.php) to your `config/` directory
 
 ##### Set LARAVEL_LOGGER_DISABLE_ROUTES=true in your .env file!
 
