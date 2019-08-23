@@ -28,7 +28,7 @@
 - [License](#license)
 
 ### About
-Laravel logger is an activity event logger for your laravel application. It comes out the box with ready to use with dashboard to view your activity. Laravel logger can be added as a middleware or called through a trait. Easily have an Activity Log. This package is easily configurable and customizable. Supports Laravel 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, and 5.8+
+Laravel logger is an activity event logger for your Laravel or Lumen application. It comes out the box with ready to use with dashboard to view your activity. Laravel logger can be added as a middleware or called through a trait. Easily have an Activity Log. This package is easily configurable and customizable. Supports Laravel 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, and 5.8+
 
 Laravel logger can work out the box with or without the following roles packages:
 * [jeremykenedy/laravel-roles](https://github.com/jeremykenedy/laravel-roles)
