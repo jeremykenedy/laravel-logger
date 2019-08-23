@@ -273,7 +273,7 @@ class LaravelLoggerController extends BaseController
     }
 
     /**
-     * Search the activity log according to specific criteria
+     * Search the activity log according to specific criteria.
      *
      * @param query
      * @param request
@@ -283,9 +283,8 @@ class LaravelLoggerController extends BaseController
     public function searchActivityLog($query, $requeset)
     {
         if (in_array('description', explode(',', config('LaravelLogger.searchFields'))) && $requeset->get('description')) {
-            $query->where('description','like', '%'.$requeset->get('description').'%');
+            $query->where('description', 'like', '%'.$requeset->get('description').'%');
         }
-
 
         if (in_array('user', explode(',', config('LaravelLogger.searchFields'))) && $requeset->get('user')) {
             $query->where('userId', '=', $requeset->get('user'));
@@ -295,7 +294,7 @@ class LaravelLoggerController extends BaseController
             $query->where('methodType', '=', $requeset->get('method'));
         }
 
-        if (in_array('route', explode(',', config('LaravelLogger.searchFields')))&& $requeset->get('route')) {
+        if (in_array('route', explode(',', config('LaravelLogger.searchFields'))) && $requeset->get('route')) {
             $query->where('route', 'like', '%'.$requeset->get('route').'%');
         }
 

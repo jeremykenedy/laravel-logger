@@ -42,7 +42,6 @@ return [
     'logSuccessfulLogin'    => true,    // Successful Login
     'logSuccessfulLogout'   => true,    // Successful Logout
 
-
     /*
     |--------------------------------------------------------------------------
     | Laravel Logger Search Enable/Disable
@@ -57,8 +56,6 @@ return [
     */
     // you can add or remove from these options [description,user,method,route,ip]
     'searchFields'  => env('LARAVEL_LOGGER_SEARCH_FIELDS', 'description,user,method,route,ip'),
-
-    
 
     /*
     |--------------------------------------------------------------------------
