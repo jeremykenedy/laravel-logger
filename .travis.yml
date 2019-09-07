@@ -25,6 +25,5 @@ before_script:
   - composer require jeremykenedy/laravel-logger
   - php artisan key:generate
   - php artisan vendor:publish --tag=LaravelLogger
-  - php artisan make:auth
   - composer dump-autoload
   - php artisan clear-compiled
