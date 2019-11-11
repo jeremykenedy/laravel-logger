@@ -67,6 +67,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Laravel Default User ID Field
+    |--------------------------------------------------------------------------
+    */
+
+    'defaultUserIDField' => env('LARAVEL_LOGGER_USER_ID_FIELD', 'id'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Disable automatic Laravel Logger routes
     | If you want to customise the routes the package uses, set this to true.
     | For more information, see the README.
