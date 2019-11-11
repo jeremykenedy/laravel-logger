@@ -24,7 +24,8 @@ trait ActivityLogger
 
         if (\Auth::check()) {
             $userType = trans('LaravelLogger::laravel-logger.userTypes.registered');
-            $userId = Request::user()->id;
+            $userIdField = config('LaravelLogger.defaultUserIDField');
+            $userId = Request::user()->{$userIdField};
         }
 
         if (Crawler::isCrawler()) {
