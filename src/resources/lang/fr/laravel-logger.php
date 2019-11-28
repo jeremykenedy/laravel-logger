@@ -1,0 +1,1 @@
+/home/thomas/Documents/01.seb.mat/04/resources/lang/vendor/LaravelLogger/fr/laravel-logger.php
