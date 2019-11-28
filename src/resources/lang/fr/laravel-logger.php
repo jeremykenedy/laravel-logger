@@ -140,11 +140,11 @@ return [
     |--------------------------------------------------------------------------
     */
 
-   'messages' => [
+    'messages' => [
         'logClearedSuccessfuly'   => 'Activité effacé avec succès',
         'logDestroyedSuccessfuly' => 'Activité supprimé avec succès',
         'logRestoredSuccessfuly'  => 'Activité restauré avec succès',
-   ],
+    ],
 
     /*
     |--------------------------------------------------------------------------

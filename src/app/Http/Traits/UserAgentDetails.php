@@ -92,7 +92,7 @@ trait UserAgentDetails
      */
     public static function localeLang($locale)
     {
-        if(class_exists('Locale'))
+        if (class_exists('Locale'))
             return \Locale::acceptFromHttp($locale);#origin BUT : Class 'Locale' not found
         $a = explode(',', $locale);
         $a = explode(';', $a[1]);
