@@ -41,7 +41,7 @@
         @endif
         @if(in_array('description',explode(',', config('LaravelLogger.searchFields')))||in_array('user',explode(',', config('LaravelLogger.searchFields'))) ||in_array('method',explode(',', config('LaravelLogger.searchFields'))) || in_array('route',explode(',', config('LaravelLogger.searchFields'))) || in_array('ip',explode(',', config('LaravelLogger.searchFields'))))
             <div class="col-12 col-sm-4 col-lg-2 mb-2">
-                <input type="submit" class="btn btn-primary btn-block" value="Search">
+                <input type="submit" class="btn btn-primary btn-block" value="{{ trans('LaravelLogger::laravel-logger.dashboard.search.search') }}">
             </div>
         @endif
     </div>

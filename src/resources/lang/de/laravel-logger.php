@@ -55,6 +55,7 @@ return [
 
         'search'    => [
             'all'           => 'All',
+            'search'        => 'Suche',
         ],
     ],
 
