@@ -52,6 +52,10 @@ return [
             'show'          => 'Show Cleared Logs',
             'back'          => 'Back to Activity Log',
         ],
+
+        'search'    => [
+            'all'           => 'All',
+        ],
     ],
 
     /*
