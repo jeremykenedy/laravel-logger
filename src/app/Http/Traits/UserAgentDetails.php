@@ -94,10 +94,12 @@ trait UserAgentDetails
     {
         if (class_exists('Locale'))
         {
-            return \Locale::acceptFromHttp($locale);#origin BUT : Class 'Locale' not found
+            return \Locale::acceptFromHttp($locale);
         }
+
         $a = explode(',', $locale);
         $a = explode(';', $a[1]);
         return $a[0];
     }
+
 }
