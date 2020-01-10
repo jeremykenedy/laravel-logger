@@ -14,8 +14,11 @@ use jeremykenedy\LaravelLogger\App\Models\Activity;
 
 class LaravelLoggerController extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, IpAddressDetails, UserAgentDetails, ValidatesRequests;
-
+    use AuthorizesRequests;
+    use DispatchesJobs;
+    use IpAddressDetails;
+    use UserAgentDetails;
+    use ValidatesRequests;
     private $_rolesEnabled;
     private $_rolesMiddlware;
 
