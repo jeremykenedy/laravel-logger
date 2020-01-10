@@ -1,3 +1,7 @@
+@php
+    $userIdField = config('LaravelLogger.defaultUserIDField')
+@endphp
+
 @extends(config('LaravelLogger.loggerBladeExtended'))
 
 @if(config('LaravelLogger.bladePlacement') == 'yield')
@@ -6,7 +10,7 @@
     @push(config('LaravelLogger.bladePlacementCss'))
 @endif
 
-        @include('LaravelLogger::partials.styles')
+@include('LaravelLogger::partials.styles')
 
 @if(config('LaravelLogger.bladePlacement') == 'yield')
     @endsection
@@ -20,7 +24,7 @@
     @push(config('LaravelLogger.bladePlacementJs'))
 @endif
 
-        @include('LaravelLogger::partials.scripts', ['activities' => $userActivities])
+@include('LaravelLogger::partials.scripts', ['activities' => $userActivities])
 
 @if(config('LaravelLogger.bladePlacement') == 'yield')
     @endsection
@@ -172,7 +176,6 @@
             <div class="row">
                 <div class="col-xs-12 col-12">
                     <div class="row">
-
                         <div class="col-md-6 col-lg-4">
                             <ul class="list-group">
                                 <li class="list-group-item @if($isClearedEntry) list-group-item-danger @else active @endif">
@@ -182,17 +185,14 @@
                                     <dl class="dl-horizontal">
                                         <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.id') !!}</dt>
                                         <dd>{{$activity->id}}</dd>
-
                                         <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.description') !!}</dt>
                                         <dd>{{$activity->description}}</dd>
-
                                         <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.route') !!}</dt>
                                         <dd>
                                             <a href="@if($activity->route != '/')/@endif{{$activity->route}}">
                                                 {{$activity->route}}
                                             </a>
                                         </dd>
-
                                         <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.agent') !!}</dt>
                                         <dd>
                                             <i class="fa {{ $platformIcon }} fa-fw" aria-hidden="true">
@@ -211,32 +211,26 @@
                                                 </small>
                                             </sup>
                                         </dd>
-
                                         <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.locale') !!}</dt>
                                         <dd>
                                             {{ $langDetails }}
                                         </dd>
-
                                         <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.referer') !!}</dt>
                                         <dd>
                                             <a href="{{ $activity->referer }}">
                                                 {{ $activity->referer }}
                                             </a>
                                         </dd>
-
                                         <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.methodType') !!}</dt>
                                         <dd>
                                             <span class="badge badge-{{$methodClass}}">
                                                 {{ $activity->methodType }}
                                             </span>
                                         </dd>
-
                                         <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.timePassed') !!}</dt>
                                         <dd>{{$timePassed}}</dd>
-
                                         <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.createdAt') !!}</dt>
                                         <dd>{{$activity->created_at}}</dd>
-
                                     </dl>
                                 </li>
                             </ul>
@@ -266,10 +260,8 @@
                                     </dl>
                                 </li>
                             </ul>
-
                             <br />
                         </div>
-
                         <div class="col-md-12 col-lg-4">
                             <ul class="list-group">
                                 <li class="list-group-item @if($isClearedEntry) list-group-item-danger @else active @endif">
@@ -283,78 +275,54 @@
                                                 {{$activity->userType}}
                                             </span>
                                         </dd>
-
                                         @if($userDetails)
-
                                             <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.userId') !!}</dt>
-                                            <dd>{{$userDetails->id}}</dd>
-
+                                            <dd>{{ $userDetails->$userIdField }}</dd>
                                             @if(config('LaravelLogger.rolesEnabled'))
-
                                                 <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.labels.userRoles') !!}</dt>
-
                                                   @foreach ($userDetails->roles as $user_role)
-
                                                     @if ($user_role->name == 'User')
                                                       @php $labelClass = 'primary' @endphp
-
                                                     @elseif ($user_role->name == 'Admin')
                                                       @php $labelClass = 'warning' @endphp
-
                                                     @elseif ($user_role->name == 'Unverified')
                                                       @php $labelClass = 'danger' @endphp
-
                                                     @else
                                                       @php $labelClass = 'default' @endphp
-
                                                     @endif
-
                                                     <dd>
                                                         <span class="badge badge-{{$labelClass}}">
                                                             {{ $user_role->name }} - {!! trans('LaravelLogger::laravel-logger.drilldown.labels.userLevel') !!} {{ $user_role->level }}
                                                         </span>
                                                     </dd>
-
                                                   @endforeach
-
                                             @endif
-
-
                                             <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.userName') !!}</dt>
                                             <dd>{{$userDetails->name}}</dd>
-
                                             <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.userEmail') !!}</dt>
                                             <dd>
                                                 <a href="mailto:{{$userDetails->email}}">
                                                     {{$userDetails->email}}
                                                 </a>
                                             </dd>
-
                                             @if($userDetails->last_name || $userDetails->first_name)
                                                 <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.userFulltName') !!}</dt>
                                                 <dd>{{$userDetails->last_name}}, {{$userDetails->first_name}}</dd>
                                             @endif
-
                                             @if($userDetails->signup_ip_address)
                                                 <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.userSignupIp') !!}</dt>
                                                 <dd>{{$userDetails->signup_ip_address}}</dd>
                                             @endif
-
                                             <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.userCreatedAt') !!}</dt>
                                             <dd>{{$userDetails->created_at}}</dd>
-
                                             <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.userUpdatedAt') !!}</dt>
                                             <dd>{{$userDetails->updated_at}}</dd>
-
                                         @endif
-
                                     </dl>
                                 </li>
                             </ul>
-
                             <br />
                         </div>
-
                     </div>
                 </div>
             </div>
