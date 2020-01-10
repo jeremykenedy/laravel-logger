@@ -78,7 +78,7 @@ class LaravelLoggerServiceProvider extends ServiceProvider
             $this->mergeConfigFrom(__DIR__.'/config/laravel-logger.php', 'LaravelLogger');
         }
 
-        if (!config(self::DISABLE_DEFAULT_ROUTES_CONFIG, false)) {
+        if (config(self::DISABLE_DEFAULT_ROUTES_CONFIG, false)) {
             $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         }
 
