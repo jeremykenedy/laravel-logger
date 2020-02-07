@@ -86,12 +86,20 @@ trait UserAgentDetails
      * http://php.net/manual/en/class.locale.php
      * http://php.net/manual/en/locale.acceptfromhttp.php.
      *
-     * @param string $locale
-     *
+     * @param string $locale :: LIKE "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3" > return 'fr-FR';
+     * Fallback if No Locale CLASS @sudwebdesign
      * @return string (Example: "en_US")
      */
     public static function localeLang($locale)
     {
-        return \Locale::acceptFromHttp($locale);
+        if (class_exists('Locale'))
+        {
+            return \Locale::acceptFromHttp($locale);
+        }
+
+        $a = explode(',', $locale);
+        $a = explode(';', $a[1]);
+        return $a[0];
     }
+
 }

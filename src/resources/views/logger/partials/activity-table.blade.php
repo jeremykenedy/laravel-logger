@@ -65,13 +65,13 @@ if (Request::is('activity/cleared')) {
         </thead>
         <tbody>
             @foreach($activities as $activity)
-                <tr @if($drilldownStatus && $hoverable) class="clickable-row" data-href="{{$prependUrl . $activity->id}}" data-toggle="tooltip" title="{{trans('LaravelLogger::laravel-logger.tooltips.viewRecord')}}" @endif >
+                <tr @if($drilldownStatus && $hoverable) class="clickable-row" data-href="{{ url($prependUrl . $activity->id) }}" data-toggle="tooltip" title="{{trans('LaravelLogger::laravel-logger.tooltips.viewRecord')}}" @endif >
                     <td>
                         <small>
                             @if($hoverable)
                                 {{ $activity->id }}
                             @else
-                                <a href="{{$prependUrl . $activity->id}}">
+                                <a href="{{ url($prependUrl . $activity->id) }}">
                                     {{ $activity->id }}
                                 </a>
                             @endif

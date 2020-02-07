@@ -52,6 +52,11 @@ return [
             'show'          => 'Zeige gelöschte Logs',
             'back'          => 'Zurück zum Log',
         ],
+
+        'search'    => [
+            'all'           => 'All',
+            'search'        => 'Suche',
+        ],
     ],
 
     /*
