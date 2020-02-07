@@ -10,7 +10,7 @@ return [
     'userTypes' => [
         'guest'      => 'Anonyme',
         'registered' => 'Membre',
-        'crawler'    => 'Robot',#extracteur
+        'crawler'    => 'Robot', //extracteur
     ],
 
     'verbTypes' => [
@@ -18,7 +18,7 @@ return [
         'edited'     => 'Édition',
         'deleted'    => 'Supprimé',
         'viewed'     => 'Vu',
-        'crawled'    => 'Visité',#trainé
+        'crawled'    => 'Visité', //trainé
     ],
 
     'tooltips' => [
@@ -70,12 +70,12 @@ return [
         'title-ip-details'      => 'Adresse Ip',
         'title-user-details'    => 'Utilisateur',
         'title-user-activity'   => 'Activité Utilisateur supplémentaire',
-        'buttons'   => [
+        'buttons'               => [
             'back'      => '<span class="hidden-xs hidden-sm">Retour au </span><span class="hidden-xs"> Journal des Activitées</span>',
         ],
 
         'labels' => [
-            'userRoles'     => 'Rôles',
+            'userRoles'      => 'Rôles',
             'userNiveau'     => 'Niveau',
         ],
 
@@ -92,7 +92,7 @@ return [
                 'referer'       => 'Référant',
 
                 'methodType'    => 'Type de méthode',
-                'createdAt'     => 'Événement',#Event Time
+                'createdAt'     => 'Événement', //Event Time
                 'updatedAt'     => 'Actualisé le',
                 'deletedAt'     => 'Éffacé le',
                 'timePassed'    => 'Temps écoulé',
