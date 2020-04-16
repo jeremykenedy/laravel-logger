@@ -127,16 +127,16 @@ class Activity extends Model
     {
         return array_merge(
             [
-            'description'   => 'required|string',
-            'userType'      => 'required|string',
-            'userId'        => 'nullable|integer',
-            'route'         => 'nullable|url',
-            'ipAddress'     => 'nullable|ip',
-            'userAgent'     => 'nullable|string',
-            'locale'        => 'nullable|string',
-            'referer'       => 'nullable|string',
-            'methodType'    => 'nullable|string',
-        ],
+                'description'   => 'required|string',
+                'userType'      => 'required|string',
+                'userId'        => 'nullable|integer',
+                'route'         => 'nullable|url',
+                'ipAddress'     => 'nullable|ip',
+                'userAgent'     => 'nullable|string',
+                'locale'        => 'nullable|string',
+                'referer'       => 'nullable|string',
+                'methodType'    => 'nullable|string',
+            ],
             $merge
         );
     }
