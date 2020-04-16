@@ -109,7 +109,8 @@ class LaravelLoggerServiceProvider extends ServiceProvider
         $listeners = $this->getListeners();
         foreach ($listeners as $listenerKey => $listenerValues) {
             foreach ($listenerValues as $listenerValue) {
-                \Event::listen($listenerKey,
+                \Event::listen(
+                    $listenerKey,
                     $listenerValue
                 );
             }

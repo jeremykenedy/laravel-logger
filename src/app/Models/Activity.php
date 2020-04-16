@@ -125,7 +125,8 @@ class Activity extends Model
      */
     public static function rules($merge = [])
     {
-        return array_merge([
+        return array_merge(
+            [
             'description'   => 'required|string',
             'userType'      => 'required|string',
             'userId'        => 'nullable|integer',
@@ -136,6 +137,7 @@ class Activity extends Model
             'referer'       => 'nullable|string',
             'methodType'    => 'nullable|string',
         ],
-        $merge);
+            $merge
+        );
     }
 }
