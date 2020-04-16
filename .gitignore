@@ -28,3 +28,4 @@ composer.phar
 vendor/
 /vendor
 /log
+.php_cs.cache
