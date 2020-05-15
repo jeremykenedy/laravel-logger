@@ -1,4 +1,7 @@
+![Laravel Roles](https://github-project-images.s3-us-west-2.amazonaws.com/laravel-blocker/laravel-logger-logo.png)
+
 # Laravel Activity Logger
+Laravel logger is an activity event logger for your Laravel or Lumen application. It comes out the box with ready to use with dashboard to view your activity. Laravel logger can be added as a middleware or called through a trait. Easily have an Activity Log. This package is easily configurable and customizable. Supports Laravel 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 6, and 7+
 
 [![Latest Stable Version](https://poser.pugx.org/jeremykenedy/laravel-logger/v/stable)](https://packagist.org/packages/jeremykenedy/laravel-logger)
 [![Total Downloads](https://poser.pugx.org/jeremykenedy/laravel-logger/downloads)](https://packagist.org/packages/jeremykenedy/laravel-logger)
@@ -9,10 +12,10 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jeremykenedy/laravel-logger/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/jeremykenedy/laravel-logger/?branch=master)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-#### READY FOR USE!
-- [About](#about)
+#### Table of contents
 - [Features](#features)
 - [Requirements](#requirements)
+- [Integrations](#integrations)
 - [Laravel Installation Instructions](#laravel-installation-instructions)
 - [Lumen Installation Instructions](#lumen-installation-instructions)
 - [Configuration](#configuration)
@@ -27,18 +30,7 @@
 - [Opening an Issue](#opening-an-issue)
 - [License](#license)
 
-### About
-Laravel logger is an activity event logger for your Laravel or Lumen application. It comes out the box with ready to use with dashboard to view your activity. Laravel logger can be added as a middleware or called through a trait. Easily have an Activity Log. This package is easily configurable and customizable. Supports Laravel 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 6, and 7+
-
-Laravel logger can work out the box with or without the following roles packages:
-* [jeremykenedy/laravel-roles](https://github.com/jeremykenedy/laravel-roles)
-* [spatie/laravel-permission](https://github.com/spatie/laravel-permission)
-* [Zizaco/entrust](https://github.com/Zizaco/entrust)
-* [romanbican/roles](https://github.com/romanbican/roles)
-* [ultraware/roles](https://github.com/ultraware/roles)
-
 ### Features
-
 | Laravel Activity Logger Features  |
 | :------------ |
 |Logs login page visits|
@@ -69,6 +61,14 @@ Laravel logger can work out the box with or without the following roles packages
 ### Requirements
 * [Laravel 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 6, and 7+](https://laravel.com/docs/installation)
 * [jaybizzle/laravel-crawler-detect](https://github.com/JayBizzle/Laravel-Crawler-Detect) included dependency in composer.json (for crawler detection)
+
+### Integrations
+Laravel logger can work out the box with or without the following roles packages:
+* [jeremykenedy/laravel-roles](https://github.com/jeremykenedy/laravel-roles)
+* [spatie/laravel-permission](https://github.com/spatie/laravel-permission)
+* [Zizaco/entrust](https://github.com/Zizaco/entrust)
+* [romanbican/roles](https://github.com/romanbican/roles)
+* [ultraware/roles](https://github.com/ultraware/roles)
 
 ### Laravel Installation Instructions
 1. From your projects root folder in terminal run:
