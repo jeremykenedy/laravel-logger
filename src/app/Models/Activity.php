@@ -142,13 +142,12 @@ class Activity extends Model
     }
 
     /**
-     * User Agent Parsing Helper
+     * User Agent Parsing Helper.
      *
-     * @return String
+     * @return string
      */
     public function getUserAgentDetailsAttribute()
     {
         return \jeremykenedy\LaravelLogger\App\Http\Traits\UserAgentDetails::details($this->userAgent);
     }
-
 }
