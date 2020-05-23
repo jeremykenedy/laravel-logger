@@ -140,4 +140,15 @@ class Activity extends Model
             $merge
         );
     }
+
+    /**
+     * User Agent Parsing Helper
+     *
+     * @return String
+     */
+    public function getUserAgentDetailsAttribute()
+    {
+        return \jeremykenedy\LaravelLogger\App\Http\Traits\UserAgentDetails::details($this->userAgent);
+    }
+
 }
