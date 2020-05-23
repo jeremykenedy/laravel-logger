@@ -27,7 +27,7 @@
             "jeremykenedy\\LaravelLogger\\": "src/"
         },
         "files": [
-            "src/app/Logic/helpers.php"
+            "src/App/Logic/helpers.php"
         ]
     },
     "extra": {
