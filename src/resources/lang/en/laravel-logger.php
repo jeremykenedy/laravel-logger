@@ -25,6 +25,25 @@ return [
         'viewRecord' => 'View Record Details',
     ],
 
+    'placeholders' => [
+        'description'   => 'Description',
+        'route'         => 'Route',
+        'ip_address'    => 'Ip Address',
+    ],
+
+    'buttons' => [
+        'close' => 'Close',
+    ],
+
+    'status' => [
+        'success'   => 'Success',
+        'error'     => 'Error',
+    ],
+
+    'errors' => [
+        'ip_not_available' => 'Additional Ip Address Data Not Available.',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Laravel Logger Admin Dashboard Language Lines
@@ -121,6 +140,7 @@ return [
         'shared' => [
             'btnCancel'     => 'Cancel',
             'btnConfirm'    => 'Confirm',
+            'areYouSure'    => 'Are you sure?',
         ],
         'clearLog' => [
             'title'     => 'Clear Activity Log',
@@ -171,6 +191,21 @@ return [
     */
     'pagination' => [
         'countText' => 'Showing :firstItem - :lastItem of :total results <small>(:perPage per page)</small>',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Laravel Logger Activities
+    |--------------------------------------------------------------------------
+    */
+    'activities' => [
+        'authenticated'             => 'Authenticated Activity',
+        'authentication_attempt'    => 'Authenticated Attempt',
+        'failed_login'              => 'Failed Login Attempt',
+        'locked_out'                => 'Locked Out',
+        'reset_password'            => 'Reset Password',
+        'logged_in'                 => 'Logged In',
+        'logged_out'                => 'Logged Out',
     ],
 
 ];
