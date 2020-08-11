@@ -3,6 +3,7 @@
 namespace jeremykenedy\LaravelLogger;
 
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use jeremykenedy\LaravelLogger\App\Http\Middleware\LogActivity;
 
@@ -109,7 +110,7 @@ class LaravelLoggerServiceProvider extends ServiceProvider
         $listeners = $this->getListeners();
         foreach ($listeners as $listenerKey => $listenerValues) {
             foreach ($listenerValues as $listenerValue) {
-                \Event::listen(
+                Event::listen(
                     $listenerKey,
                     $listenerValue
                 );
