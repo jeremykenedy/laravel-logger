@@ -2,7 +2,6 @@
 
 namespace jeremykenedy\LaravelLogger\App\Http\Traits;
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
@@ -20,40 +19,40 @@ trait ActivityLogger
      */
     public static function activity($description = null)
     {
-        $userType = trans('LaravelLogger::laravel-logger.userTypes.guest');
+        $userType = 'LaravelLogger::laravel-logger.userTypes.guest';
         $userId = null;
 
-        if (Auth::check()) {
-            $userType = trans('LaravelLogger::laravel-logger.userTypes.registered');
+        if (\Auth::check()) {
+            $userType = 'LaravelLogger::laravel-logger.userTypes.registered';
             $userIdField = config('LaravelLogger.defaultUserIDField');
             $userId = Request::user()->{$userIdField};
         }
 
         if (Crawler::isCrawler()) {
-            $userType = trans('LaravelLogger::laravel-logger.userTypes.crawler');
+            $userType = 'LaravelLogger::laravel-logger.userTypes.crawler,';
             if (is_null($description)) {
-                $description = $userType.' '.trans('LaravelLogger::laravel-logger.verbTypes.crawled').' '.Request::fullUrl();
+                $description = $userType. 'LaravelLogger::laravel-logger.verbTypes.crawled'/*  .' '.Request::fullUrl() */;
             }
         }
 
         if (!$description) {
             switch (strtolower(Request::method())) {
                 case 'post':
-                    $verb = trans('LaravelLogger::laravel-logger.verbTypes.created');
+                    $verb = 'LaravelLogger::laravel-logger.verbTypes.created';
                     break;
 
                 case 'patch':
                 case 'put':
-                    $verb = trans('LaravelLogger::laravel-logger.verbTypes.edited');
+                    $verb = 'LaravelLogger::laravel-logger.verbTypes.edited';
                     break;
 
                 case 'delete':
-                    $verb = trans('LaravelLogger::laravel-logger.verbTypes.deleted');
+                    $verb = 'LaravelLogger::laravel-logger.verbTypes.deleted';
                     break;
 
                 case 'get':
                 default:
-                    $verb = trans('LaravelLogger::laravel-logger.verbTypes.viewed');
+                    $verb = 'LaravelLogger::laravel-logger.verbTypes.viewed';
                     break;
             }
 
@@ -73,7 +72,7 @@ trait ActivityLogger
         ];
 
         // Validation Instance
-        $validator = Validator::make($data, Activity::rules());
+        $validator = Validator::make($data, Activity::rules([]));
         if ($validator->fails()) {
             $errors = self::prepareErrorMessage($validator->errors(), $data);
             if (config('LaravelLogger.logDBActivityLogFailuresToFile')) {

@@ -51,7 +51,7 @@
     }
     $bootstrapCardClasses = (is_null(config('LaravelLogger.bootstrapCardClasses')) ? '' : config('LaravelLogger.bootstrapCardClasses'));
 
-    switch ($activity->userType) {
+    switch (trans($activity->userType)) {
         case trans('LaravelLogger::laravel-logger.userTypes.registered'):
             $userTypeClass = 'success';
             break;
@@ -186,7 +186,7 @@
                                         <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.id') !!}</dt>
                                         <dd>{{$activity->id}}</dd>
                                         <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.description') !!}</dt>
-                                        <dd>{{$activity->description}}</dd>
+                                        <dd>{{ trans($activity->description) }}</dd>
                                         <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.route') !!}</dt>
                                         <dd>
                                             <a href="@if($activity->route != '/')/@endif{{$activity->route}}">
@@ -254,7 +254,7 @@
                                         @else
                                             <p class="text-center disabled">
                                                 <br />
-                                                Additional Ip Address Data Not Available.
+                                                {{ trans('LaravelLogger::laravel-logger.errors.ip_not_available') }}
                                             </p>
                                         @endif
                                     </dl>
@@ -272,7 +272,7 @@
                                         <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.userType') !!}</dt>
                                         <dd>
                                             <span class="badge badge-{{$userTypeClass}}">
-                                                {{$activity->userType}}
+                                                {{ trans($activity->userType) }}
                                             </span>
                                         </dd>
                                         @if($userDetails)
