@@ -31,7 +31,7 @@ trait ActivityLogger
         if (Crawler::isCrawler()) {
             $userType = 'LaravelLogger::laravel-logger.userTypes.crawler,';
             if (is_null($description)) {
-                $description = $userType. 'LaravelLogger::laravel-logger.verbTypes.crawled'/*  .' '.Request::fullUrl() */;
+                $description = $userType.'LaravelLogger::laravel-logger.verbTypes.crawled';
             }
         }
 
