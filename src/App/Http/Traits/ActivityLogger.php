@@ -3,10 +3,11 @@
 namespace jeremykenedy\LaravelLogger\App\Http\Traits;
 
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Validator;
 use Jaybizzle\LaravelCrawlerDetect\Facades\LaravelCrawlerDetect as Crawler;
 use jeremykenedy\LaravelLogger\App\Models\Activity;
-use Validator;
 
 trait ActivityLogger
 {
@@ -22,7 +23,7 @@ trait ActivityLogger
         $userType = trans('LaravelLogger::laravel-logger.userTypes.guest');
         $userId = null;
 
-        if (\Auth::check()) {
+        if (Auth::check()) {
             $userType = trans('LaravelLogger::laravel-logger.userTypes.registered');
             $userIdField = config('LaravelLogger.defaultUserIDField');
             $userId = Request::user()->{$userIdField};
@@ -72,7 +73,7 @@ trait ActivityLogger
         ];
 
         // Validation Instance
-        $validator = Validator::make($data, Activity::Rules([]));
+        $validator = Validator::make($data, Activity::rules([]));
         if ($validator->fails()) {
             $errors = self::prepareErrorMessage($validator->errors(), $data);
             if (config('LaravelLogger.logDBActivityLogFailuresToFile')) {
