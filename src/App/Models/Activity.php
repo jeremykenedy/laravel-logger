@@ -125,12 +125,17 @@ class Activity extends Model
      */
     public static function rules($merge = [])
     {
+        if (\Illuminate\Foundation\Application::VERSION < 5.8) {
+            $route_url_check = 'active_url';
+        } else {
+            $route_url_check = 'url';
+        }
         return array_merge(
             [
                 'description'   => 'required|string',
                 'userType'      => 'required|string',
                 'userId'        => 'nullable|integer',
-                'route'         => 'nullable|url',
+                'route'         => 'nullable|' . $route_url_check,
                 'ipAddress'     => 'nullable|ip',
                 'userAgent'     => 'nullable|string',
                 'locale'        => 'nullable|string',
