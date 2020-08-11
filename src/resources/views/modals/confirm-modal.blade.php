@@ -16,12 +16,12 @@ if (!isset($btnSubmitText)) {
     <div class="modal-content">
       <div class="modal-header {{$modalClass}}">
         <h5 class="modal-title">
-          Confirm
+          {{ $btnSubmitText }}
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       </div>
       <div class="modal-body">
-        <p>Are you sure?</p>
+        <p>{{ trans('LaravelLogger::laravel-logger.modals.shared.areYouSure') }}</p>
       </div>
       <div class="modal-footer">
         {!! Form::button('<i class="fa fa-fw fa-close" aria-hidden="true"></i> ' . trans('LaravelLogger::laravel-logger.modals.shared.btnCancel'), array('class' => 'btn btn-outline pull-left btn-flat', 'type' => 'button', 'data-dismiss' => 'modal' )) !!}
