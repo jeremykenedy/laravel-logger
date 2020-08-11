@@ -130,12 +130,13 @@ class Activity extends Model
         } else {
             $route_url_check = 'url';
         }
+
         return array_merge(
             [
                 'description'   => 'required|string',
                 'userType'      => 'required|string',
                 'userId'        => 'nullable|integer',
-                'route'         => 'nullable|' . $route_url_check,
+                'route'         => 'nullable|'.$route_url_check,
                 'ipAddress'     => 'nullable|ip',
                 'userAgent'     => 'nullable|string',
                 'locale'        => 'nullable|string',
