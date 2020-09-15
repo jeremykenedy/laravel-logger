@@ -71,7 +71,7 @@ class Activity extends Model
         'description'   => 'string',
         'user'          => 'integer',
         'route'         => 'string',
-        'ipAddress'     => 'ipAddress',
+        'ipAddress'     => 'string',
         'userAgent'     => 'string',
         'locale'        => 'string',
         'referer'       => 'string',
