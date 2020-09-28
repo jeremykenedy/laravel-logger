@@ -15,7 +15,7 @@ trait UserAgentDetails
     {
         $ua = is_null($ua) ? $_SERVER['HTTP_USER_AGENT'] : $ua;
         // Enumerate all common platforms, this is usually placed in braces (order is important! First come first serve..)
-        $platforms = 'Windows|iPad|iPhone|Macintosh|Android|BlackBerry|Unix|Linux|X11';
+        $platforms = 'Windows|iPad|iPhone|Macintosh|Android|BlackBerry|Unix|Linux|X11|CrOS';
 
         // All browsers except MSIE/Trident and..
         // NOT for browsers that use this syntax: Version/0.xx Browsername

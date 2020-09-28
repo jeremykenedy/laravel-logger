@@ -185,6 +185,10 @@ if (Request::is('activity/cleared')) {
                                     $platformIcon = 'fa-linux';
                                     break;
 
+                                case 'CrOS':
+                                    $platformIcon = 'fa-chrome';
+                                    break;
+
                                 default:
                                     $platformIcon = 'fa-';
                                     break;
