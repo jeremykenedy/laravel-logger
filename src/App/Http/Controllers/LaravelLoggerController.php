@@ -51,7 +51,7 @@ class LaravelLoggerController extends BaseController
         $collectionItems->map(function ($collectionItem) {
             $eventTime = Carbon::parse($collectionItem->updated_at);
             $collectionItem['timePassed'] = $eventTime->diffForHumans();
-            $collectionItem['userAgentDetails'] = UserAgentDetails::details($collectionItem->useragent);
+            $collectionItem['userAgentDetails'] = UserAgentDetails::details($collectionItem->userAgent);
             $collectionItem['langDetails'] = UserAgentDetails::localeLang($collectionItem->locale);
             $collectionItem['userDetails'] = config('LaravelLogger.defaultUserModel')::find($collectionItem->userId);
 
@@ -111,7 +111,7 @@ class LaravelLoggerController extends BaseController
         $activity = Activity::findOrFail($id);
 
         $userDetails = config('LaravelLogger.defaultUserModel')::find($activity->userId);
-        $userAgentDetails = UserAgentDetails::details($activity->useragent);
+        $userAgentDetails = UserAgentDetails::details($activity->userAgent);
         $ipAddressDetails = IpAddressDetails::checkIP($activity->ipAddress);
         $langDetails = UserAgentDetails::localeLang($activity->locale);
         $eventTime = Carbon::parse($activity->created_at);
@@ -205,7 +205,7 @@ class LaravelLoggerController extends BaseController
         $activity = self::getClearedActvity($id);
 
         $userDetails = config('LaravelLogger.defaultUserModel')::find($activity->userId);
-        $userAgentDetails = UserAgentDetails::details($activity->useragent);
+        $userAgentDetails = UserAgentDetails::details($activity->userAgent);
         $ipAddressDetails = IpAddressDetails::checkIP($activity->ipAddress);
         $langDetails = UserAgentDetails::localeLang($activity->locale);
         $eventTime = Carbon::parse($activity->created_at);
