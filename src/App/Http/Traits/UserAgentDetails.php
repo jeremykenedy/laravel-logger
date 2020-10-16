@@ -15,7 +15,7 @@ trait UserAgentDetails
     {
         $ua = is_null($ua) ? $_SERVER['HTTP_USER_AGENT'] : $ua;
         // Enumerate all common platforms, this is usually placed in braces (order is important! First come first serve..)
-        $platforms = 'Windows|iPad|iPhone|Macintosh|Android|BlackBerry|Unix|Linux';
+        $platforms = 'Windows|iPad|iPhone|Macintosh|Android|BlackBerry|Unix|Linux|X11|CrOS';
 
         // All browsers except MSIE/Trident and..
         // NOT for browsers that use this syntax: Version/0.xx Browsername
@@ -53,7 +53,11 @@ trait UserAgentDetails
                 $return['version'] = $ua_array[4];
             }
         } else {
-            return false;
+            $return['platform'] = '-';
+            $return['type'] = '-';
+            $return['renderer'] = '-';
+            $return['browser'] = '-';
+            $return['version'] = '-';
         }
 
         // Replace some browsernames e.g. MSIE -> Internet Explorer
@@ -98,7 +102,7 @@ trait UserAgentDetails
         }
 
         $a = explode(',', $locale);
-        $a = explode(';', $a[1]);
+        $a ??= explode(';', $a[1]);
 
         return $a[0];
     }
