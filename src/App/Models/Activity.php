@@ -125,8 +125,8 @@ class Activity extends Model
      */
     public static function rules($merge = [])
     {
-        if (\Illuminate\Foundation\Application::VERSION < 5.8) {
-            $route_url_check = 'active_url';
+        if ((app() instanceof \Illuminate\Foundation\Application)) {
+            $route_url_check = \Illuminate\Foundation\Application::VERSION < 5.8 ? 'active_url' : 'url';
         } else {
             $route_url_check = 'url';
         }
