@@ -39,6 +39,7 @@ Laravel logger is an activity event logger for your Laravel or Lumen application
 |Routing Events can recording using middleware|
 |Records activity timestamps|
 |Records activity description|
+|Records activity details (optional)|
 |Records activity user type with crawler detection.|
 |Records activity Method|
 |Records activity Route|
@@ -216,20 +217,25 @@ When using the trait you can customize the event description.
 To use the trait:
 1. Include the call in the head of your class file:
 
-```php
-    use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
-```
+    ```php
+        use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
+    ```
 
 2. Include the trait call in the opening of your class:
 
-```php
-    use ActivityLogger;
-```
+    ```php
+        use ActivityLogger;
+    ```
 
 3. You can record the activity my calling the traits method:
-```
-    ActivityLogger::activity("Logging this activity.");
-```
+    ```
+        ActivityLogger::activity("Logging this activity.");
+    ```
+
+    Or as bellow to include extended activity details:
+    ```
+        ActivityLogger::activity("Logging this activity.", "Additional activity details.");
+    ```
 
 ### Routes
 ##### Laravel Activity Dashbaord Routes

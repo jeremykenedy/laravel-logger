@@ -14,11 +14,12 @@ trait ActivityLogger
     /**
      * Laravel Logger Log Activity.
      *
-     * @param string $description
+     * @param null $description
+     * @param null $details
      *
      * @return void
      */
-    public static function activity($description = null)
+    public static function activity($description = null, $details = null)
     {
         $userType = trans('LaravelLogger::laravel-logger.userTypes.guest');
         $userId = null;
@@ -62,6 +63,7 @@ trait ActivityLogger
 
         $data = [
             'description'   => $description,
+            'details'       => $details,
             'userType'      => $userType,
             'userId'        => $userId,
             'route'         => Request::fullUrl(),
@@ -95,6 +97,7 @@ trait ActivityLogger
     {
         Activity::create([
             'description'   => $data['description'],
+            'details'       => $data['details'],
             'userType'      => $data['userType'],
             'userId'        => $data['userId'],
             'route'         => $data['route'],
