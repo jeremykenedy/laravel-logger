@@ -81,7 +81,7 @@ if (Request::is('activity/cleared')) {
                         {{ $activity->timePassed }}
                     </td>
                     <td>
-                        {{ $activity->description }}
+                        {{ trans($activity->description) }}
                     </td>
                     <td>
                         @php
@@ -105,7 +105,7 @@ if (Request::is('activity/cleared')) {
 
                         @endphp
                         <span class="badge badge-{{$userTypeClass}}">
-                            {{$userLabel}}
+                            {{ trans($userLabel) }}
                         </span>
                     </td>
                     <td>

@@ -29,7 +29,7 @@ class LogSuccessfulLogin
     public function handle(Login $event)
     {
         if (config('LaravelLogger.logSuccessfulLogin')) {
-            ActivityLogger::activity('Logged In');
+            ActivityLogger::activity('LaravelLogger::laravel-logger.activities.logged_in');
         }
     }
 }
