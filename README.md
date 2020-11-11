@@ -46,6 +46,7 @@ Laravel logger is an activity event logger for your Laravel or Lumen application
 |Records activity User Agent|
 |Records activity Browser Language|
 |Records activity referrer|
+|Customizable activity model|
 |Activity panel dashboard|
 |Individual activity drilldown report dashboard|
 |Activity Drilldown looks up Id Address meta information|
@@ -160,6 +161,7 @@ LARAVEL_LOGGER_ROLES_ENABLED=true
 LARAVEL_LOGGER_ROLES_MIDDLWARE=role:admin
 LARAVEL_LOGGER_MIDDLEWARE_ENABLED=true
 LARAVEL_LOGGER_MIDDLEWARE_EXCEPT=
+LARAVEL_LOGGER_ACTIVITY_MODEL=jeremykenedy\LaravelLogger\App\Models\Activity
 LARAVEL_LOGGER_USER_MODEL=App\User
 LARAVEL_LOGGER_USER_ID_FIELD=id
 LARAVEL_LOGGER_DISABLE_ROUTES=false

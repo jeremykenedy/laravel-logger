@@ -59,10 +59,11 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Laravel Default User Model
+    | Laravel Default Models
     |--------------------------------------------------------------------------
     */
 
+    'defaultActivityModel' => env('LARAVEL_LOGGER_ACTIVITY_MODEL', 'jeremykenedy\LaravelLogger\App\Models\Activity'),
     'defaultUserModel' => env('LARAVEL_LOGGER_USER_MODEL', 'App\User'),
 
     /*

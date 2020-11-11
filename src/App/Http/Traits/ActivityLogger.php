@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
 use Jaybizzle\LaravelCrawlerDetect\Facades\LaravelCrawlerDetect as Crawler;
-use jeremykenedy\LaravelLogger\App\Models\Activity;
 
 trait ActivityLogger
 {
@@ -73,7 +72,7 @@ trait ActivityLogger
         ];
 
         // Validation Instance
-        $validator = Validator::make($data, Activity::rules());
+        $validator = Validator::make($data, config('laravel-logger.defaultActivityModel')::rules());
         if ($validator->fails()) {
             $errors = self::prepareErrorMessage($validator->errors(), $data);
             if (config('LaravelLogger.logDBActivityLogFailuresToFile')) {
@@ -93,7 +92,7 @@ trait ActivityLogger
      */
     private static function storeActivity($data)
     {
-        Activity::create([
+        config('laravel-logger.defaultActivityModel')::create([
             'description'   => $data['description'],
             'userType'      => $data['userType'],
             'userId'        => $data['userId'],
