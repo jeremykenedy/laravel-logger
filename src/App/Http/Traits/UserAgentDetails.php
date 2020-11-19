@@ -102,7 +102,7 @@ trait UserAgentDetails
         }
 
         $a = explode(',', $locale);
-        $a ??= explode(';', $a[1]);
+        $a = $a ?? explode(';', $a[1]);
 
         return $a[0];
     }
