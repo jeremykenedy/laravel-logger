@@ -23,6 +23,7 @@ class CreateLaravelLoggerActivityTable extends Migration
             Schema::connection($connection)->create($table, function (Blueprint $table) {
                 $table->increments('id');
                 $table->longText('description');
+                $table->longText('details')->nullable();
                 $table->string('userType');
                 $table->integer('userId')->nullable();
                 $table->longText('route')->nullable();

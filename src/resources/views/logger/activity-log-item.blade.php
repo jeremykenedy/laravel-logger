@@ -191,6 +191,8 @@
                                         <dd>{{$activity->id}}</dd>
                                         <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.description') !!}</dt>
                                         <dd>{{$activity->description}}</dd>
+                                        <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.details') !!}</dt>
+                                        <dd>@if($activity->details){{$activity->details}}@else{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.fields.none') !!}@endif</dd>
                                         <dt>{!! trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.route') !!}</dt>
                                         <dd>
                                             <a href="@if($activity->route != '/')/@endif{{$activity->route}}">

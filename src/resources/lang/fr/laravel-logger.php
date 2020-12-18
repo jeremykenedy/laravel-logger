@@ -84,6 +84,7 @@ return [
                 'id'            => 'Activité Id :',
                 'ip'            => 'Adresse Ip',
                 'description'   => 'Description',
+                'details'       => 'Détails',
                 'userType'      => 'Type Utilisateur',
                 'userId'        => 'Id Utilisateur',
                 'route'         => 'Route',
@@ -104,6 +105,10 @@ return [
                 'userSignupIp'  => 'Inscription Ip',
                 'userCreatedAt' => 'Créé le',
                 'userUpdatedAt' => 'Actualisé le',
+            ],
+
+            'fields' => [
+                'none' => 'Aucun',
             ],
         ],
 

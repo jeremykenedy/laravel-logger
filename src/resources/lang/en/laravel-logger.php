@@ -86,6 +86,7 @@ return [
                 'id'            => 'Activity Log ID:',
                 'ip'            => 'Ip Address',
                 'description'   => 'Description',
+                'details'       => 'Details',
                 'userType'      => 'User Type',
                 'userId'        => 'User Id',
                 'route'         => 'Route',
@@ -106,6 +107,10 @@ return [
                 'userSignupIp'  => 'Signup Ip',
                 'userCreatedAt' => 'Created',
                 'userUpdatedAt' => 'Updated',
+            ],
+
+            'fields' => [
+                'none' => 'None',
             ],
         ],
 

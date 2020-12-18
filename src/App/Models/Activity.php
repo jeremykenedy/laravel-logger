@@ -57,6 +57,7 @@ class Activity extends Model
      */
     protected $fillable = [
         'description',
+        'details',
         'userType',
         'userId',
         'route',
@@ -69,6 +70,7 @@ class Activity extends Model
 
     protected $casts = [
         'description'   => 'string',
+        'details'       => 'string',
         'user'          => 'integer',
         'route'         => 'string',
         'ipAddress'     => 'string',
@@ -134,6 +136,7 @@ class Activity extends Model
         return array_merge(
             [
                 'description'   => 'required|string',
+                'details'       => 'nullable|string',
                 'userType'      => 'required|string',
                 'userId'        => 'nullable|integer',
                 'route'         => 'nullable|'.$route_url_check,
