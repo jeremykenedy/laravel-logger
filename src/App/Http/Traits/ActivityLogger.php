@@ -32,7 +32,7 @@ trait ActivityLogger
         if (Crawler::isCrawler()) {
             $userType = trans('LaravelLogger::laravel-logger.userTypes.crawler');
             if (is_null($description)) {
-                $description = $userType.' '.trans('LaravelLogger::laravel-logger.verbTypes.crawled').' '.Request::fullUrl();
+                $description = $userType . ' ' . trans('LaravelLogger::laravel-logger.verbTypes.crawled') . ' ' . Request::fullUrl();
             }
         }
 
@@ -57,7 +57,15 @@ trait ActivityLogger
                     break;
             }
 
-            $description = $verb.' '.Request::path();
+            $description = $verb . ' ' . Request::path();
+        }
+
+        if (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+            $ip = $_SERVER["HTTP_CF_CONNECTING_IP"];
+        } elseif (isset($_SERVER["HTTP_X_FORWARDED_FOR"])) {
+            $ip = $_SERVER["HTTP_X_FORWARDED_FOR"];
+        } else {
+            $ip = Request::ip();
         }
 
         $data = [
@@ -66,7 +74,7 @@ trait ActivityLogger
             'userType'      => $userType,
             'userId'        => $userId,
             'route'         => Request::fullUrl(),
-            'ipAddress'     => Request::ip(),
+            'ipAddress'     => $ip,
             'userAgent'     => Request::header('user-agent'),
             'locale'        => Request::header('accept-language'),
             'referer'       => Request::header('referer'),
@@ -78,7 +86,7 @@ trait ActivityLogger
         if ($validator->fails()) {
             $errors = self::prepareErrorMessage($validator->errors(), $data);
             if (config('LaravelLogger.logDBActivityLogFailuresToFile')) {
-                Log::error('Failed to record activity event. Failed Validation: '.$errors);
+                Log::error('Failed to record activity event. Failed Validation: ' . $errors);
             }
         } else {
             self::storeActivity($data);
