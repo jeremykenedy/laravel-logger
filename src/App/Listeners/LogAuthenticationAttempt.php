@@ -29,7 +29,7 @@ class LogAuthenticationAttempt
     public function handle(Attempting $event)
     {
         if (config('LaravelLogger.logAuthAttempts')) {
-            ActivityLogger::activity('Authenticated Attempt');
+            ActivityLogger::activity(trans('LaravelLogger::laravel-logger.listenerTypes.attempt'));
         }
     }
 }

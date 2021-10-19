@@ -29,7 +29,7 @@ class LogLockout
     public function handle(Lockout $event)
     {
         if (config('LaravelLogger.logLockOut')) {
-            ActivityLogger::activity('Locked Out');
+            ActivityLogger::activity(trans('LaravelLogger::laravel-logger.listenerTypes.lockout'));
         }
     }
 }
