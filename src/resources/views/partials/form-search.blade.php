@@ -6,7 +6,7 @@
     <div class="row mb-3">
         @if(in_array('description',explode(',', config('LaravelLogger.searchFields'))))
             <div class="col-12 col-sm-4 col-lg-2 mb-2">
-                <input type="text" name="description" value="{{request()->get('description') ? request()->get('description'):null}}" class="form-control" placeholder="Description">
+                <input type="text" name="description" value="{{request()->get('description') ? request()->get('description'):null}}" class="form-control" placeholder="{{ trans('LaravelLogger::laravel-logger.dashboard.labels.description') }}">
             </div>
         @endif
         @if(in_array('user',explode(',', config('LaravelLogger.searchFields'))))
@@ -31,12 +31,12 @@
         @endif
         @if(in_array('route',explode(',', config('LaravelLogger.searchFields'))))
             <div class="col-12 col-sm-4 col-lg-2 mb-2">
-                <input type="text" name="route" class="form-control" value="{{request()->get('route') ? request()->get('route'):null}}" placeholder="Route">
+                <input type="text" name="route" class="form-control" value="{{request()->get('route') ? request()->get('route'):null}}" placeholder="{{ trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.route') }}">
             </div>
         @endif
         @if(in_array('ip',explode(',', config('LaravelLogger.searchFields'))))
             <div class="col-12 col-sm-4 col-lg-2 mb-2">
-                <input type="text" name="ip_address" class="form-control" value="{{request()->get('ip_address') ? request()->get('ip_address'):null}}" placeholder="Ip Address">
+                <input type="text" name="ip_address" class="form-control" value="{{request()->get('ip_address') ? request()->get('ip_address'):null}}" placeholder="{{ trans('LaravelLogger::laravel-logger.drilldown.list-group.labels.ip') }}">
             </div>
         @endif
         @if(in_array('description',explode(',', config('LaravelLogger.searchFields')))||in_array('user',explode(',', config('LaravelLogger.searchFields'))) ||in_array('method',explode(',', config('LaravelLogger.searchFields'))) || in_array('route',explode(',', config('LaravelLogger.searchFields'))) || in_array('ip',explode(',', config('LaravelLogger.searchFields'))))
