@@ -21,6 +21,16 @@ return [
         'crawled'    => 'crawled',
     ],
 
+    'listenerTypes' => [
+        'auth'       => 'Authenticated Activity',
+        'attempt'    => 'Authenticated Attempt',
+        'failed'     => 'Failed Login Attempt',
+        'lockout'    => 'Locked Out',
+        'reset'      => 'Reset Password',
+        'login'      => 'Logged In',
+        'logout'     => 'Logged Out',
+    ],
+
     'tooltips' => [
         'viewRecord' => 'View Record Details',
     ],
