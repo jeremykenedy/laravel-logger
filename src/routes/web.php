@@ -7,8 +7,15 @@
 |
 */
 
-Route::group(['prefix' => 'activity', 'namespace' => 'jeremykenedy\LaravelLogger\App\Http\Controllers', 'middleware' => ['web', 'auth', 'activity']], function () {
+Route::group(['prefix' => 'activity', 'namespace' => 'jeremykenedy\LaravelLogger\App\Http\Controllers', 'middleware' => (function () {
+    $middleware = ['web', 'activity'];
 
+    if (config('LaravelLogger.authRequired', true)) {
+        $middleware[] = 'auth';
+    }
+
+    return $middleware;
+})], function () {
     // Dashboards
     Route::get('/', 'LaravelLoggerController@showAccessLog')->name('activity');
     Route::get('/cleared', ['uses' => 'LaravelLoggerController@showClearedActivityLog'])->name('cleared');

@@ -28,7 +28,10 @@ class LaravelLoggerController extends BaseController
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->_authRequired = config('LaravelLogger.authRequired');
+        if ($this->_authRequired) {
+            $this->middleware('auth');
+        }
 
         $this->_rolesEnabled = config('LaravelLogger.rolesEnabled');
         $this->_rolesMiddlware = config('LaravelLogger.rolesMiddlware');
