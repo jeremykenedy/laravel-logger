@@ -23,10 +23,29 @@ trait ActivityLogger
         $userType = trans('LaravelLogger::laravel-logger.userTypes.guest');
         $userId = null;
 
-        if (Auth::check()) {
+        $model = config('laravel-logger.defaultUserModel');
+        
+        if ($model == "App\Models\Admin")
+        {
+            $check = \Auth::guard('admin')->check();
+        }
+        else
+        {
+            $check = \Auth::check();
+        }
+        
+        if ($check) {
             $userType = trans('LaravelLogger::laravel-logger.userTypes.registered');
             $userIdField = config('LaravelLogger.defaultUserIDField');
-            $userId = Request::user()->{$userIdField};
+            
+            if ($model == "App\Models\Admin")
+            {
+                $userId = \Auth::guard('admin')->user()->{$userIdField};
+            }
+            else{
+                $userId = Request::user()->{$userIdField};
+            }
+            
         }
 
         if (Crawler::isCrawler()) {
