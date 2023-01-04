@@ -9,7 +9,7 @@ if (isset($hoverable) && $hoverable === true) {
     $hoverable = false;
 }
 
-if (Request::is('activity/cleared')) {
+if (\Illuminate\Http\Request::is('activity/cleared')) {
     $prependUrl = '/activity/cleared/log/';
 }
 
@@ -55,7 +55,7 @@ if (Request::is('activity/cleared')) {
                     <i class="fa fa-laptop fa-fw" aria-hidden="true"></i>
                     {!! trans('LaravelLogger::laravel-logger.dashboard.labels.agent') !!}
                 </th>
-                @if(Request::is('activity/cleared'))
+                @if(\Illuminate\Http\Request::is('activity/cleared'))
                     <th>
                         <i class="fa fa-trash-o fa-fw" aria-hidden="true"></i>
                         {!! trans('LaravelLogger::laravel-logger.dashboard.labels.deleteDate') !!}
@@ -242,7 +242,7 @@ if (Request::is('activity/cleared')) {
                             </small>
                         </sup>
                     </td>
-                    @if(Request::is('activity/cleared'))
+                    @if(\Illuminate\Http\Request::is('activity/cleared'))
                         <td>
                             {{ $activity->deleted_at }}
                         </td>
