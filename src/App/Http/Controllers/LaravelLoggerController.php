@@ -282,26 +282,26 @@ class LaravelLoggerController extends BaseController
      *
      * @return filtered query
      */
-    public function searchActivityLog($query, $requeset)
+    public function searchActivityLog($query, $request)
     {
-        if (in_array('description', explode(',', config('LaravelLogger.searchFields'))) && $requeset->get('description')) {
-            $query->where('description', 'like', '%'.$requeset->get('description').'%');
+        if (in_array('description', explode(',', config('LaravelLogger.searchFields'))) && $request->get('description')) {
+            $query->where('description', 'like', '%'.$request->get('description').'%');
         }
 
-        if (in_array('user', explode(',', config('LaravelLogger.searchFields'))) && $requeset->get('user')) {
-            $query->where('userId', '=', $requeset->get('user'));
+        if (in_array('user', explode(',', config('LaravelLogger.searchFields'))) && (int) $request->get('user')) {
+            $query->where('userId', '=', (int) $request->get('user'));
         }
 
-        if (in_array('method', explode(',', config('LaravelLogger.searchFields'))) && $requeset->get('method')) {
-            $query->where('methodType', '=', $requeset->get('method'));
+        if (in_array('method', explode(',', config('LaravelLogger.searchFields'))) && $request->get('method')) {
+            $query->where('methodType', '=', $request->get('method'));
         }
 
-        if (in_array('route', explode(',', config('LaravelLogger.searchFields'))) && $requeset->get('route')) {
-            $query->where('route', 'like', '%'.$requeset->get('route').'%');
+        if (in_array('route', explode(',', config('LaravelLogger.searchFields'))) && $request->get('route')) {
+            $query->where('route', 'like', '%'.$request->get('route').'%');
         }
 
-        if (in_array('ip', explode(',', config('LaravelLogger.searchFields'))) && $requeset->get('ip_address')) {
-            $query->where('ipAddress', 'like', '%'.$requeset->get('ip_address').'%');
+        if (in_array('ip', explode(',', config('LaravelLogger.searchFields'))) && $request->get('ip_address')) {
+            $query->where('ipAddress', 'like', '%'.$request->get('ip_address').'%');
         }
 
         return $query;
