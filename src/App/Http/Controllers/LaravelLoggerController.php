@@ -72,7 +72,7 @@ class LaravelLoggerController extends BaseController
             if (config('LaravelLogger.enableSearch')) {
                 $activities = $this->searchActivityLog($activities, $request);
             }
-            $activities = $activities->paginate(config('LaravelLogger.loggerPaginationPerPage'));
+            $activities = $activities->paginate(config('LaravelLogger.loggerPaginationPerPage'))->withQueryString();
             $totalActivities = $activities->total();
         } else {
             $activities = config('laravel-logger.defaultActivityModel')::orderBy('created_at', 'desc');
