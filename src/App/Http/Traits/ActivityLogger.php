@@ -82,7 +82,7 @@ trait ActivityLogger
         ];
 
         // Validation Instance
-        $validator = Validator::make($data, config('laravel-logger.defaultActivityModel')::rules());
+        $validator = Validator::make($data, config('LaravelLogger.defaultActivityModel')::rules());
         if ($validator->fails()) {
             $errors = self::prepareErrorMessage($validator->errors(), $data);
             if (config('LaravelLogger.logDBActivityLogFailuresToFile')) {
@@ -102,7 +102,7 @@ trait ActivityLogger
      */
     private static function storeActivity($data)
     {
-        config('laravel-logger.defaultActivityModel')::create([
+        config('LaravelLogger.defaultActivityModel')::create([
             'description'   => $data['description'],
             'details'       => $data['details'],
             'userType'      => $data['userType'],
