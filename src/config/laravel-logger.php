@@ -172,4 +172,7 @@ return [
     'enableFontAwesomeCDN'      => env('LARAVEL_LOGGER_FONT_AWESOME_CDN_ENABLED', true),
     'fontAwesomeCDN'            => env('LARAVEL_LOGGER_FONT_AWESOME_CDN_URL', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'),
 
+    // LiveSearch for scalability
+    'enableLiveSearch'          => env('LARAVEL_LOGGER_LIVE_SEARCH_ENABLED', true),
+
 ];

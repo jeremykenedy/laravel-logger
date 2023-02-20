@@ -11,7 +11,7 @@
         @endif
         @if(in_array('user',explode(',', config('LaravelLogger.searchFields'))))
             <div class="col-12 col-sm-4 col-lg-2 mb-2">
-                <select class="form-control" name="user">
+                <select class="form-control" id="user_select" name="user">
                     <option value="">{{ trans('LaravelLogger::laravel-logger.dashboard.search.all') }}</option>
                     @foreach($users as $user)
                         <option value="{{ $user->$userIdField }}"{{ request()->get('user') && request()->get('user') == $user->$userIdField ? ' selected':'' }}>{{ $user->name }}</option>
