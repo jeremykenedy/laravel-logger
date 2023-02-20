@@ -23,6 +23,8 @@
 @include('LaravelLogger::partials.scripts', ['activities' => $activities])
 @include('LaravelLogger::scripts.confirm-modal', ['formTrigger' => '#confirmDelete'])
 
+
+
 @if(config('LaravelLogger.enableDrillDown'))
 @include('LaravelLogger::scripts.clickable-row')
 @include('LaravelLogger::scripts.tooltip')
@@ -57,6 +59,11 @@
 @section('content')
 
     <div class="container-fluid">
+
+       @if(config('LaravelLogger.enableLiveSearch'))
+       @include('LaravelLogger::partials.form-live-search')
+       @endif
+
        @if(config('LaravelLogger.enableSearch'))
        @include('LaravelLogger::partials.form-search')
        @endif
@@ -130,6 +137,10 @@
             </div>
         </div>
     </div>
+
+@if(config('LaravelLogger.enableLiveSearch'))
+@include('LaravelLogger::scripts.live-search-script')
+@endif
 
 @include('LaravelLogger::modals.confirm-modal', ['formTrigger' => 'confirmDelete', 'modalClass' => 'danger', 'actionBtnIcon' => 'fa-trash-o'])
 
