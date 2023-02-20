@@ -86,13 +86,12 @@ class LaravelLoggerController extends BaseController
 
         self::mapAdditionalDetails($activities);
 
-
-        if(config('LaravelLogger.enableLiveSearch')){
-          // We are querying only the paginated userIds because in a big application querying all user data is performance heavy
-          $user_ids = array_unique($activities->pluck('userId')->toArray());
-          $users = config('LaravelLogger.defaultUserModel')::whereIn(config('LaravelLogger.defaultUserIDField'), $user_ids)->get();
-        }else{
-          $users = config('LaravelLogger.defaultUserModel')::all();
+        if (config('LaravelLogger.enableLiveSearch')) {
+            // We are querying only the paginated userIds because in a big application querying all user data is performance heavy
+            $user_ids = array_unique($activities->pluck('userId')->toArray());
+            $users = config('LaravelLogger.defaultUserModel')::whereIn(config('LaravelLogger.defaultUserIDField'), $user_ids)->get();
+        } else {
+            $users = config('LaravelLogger.defaultUserModel')::all();
         }
 
         $data = [
@@ -312,22 +311,23 @@ class LaravelLoggerController extends BaseController
         }
 
         return $query;
-  }
-  /**
-  * Search the database users according to specific criteria.
-  *
-  * @param request
-  *
-  * @return filtered user data
-  */
-  public function liveSearch(Request $request){
+    }
 
-    $filteredUsers = config('LaravelLogger.defaultUserModel')::when(request('userid'), function ($q) {
-      return $q->where(config('LaravelLogger.defaultUserIDField'), (int) request('userid', 0));
-    })->when(request('email'), function ($q) {
-      return $q->where('email', 'like', '%' . request('email') . '%');
-    });
+    /**
+     * Search the database users according to specific criteria.
+     *
+     * @param request
+     *
+     * @return filtered user data
+     */
+    public function liveSearch(Request $request)
+    {
+        $filteredUsers = config('LaravelLogger.defaultUserModel')::when(request('userid'), function ($q) {
+            return $q->where(config('LaravelLogger.defaultUserIDField'), (int) request('userid', 0));
+        })->when(request('email'), function ($q) {
+            return $q->where('email', 'like', '%'.request('email').'%');
+        });
 
-    return response()->json($filteredUsers->get()->pluck('email', config('LaravelLogger.defaultUserIDField')), 200);
-  }
+        return response()->json($filteredUsers->get()->pluck('email', config('LaravelLogger.defaultUserIDField')), 200);
+    }
 }
