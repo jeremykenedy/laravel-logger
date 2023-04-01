@@ -8,7 +8,6 @@
 */
 
 Route::group(['prefix' => 'activity', 'namespace' => 'jeremykenedy\LaravelLogger\App\Http\Controllers', 'middleware' => ['web', 'auth', 'activity']], function () {
-
     // Dashboards
     Route::get('/', 'LaravelLoggerController@showAccessLog')->name('activity');
     Route::get('/cleared', ['uses' => 'LaravelLoggerController@showClearedActivityLog'])->name('cleared');
