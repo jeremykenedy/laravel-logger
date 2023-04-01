@@ -70,7 +70,7 @@ trait UserAgentDetails
                 if (strtolower($return['renderer']) == 'trident') {
                     $return['browser'] = 'Internet Explorer';
                 }
-            break;
+                break;
         }
 
         switch (strtolower($return['platform'])) {
