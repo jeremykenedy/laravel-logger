@@ -64,6 +64,11 @@ Laravel logger is an activity event logger for your Laravel or Lumen application
 * [Laravel 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 6, and 7+](https://laravel.com/docs/installation)
 * [jaybizzle/laravel-crawler-detect](https://github.com/JayBizzle/Laravel-Crawler-Detect) included dependency in composer.json (for crawler detection)
 
+### :film_strip: Video Tour 
+If you'd prefer a more visual review of this package, please watch this video on Laravel Package Tutorial.
+ 
+[<img src="https://img.youtube.com/vi/mHLSv9XhTuk/0.jpg" width="350">](https://youtu.be/mHLSv9XhTuk)
+ 
 ### Integrations
 Laravel logger can work out the box with or without the following roles packages:
 * [jeremykenedy/laravel-roles](https://github.com/jeremykenedy/laravel-roles)
