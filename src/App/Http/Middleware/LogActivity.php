@@ -21,7 +21,7 @@ class LogActivity
     public function handle($request, Closure $next, $description = null)
     {
         if (config('LaravelLogger.loggerMiddlewareEnabled') && $this->shouldLog($request)) {
-            ActivityLogger::activity($description);
+            $this->activity($description);
         }
 
         return $next($request);
