@@ -18,7 +18,7 @@ trait ActivityLogger
      *
      * @return void
      */
-    public static function activity($description = null, $details = null)
+    public function activity($description = null, $details = null)
     {
         $userType = trans('LaravelLogger::laravel-logger.userTypes.guest');
         $userId = null;
