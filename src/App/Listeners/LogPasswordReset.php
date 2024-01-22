@@ -29,7 +29,7 @@ class LogPasswordReset
     public function handle(PasswordReset $event)
     {
         if (config('LaravelLogger.logPasswordReset')) {
-            ActivityLogger::activity(trans('LaravelLogger::laravel-logger.listenerTypes.reset'));
+            $this->activity(trans('LaravelLogger::laravel-logger.listenerTypes.reset'));
         }
     }
 }

@@ -29,7 +29,7 @@ class LogSuccessfulLogout
     public function handle(Logout $event)
     {
         if (config('LaravelLogger.logSuccessfulLogout')) {
-            ActivityLogger::activity(trans('LaravelLogger::laravel-logger.listenerTypes.logout'));
+            $this->activity(trans('LaravelLogger::laravel-logger.listenerTypes.logout'));
         }
     }
 }

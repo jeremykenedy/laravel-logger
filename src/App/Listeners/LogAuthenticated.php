@@ -29,7 +29,7 @@ class LogAuthenticated
     public function handle(Authenticated $event)
     {
         if (config('LaravelLogger.logAllAuthEvents')) {
-            ActivityLogger::activity(trans('LaravelLogger::laravel-logger.listenerTypes.auth'));
+            $this->activity(trans('LaravelLogger::laravel-logger.listenerTypes.auth'));
         }
     }
 }

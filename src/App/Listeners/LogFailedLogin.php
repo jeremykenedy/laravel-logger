@@ -29,7 +29,7 @@ class LogFailedLogin
     public function handle(Failed $event)
     {
         if (config('LaravelLogger.logFailedAuthAttempts')) {
-            ActivityLogger::activity(trans('LaravelLogger::laravel-logger.listenerTypes.failed'));
+            $this->activity(trans('LaravelLogger::laravel-logger.listenerTypes.failed'));
         }
     }
 }
