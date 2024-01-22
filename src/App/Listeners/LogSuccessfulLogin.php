@@ -29,7 +29,7 @@ class LogSuccessfulLogin
     public function handle(Login $event)
     {
         if (config('LaravelLogger.logSuccessfulLogin')) {
-            ActivityLogger::activity(trans('LaravelLogger::laravel-logger.listenerTypes.login'));
+            $this->activity(trans('LaravelLogger::laravel-logger.listenerTypes.login'));
         }
     }
 }
