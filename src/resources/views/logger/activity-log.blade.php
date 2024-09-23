@@ -81,11 +81,13 @@
 
                             <span>
                                 {!! trans('LaravelLogger::laravel-logger.dashboard.title') !!}
-                                <small>
-                                    <sup class="label label-default">
-                                        {{ $totalActivities }} {!! trans('LaravelLogger::laravel-logger.dashboard.subtitle') !!}
-                                    </sup>
-                                </small>
+                                @if(! config('LaravelLogger.loggerCursorPaginationEnabled'))
+                                    <small>
+                                        <sup class="label label-default">
+                                            {{ $totalActivities }} {!! trans('LaravelLogger::laravel-logger.dashboard.subtitle') !!}
+                                        </sup>
+                                    </small>
+                                @endif
                             </span>
 
                             <div class="btn-group pull-right btn-group-xs">
@@ -120,12 +122,14 @@
 
                             @else
                             {!! trans('LaravelLogger::laravel-logger.dashboard.title') !!}
-                            <span class="pull-right label label-default">
-                                {{ $totalActivities }}
-                                <span class="hidden-sms">
-                                    {!! trans('LaravelLogger::laravel-logger.dashboard.subtitle') !!}
-                                </span>
-                            </span>
+                                @if(! config('LaravelLogger.loggerCursorPaginationEnabled'))
+                                    <span class="pull-right label label-default">
+                                        {{ $totalActivities }}
+                                        <span class="hidden-sms">
+                                            {!! trans('LaravelLogger::laravel-logger.dashboard.subtitle') !!}
+                                        </span>
+                                    </span>
+                                @endif
                             @endif
 
                         </div>

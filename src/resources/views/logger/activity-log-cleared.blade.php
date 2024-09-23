@@ -71,9 +71,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
                             <span>
                                 {!! trans('LaravelLogger::laravel-logger.dashboardCleared.title') !!}
-                                <sup class="label">
-                                    {{ $totalActivities }} {!! trans('LaravelLogger::laravel-logger.dashboardCleared.subtitle') !!}
-                                </sup>
+                                @if(! config('LaravelLogger.loggerCursorPaginationEnabled'))
+                                    <sup class="label">
+                                        {{ $totalActivities }} {!! trans('LaravelLogger::laravel-logger.dashboardCleared.subtitle') !!}
+                                    </sup>
+                                @endif
                             </span>
                             <div class="btn-group pull-right btn-group-xs">
                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
