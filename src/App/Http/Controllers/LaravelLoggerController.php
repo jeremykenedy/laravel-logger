@@ -67,7 +67,14 @@ class LaravelLoggerController extends BaseController
      */
     public function showAccessLog(Request $request)
     {
-        if (config('LaravelLogger.loggerPaginationEnabled')) {
+        if (config('LaravelLogger.loggerCursorPaginationEnabled')) {
+            $activities = config('LaravelLogger.defaultActivityModel')::orderBy('created_at', 'desc');
+            if (config('LaravelLogger.enableSearch')) {
+                $activities = $this->searchActivityLog($activities, $request);
+            }
+            $activities = $activities->cursorPaginate(config('LaravelLogger.loggerPaginationPerPage'))->withQueryString();
+            $totalActivities = 0;
+        } elseif (config('LaravelLogger.loggerPaginationEnabled')) {
             $activities = config('LaravelLogger.defaultActivityModel')::orderBy('created_at', 'desc');
             if (config('LaravelLogger.enableSearch')) {
                 $activities = $this->searchActivityLog($activities, $request);
@@ -76,7 +83,6 @@ class LaravelLoggerController extends BaseController
             $totalActivities = $activities->total();
         } else {
             $activities = config('LaravelLogger.defaultActivityModel')::orderBy('created_at', 'desc');
-
             if (config('LaravelLogger.enableSearch')) {
                 $activities = $this->searchActivityLog($activities, $request);
             }
@@ -122,7 +128,12 @@ class LaravelLoggerController extends BaseController
         $eventTime = Carbon::parse($activity->created_at);
         $timePassed = $eventTime->diffForHumans();
 
-        if (config('LaravelLogger.loggerPaginationEnabled')) {
+        if (config('LaravelLogger.loggerCursorPaginationEnabled')) {
+            $userActivities = config('LaravelLogger.defaultActivityModel')::where('userId', $activity->userId)
+                ->orderBy('created_at', 'desc')
+                ->cursorPaginate(config('LaravelLogger.loggerPaginationPerPage'));
+            $totalUserActivities = 0;
+        } elseif (config('LaravelLogger.loggerPaginationEnabled')) {
             $userActivities = config('LaravelLogger.defaultActivityModel')::where('userId', $activity->userId)
             ->orderBy('created_at', 'desc')
             ->paginate(config('LaravelLogger.loggerPaginationPerPage'));
@@ -175,7 +186,12 @@ class LaravelLoggerController extends BaseController
      */
     public function showClearedActivityLog()
     {
-        if (config('LaravelLogger.loggerPaginationEnabled')) {
+        if (config('LaravelLogger.loggerCursorPaginationEnabled')) {
+            $activities = config('LaravelLogger.defaultActivityModel')::onlyTrashed()
+                ->orderBy('created_at', 'desc')
+                ->paginate(config('LaravelLogger.loggerPaginationPerPage'));
+            $totalActivities = 0;
+        } elseif (config('LaravelLogger.loggerPaginationEnabled')) {
             $activities = config('LaravelLogger.defaultActivityModel')::onlyTrashed()
             ->orderBy('created_at', 'desc')
             ->paginate(config('LaravelLogger.loggerPaginationPerPage'));
