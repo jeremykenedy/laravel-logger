@@ -32,6 +32,8 @@ class CreateLaravelLoggerActivityTable extends Migration
                 $table->string('locale')->nullable();
                 $table->longText('referer')->nullable();
                 $table->string('methodType')->nullable();
+                $table->unsignedBigInteger('relId')->index()->nullable();
+                $table->string('relModel')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
             });

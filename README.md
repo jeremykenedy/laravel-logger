@@ -39,7 +39,8 @@ Laravel logger is an activity event logger for your Laravel or Lumen application
 |Records activity timestamps|
 |Records activity description|
 |Records activity details (optional)|
-|Records activity user type with crawler detection.|
+|Records model related to the activity (optional)|
+|Records activity user type with crawler detection|
 |Records activity Method|
 |Records activity Route|
 |Records activity Ip Address|
@@ -234,7 +235,7 @@ To use the trait:
         use ActivityLogger;
     ```
 
-3. You can record the activity my calling the traits method:
+3. You can record the activity by calling the traits method:
     ```
         ActivityLogger::activity("Logging this activity.");
     ```
@@ -242,6 +243,11 @@ To use the trait:
     Or as bellow to include extended activity details:
     ```
         ActivityLogger::activity("Logging this activity.", "Additional activity details.");
+    ```
+
+   Or even including the model related to the activity:
+    ```
+        ActivityLogger::activity("Logging this activity.", "Additional activity details.", ["id" => 1, "model" => "App\Models\User"]);
     ```
 
 ### Routes
