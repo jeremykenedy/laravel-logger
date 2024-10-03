@@ -253,7 +253,13 @@ if (request()->is('activity/cleared')) {
     </table>
 </div>
 
-@if(config('LaravelLogger.loggerPaginationEnabled'))
+@if(config('LaravelLogger.loggerCursorPaginationEnabled'))
+    <div class="text-center">
+        <div class="d-flex justify-content-center">
+            {!! $activities->links() !!}
+        </div>
+    </div>
+@elseif(config('LaravelLogger.loggerPaginationEnabled'))
     <div class="text-center">
         <div class="d-flex justify-content-center">
             {!! $activities->links('vendor.pagination.bootstrap-4') !!}

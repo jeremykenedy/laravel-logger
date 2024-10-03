@@ -339,9 +339,11 @@
                         <ul class="list-group">
                             <li class="list-group-item list-group-item-info">
                                 {!! trans('LaravelLogger::laravel-logger.drilldown.title-user-activity') !!}
-                                <span class="badge">
-                                    {{ $totalUserActivities }} {!! trans('LaravelLogger::laravel-logger.dashboard.subtitle') !!}
-                                </span>
+                                @if(! config('LaravelLogger.loggerCursorPaginationEnabled'))
+                                    <span class="badge">
+                                        {{ $totalUserActivities }} {!! trans('LaravelLogger::laravel-logger.dashboard.subtitle') !!}
+                                    </span>
+                                @endif
                             </li>
                             <li class="list-group-item">
                                 @include('LaravelLogger::logger.partials.activity-table', ['activities' => $userActivities])
