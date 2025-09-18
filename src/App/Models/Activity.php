@@ -55,6 +55,8 @@ class Activity extends Model
         'locale',
         'referer',
         'methodType',
+        'relId',
+        'relModel',
     ];
 
     /**
