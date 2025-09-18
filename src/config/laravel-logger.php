@@ -176,4 +176,8 @@ return [
     // LiveSearch for scalability
     'enableLiveSearch'          => env('LARAVEL_LOGGER_LIVE_SEARCH_ENABLED', true),
 
+    // GeoPlugin for IP lookup
+    'enableGeoPlugin'           => env('LARAVEL_LOGGER_GEO_PLUGIN_ENABLED', true),
+    'geoPluginUrl'              => env('LARAVEL_LOGGER_GEO_PLUGIN_URL', 'http://www.geoplugin.net/json.gp?ip='),
+
 ];
