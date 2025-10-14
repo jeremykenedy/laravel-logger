@@ -54,7 +54,13 @@ class LaravelLoggerServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->app['router']->middlewareGroup('activity', [LogActivity::class]);
-        $this->loadTranslationsFrom(__DIR__.'/resources/lang/', 'LaravelLogger');
+        
+        // Load translations from new Laravel 9+ structure if available, fallback to old structure
+        if (is_dir(__DIR__.'/lang/')) {
+            $this->loadTranslationsFrom(__DIR__.'/lang/', 'LaravelLogger');
+        } else {
+            $this->loadTranslationsFrom(__DIR__.'/resources/lang/', 'LaravelLogger');
+        }
     }
 
     /**
@@ -117,8 +123,22 @@ class LaravelLoggerServiceProvider extends ServiceProvider
             __DIR__.'/resources/views' => base_path('resources/views/vendor/'.$publishTag),
         ], $publishTag);
 
-        $this->publishes([
-            __DIR__.'/resources/lang' => base_path('resources/lang/vendor/'.$publishTag),
-        ], $publishTag);
+        // Publish language files to Laravel 9+ structure if available, fallback to old structure
+        if (is_dir(__DIR__.'/lang/')) {
+            // Laravel 9+ structure
+            $this->publishes([
+                __DIR__.'/lang' => base_path('lang/vendor/'.$publishTag),
+            ], $publishTag);
+            
+            // Also publish to old structure for backward compatibility
+            $this->publishes([
+                __DIR__.'/lang' => base_path('resources/lang/vendor/'.$publishTag),
+            ], $publishTag.'-legacy');
+        } else {
+            // Old structure fallback
+            $this->publishes([
+                __DIR__.'/resources/lang' => base_path('resources/lang/vendor/'.$publishTag),
+            ], $publishTag);
+        }
     }
 }
