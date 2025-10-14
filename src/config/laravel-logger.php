@@ -51,6 +51,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Laravel Logger Date Filtering Enable/Disable
+    |--------------------------------------------------------------------------
+    */
+    'enableDateFiltering' => env('LARAVEL_LOGGER_ENABLE_DATE_FILTERING', true),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Laravel Logger Export Enable/Disable
+    |--------------------------------------------------------------------------
+    */
+    'enableExport'      => env('LARAVEL_LOGGER_ENABLE_EXPORT', true),
+
+    /*
+    |--------------------------------------------------------------------------
     | Laravel Logger Search Parameters
     |--------------------------------------------------------------------------
     */
@@ -64,7 +78,7 @@ return [
     */
 
     'defaultActivityModel' => env('LARAVEL_LOGGER_ACTIVITY_MODEL', 'jeremykenedy\LaravelLogger\App\Models\Activity'),
-    'defaultUserModel'     => env('LARAVEL_LOGGER_USER_MODEL', 'App\User'),
+    'defaultUserModel'     => env('LARAVEL_LOGGER_USER_MODEL', 'App\Models\User'),
 
     /*
     |--------------------------------------------------------------------------

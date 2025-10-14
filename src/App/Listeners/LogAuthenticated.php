@@ -22,11 +22,9 @@ class LogAuthenticated
     /**
      * Handle ANY authenticated event.
      *
-     * @param Authenticated $event
      *
-     * @return void
      */
-    public function handle(Authenticated $event)
+    public function handle(Authenticated $event): void
     {
         if (config('LaravelLogger.logAllAuthEvents')) {
             $this->activity(trans('LaravelLogger::laravel-logger.listenerTypes.auth'));

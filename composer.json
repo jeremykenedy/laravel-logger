@@ -39,5 +39,10 @@
     "config": {
         "sort-packages": true
     },
-    "minimum-stability": "stable"
+    "minimum-stability": "stable",
+    "require-dev": {
+        "larastan/larastan": "^3.7",
+        "rector/rector": "^2.2",
+        "rector/rector-laravel": "^2.1"
+    }
 }

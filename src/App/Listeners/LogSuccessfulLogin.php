@@ -22,11 +22,9 @@ class LogSuccessfulLogin
     /**
      * Handle the event.
      *
-     * @param Login $event
      *
-     * @return void
      */
-    public function handle(Login $event)
+    public function handle(Login $event): void
     {
         if (config('LaravelLogger.logSuccessfulLogin')) {
             $this->activity(trans('LaravelLogger::laravel-logger.listenerTypes.login'));

@@ -22,11 +22,9 @@ class LogSuccessfulLogout
     /**
      * Handle the event.
      *
-     * @param Logout $event
      *
-     * @return void
      */
-    public function handle(Logout $event)
+    public function handle(Logout $event): void
     {
         if (config('LaravelLogger.logSuccessfulLogout')) {
             $this->activity(trans('LaravelLogger::laravel-logger.listenerTypes.logout'));

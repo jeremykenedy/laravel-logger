@@ -12,13 +12,6 @@ class LaravelLoggerServiceProvider extends ServiceProvider
     const DISABLE_DEFAULT_ROUTES_CONFIG = 'laravel-logger.disableRoutes';
 
     /**
-     * Indicates if loading of the provider is deferred.
-     *
-     * @var bool
-     */
-    protected $defer = false;
-
-    /**
      * The event listener mappings for the applications auth scafolding.
      *
      * @var array
@@ -57,21 +50,17 @@ class LaravelLoggerServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap the application services.
-     *
-     * @return void
      */
-    public function boot(Router $router)
+    public function boot(): void
     {
-        $router->middlewareGroup('activity', [LogActivity::class]);
+        $this->app['router']->middlewareGroup('activity', [LogActivity::class]);
         $this->loadTranslationsFrom(__DIR__.'/resources/lang/', 'LaravelLogger');
     }
 
     /**
      * Register the application services.
-     *
-     * @return void
      */
-    public function register()
+    public function register(): void
     {
         if (file_exists(config_path('laravel-logger.php'))) {
             $this->mergeConfigFrom(config_path('laravel-logger.php'), 'LaravelLogger');
@@ -102,28 +91,21 @@ class LaravelLoggerServiceProvider extends ServiceProvider
 
     /**
      * Register the list of listeners and events.
-     *
-     * @return void
      */
-    private function registerEventListeners()
+    private function registerEventListeners(): void
     {
         $listeners = $this->getListeners();
-        foreach ($listeners as $listenerKey => $listenerValues) {
-            foreach ($listenerValues as $listenerValue) {
-                Event::listen(
-                    $listenerKey,
-                    $listenerValue
-                );
+        foreach ($listeners as $event => $eventListeners) {
+            foreach ($eventListeners as $listener) {
+                Event::listen($event, $listener);
             }
         }
     }
 
     /**
      * Publish files for Laravel Logger.
-     *
-     * @return void
      */
-    private function publishFiles()
+    private function publishFiles(): void
     {
         $publishTag = 'LaravelLogger';
 

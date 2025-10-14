@@ -67,7 +67,7 @@ trait UserAgentDetails
                 $return['browser'] = 'Internet Explorer';
                 break;
             case '': // IE 11 is a steamy turd (thanks Microsoft...)
-                if (strtolower($return['renderer']) == 'trident') {
+                if (strtolower($return['renderer']) === 'trident') {
                     $return['browser'] = 'Internet Explorer';
                 }
                 break;
@@ -76,7 +76,7 @@ trait UserAgentDetails
         switch (strtolower($return['platform'])) {
             case 'android':    // These browsers claim to be Safari but are BB Mobile
             case 'blackberry': // and Android Mobile
-                if ($return['browser'] == 'Safari' || $return['browser'] == 'Mobile' || $return['browser'] == '') {
+                if (in_array($return['browser'], ['Safari', 'Mobile', ''])) {
                     $return['browser'] = "{$return['platform']} mobile";
                 }
                 break;

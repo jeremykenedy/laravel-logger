@@ -84,7 +84,7 @@ class Activity extends Model
      *
      * @return void
      */
-    public function __construct($attributes = [])
+    public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
         $this->table = config('LaravelLogger.loggerDatabaseTable');
@@ -121,24 +121,16 @@ class Activity extends Model
      * Get a validator for an incoming Request.
      *
      * @param array $merge (rules to optionally merge)
-     *
-     * @return array
      */
-    public static function rules($merge = [])
+    public static function rules($merge = []): array
     {
-        if (app() instanceof \Illuminate\Foundation\Application) {
-            $route_url_check = version_compare(\Illuminate\Foundation\Application::VERSION, '5.8') < 0 ? 'active_url' : 'url';
-        } else {
-            $route_url_check = 'url';
-        }
-
         return array_merge(
             [
                 'description'   => 'required|string',
                 'details'       => 'nullable|string',
                 'userType'      => 'required|string',
                 'userId'        => 'nullable|integer',
-                'route'         => 'nullable|'.$route_url_check,
+                'route'         => 'nullable|url',
                 'ipAddress'     => 'nullable|ip',
                 'userAgent'     => 'nullable|string',
                 'locale'        => 'nullable|string',

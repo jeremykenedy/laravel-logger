@@ -22,11 +22,9 @@ class LogAuthenticationAttempt
     /**
      * Handle the event.
      *
-     * @param Attempting $event
      *
-     * @return void
      */
-    public function handle(Attempting $event)
+    public function handle(Attempting $event): void
     {
         if (config('LaravelLogger.logAuthAttempts')) {
             $this->activity(trans('LaravelLogger::laravel-logger.listenerTypes.attempt'));
