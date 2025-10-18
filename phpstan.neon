@@ -1,0 +1,18 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - src/
+    
+    # The level 8 is the highest level
+    level: 5
+    
+    ignoreErrors:
+        # Ignore errors about missing classes in vendor packages
+        - '#Class .* not found#'
+    
+    excludePaths:
+        - vendor/
+    
+    reportUnmatchedIgnoredErrors: false

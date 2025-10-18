@@ -9,10 +9,8 @@ class CreateLaravelLoggerActivityTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         $activity = new Activity();
         $connection = $activity->getConnectionName();
@@ -20,12 +18,12 @@ class CreateLaravelLoggerActivityTable extends Migration
         $tableCheck = Schema::connection($connection)->hasTable($table);
 
         if (!$tableCheck) {
-            Schema::connection($connection)->create($table, function (Blueprint $table) {
-                $table->increments('id');
+            Schema::connection($connection)->create($table, function (Blueprint $table): void {
+                $table->id();
                 $table->longText('description');
                 $table->longText('details')->nullable();
                 $table->string('userType');
-                $table->integer('userId')->nullable();
+                $table->unsignedBigInteger('userId')->nullable();
                 $table->longText('route')->nullable();
                 $table->ipAddress('ipAddress')->nullable();
                 $table->text('userAgent')->nullable();
@@ -42,10 +40,8 @@ class CreateLaravelLoggerActivityTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         $activity = new Activity();
         $connection = $activity->getConnectionName();

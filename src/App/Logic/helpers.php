@@ -8,7 +8,7 @@ if (!function_exists('showCleanRoutUrl')) {
      *
      * @return echo string
      */
-    function showCleanRoutUrl($link)
+    function showCleanRoutUrl($link): void
     {
         $parsedUrl = parse_url($link);
         $routeUrl = '';

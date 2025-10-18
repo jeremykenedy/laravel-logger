@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.5/phpunit.xsd"
+         bootstrap="vendor/autoload.php"
+         colors="true"
+         processIsolation="false"
+         stopOnFailure="false"
+         cacheResult="false"
+         executionOrder="random"
+         failOnRisky="true"
+         failOnWarning="true"
+         beStrictAboutTestsThatDoNotTestAnything="true"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutTodoAnnotatedTests="true"
+         convertDeprecationsToExceptions="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         forceCoversAnnotation="false"
+         requireCoverageMetadata="false"
+         beStrictAboutCoversAnnotation="false"
+         beStrictAboutResourceUsageDuringSmallTests="false"
+         timeoutForSmallTests="1"
+         timeoutForMediumTests="10"
+         timeoutForLargeTests="60"
+         verbose="true">
+    <testsuites>
+        <testsuite name="Unit">
+            <directory suffix="Test.php">./tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Feature">
+            <directory suffix="Test.php">./tests/Feature</directory>
+        </testsuite>
+        <testsuite name="Integration">
+            <directory suffix="Test.php">./tests/Integration</directory>
+        </testsuite>
+    </testsuites>
+    <source>
+        <include>
+            <directory suffix=".php">./src</directory>
+        </include>
+        <exclude>
+            <directory>./src/resources</directory>
+            <directory>./src/database</directory>
+        </exclude>
+    </source>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="APP_KEY" value="base64:YourAppKeyHere"/>
+        <env name="DB_CONNECTION" value="sqlite"/>
+        <env name="DB_DATABASE" value=":memory:"/>
+        <env name="CACHE_DRIVER" value="array"/>
+        <env name="SESSION_DRIVER" value="array"/>
+        <env name="QUEUE_CONNECTION" value="sync"/>
+        <env name="MAIL_MAILER" value="array"/>
+        <env name="LARAVEL_LOGGER_ENABLE_DATE_FILTERING" value="true"/>
+        <env name="LARAVEL_LOGGER_ENABLE_EXPORT" value="true"/>
+        <env name="LARAVEL_LOGGER_ENABLE_SEARCH" value="true"/>
+        <env name="LARAVEL_LOGGER_LOGGER_PAGINATION_ENABLED" value="false"/>
+        <env name="LARAVEL_LOGGER_LOGGER_PAGINATION_PER_PAGE" value="25"/>
+        <env name="LARAVEL_LOGGER_SEARCH_FIELDS" value="description,user,method,route,ip"/>
+        <env name="LARAVEL_LOGGER_LOGGER_DATABASE_TABLE" value="laravel_logger_activity"/>
+        <env name="LARAVEL_LOGGER_LOGGER_DATABASE_CONNECTION" value="sqlite"/>
+        <env name="LARAVEL_LOGGER_LOGGER_MIDDLEWARE_ENABLED" value="true"/>
+        <env name="LARAVEL_LOGGER_LOGGER_MIDDLEWARE_EXCEPT" value=""/>
+        <env name="LARAVEL_LOGGER_ROLES_ENABLED" value="false"/>
+        <env name="LARAVEL_LOGGER_ROLES_MIDDLWARE" value="role:admin"/>
+        <env name="LARAVEL_LOGGER_LOG_ALL_AUTH_EVENTS" value="false"/>
+        <env name="LARAVEL_LOGGER_LOG_AUTH_ATTEMPTS" value="false"/>
+        <env name="LARAVEL_LOGGER_LOG_FAILED_AUTH_ATTEMPTS" value="true"/>
+        <env name="LARAVEL_LOGGER_LOG_LOCK_OUT" value="true"/>
+        <env name="LARAVEL_LOGGER_LOG_PASSWORD_RESET" value="true"/>
+        <env name="LARAVEL_LOGGER_LOG_SUCCESSFUL_LOGIN" value="true"/>
+        <env name="LARAVEL_LOGGER_LOG_SUCCESSFUL_LOGOUT" value="true"/>
+        <env name="LARAVEL_LOGGER_DISABLE_ROUTES" value="false"/>
+        <env name="LARAVEL_LOGGER_LOGGER_DATATABLES" value="false"/>
+        <env name="LARAVEL_LOGGER_ENABLE_SUB_MENU" value="true"/>
+        <env name="LARAVEL_LOGGER_ENABLE_DRILL_DOWN" value="true"/>
+        <env name="LARAVEL_LOGGER_LOG_DB_ACTIVITY_LOG_FAILURES_TO_FILE" value="true"/>
+        <env name="LARAVEL_LOGGER_ENABLE_PACKAGE_FLASH_MESSAGE_BLADE" value="true"/>
+        <env name="LARAVEL_LOGGER_LAYOUT" value="layouts.app"/>
+        <env name="LARAVEL_LOGGER_BOOTSTRAP_VERSION" value="4"/>
+        <env name="LARAVEL_LOGGER_BOOTSTRAP_CARD_CLASSES" value=""/>
+        <env name="LARAVEL_LOGGER_BLADE_PLACEMENT" value="yield"/>
+        <env name="LARAVEL_LOGGER_BLADE_PLACEMENT_CSS" value="template_linked_css"/>
+        <env name="LARAVEL_LOGGER_BLADE_PLACEMENT_JS" value="footer_scripts"/>
+        <env name="LARAVEL_LOGGER_JQUERY_CDN_ENABLED" value="true"/>
+        <env name="LARAVEL_LOGGER_JQUERY_CDN_URL" value="https://code.jquery.com/jquery-3.2.1.slim.min.js"/>
+        <env name="LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_ENABLED" value="true"/>
+        <env name="LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_URL" value="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+        <env name="LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_ENABLED" value="true"/>
+        <env name="LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_URL" value="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"/>
+        <env name="LARAVEL_LOGGER_POPPER_JS_CDN_ENABLED" value="true"/>
+        <env name="LARAVEL_LOGGER_POPPER_JS_CDN_URL" value="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"/>
+        <env name="LARAVEL_LOGGER_FONT_AWESOME_CDN_ENABLED" value="true"/>
+        <env name="LARAVEL_LOGGER_FONT_AWESOME_CDN_URL" value="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+        <env name="LARAVEL_LOGGER_LIVE_SEARCH_ENABLED" value="true"/>
+    </php>
+</phpunit>

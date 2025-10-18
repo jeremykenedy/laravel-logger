@@ -22,11 +22,9 @@ class LogFailedLogin
     /**
      * Handle the event.
      *
-     * @param Failed $event
      *
-     * @return void
      */
-    public function handle(Failed $event)
+    public function handle(Failed $event): void
     {
         if (config('LaravelLogger.logFailedAuthAttempts')) {
             $this->activity(trans('LaravelLogger::laravel-logger.listenerTypes.failed'));
