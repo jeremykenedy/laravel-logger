@@ -38,7 +38,7 @@ trait IpAddressDetails
             'NA' => 'North America',
             'SA' => 'South America',
         ];
-<<<<<<< HEAD
+        
         if (config('LaravelLogger.enableGeoPlugin', true) && filter_var($ip, FILTER_VALIDATE_IP) && in_array($purpose, $support)) {
             $geopluginUrl = config('LaravelLogger.geoPluginUrl', 'http://www.geoplugin.net/json.gp?ip=');
             $ipdat = @json_decode(file_get_contents($geopluginUrl.$ip));
