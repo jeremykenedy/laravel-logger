@@ -21,8 +21,6 @@ class LogAuthenticationAttempt
 
     /**
      * Handle the event.
-     *
-     *
      */
     public function handle(Attempting $event): void
     {

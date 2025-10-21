@@ -2,7 +2,6 @@
 
 namespace jeremykenedy\LaravelLogger;
 
-use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 use jeremykenedy\LaravelLogger\App\Http\Middleware\LogActivity;
@@ -54,7 +53,7 @@ class LaravelLoggerServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->app['router']->middlewareGroup('activity', [LogActivity::class]);
-        
+
         // Load translations from new Laravel 9+ structure if available, fallback to old structure
         if (is_dir(__DIR__.'/lang/')) {
             $this->loadTranslationsFrom(__DIR__.'/lang/', 'LaravelLogger');
@@ -129,7 +128,7 @@ class LaravelLoggerServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/lang' => base_path('lang/vendor/'.$publishTag),
             ], $publishTag);
-            
+
             // Also publish to old structure for backward compatibility
             $this->publishes([
                 __DIR__.'/lang' => base_path('resources/lang/vendor/'.$publishTag),

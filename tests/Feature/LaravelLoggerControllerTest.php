@@ -2,7 +2,6 @@
 
 namespace jeremykenedy\LaravelLogger\Tests\Feature;
 
-use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\Request;
@@ -13,7 +12,8 @@ use jeremykenedy\LaravelLogger\Tests\TestCase;
 
 class LaravelLoggerControllerTest extends TestCase
 {
-    use RefreshDatabase, WithFaker;
+    use RefreshDatabase;
+    use WithFaker;
 
     protected $controller;
     protected $user;
@@ -21,15 +21,15 @@ class LaravelLoggerControllerTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $this->controller = new LaravelLoggerController();
-        
+
         // Create a test user
         $this->user = \App\Models\User::factory()->create([
             'email' => 'test@example.com',
-            'name' => 'Test User'
+            'name'  => 'Test User',
         ]);
-        
+
         // Set up configuration
         Config::set('LaravelLogger.defaultActivityModel', Activity::class);
         Config::set('LaravelLogger.defaultUserModel', \App\Models\User::class);
@@ -46,26 +46,26 @@ class LaravelLoggerControllerTest extends TestCase
         // Create test activities with different dates
         $today = Activity::factory()->create([
             'description' => 'Today activity',
-            'created_at' => now(),
-            'userId' => $this->user->id
+            'created_at'  => now(),
+            'userId'      => $this->user->id,
         ]);
 
         $yesterday = Activity::factory()->create([
             'description' => 'Yesterday activity',
-            'created_at' => now()->subDay(),
-            'userId' => $this->user->id
+            'created_at'  => now()->subDay(),
+            'userId'      => $this->user->id,
         ]);
 
         $lastWeek = Activity::factory()->create([
             'description' => 'Last week activity',
-            'created_at' => now()->subWeek(),
-            'userId' => $this->user->id
+            'created_at'  => now()->subWeek(),
+            'userId'      => $this->user->id,
         ]);
 
         // Test filtering by date range
         $request = new Request([
             'date_from' => now()->subDay()->format('Y-m-d'),
-            'date_to' => now()->format('Y-m-d')
+            'date_to'   => now()->format('Y-m-d'),
         ]);
 
         $activities = Activity::orderBy('created_at', 'desc');
@@ -84,20 +84,20 @@ class LaravelLoggerControllerTest extends TestCase
         // Create test activities
         $today = Activity::factory()->create([
             'description' => 'Today activity',
-            'created_at' => now(),
-            'userId' => $this->user->id
+            'created_at'  => now(),
+            'userId'      => $this->user->id,
         ]);
 
         $yesterday = Activity::factory()->create([
             'description' => 'Yesterday activity',
-            'created_at' => now()->subDay(),
-            'userId' => $this->user->id
+            'created_at'  => now()->subDay(),
+            'userId'      => $this->user->id,
         ]);
 
         $lastWeek = Activity::factory()->create([
             'description' => 'Last week activity',
-            'created_at' => now()->subWeek(),
-            'userId' => $this->user->id
+            'created_at'  => now()->subWeek(),
+            'userId'      => $this->user->id,
         ]);
 
         // Test 'today' period
@@ -127,14 +127,14 @@ class LaravelLoggerControllerTest extends TestCase
         // Create activities
         $recent = Activity::factory()->create([
             'description' => 'Recent activity',
-            'created_at' => now()->subDays(15),
-            'userId' => $this->user->id
+            'created_at'  => now()->subDays(15),
+            'userId'      => $this->user->id,
         ]);
 
         $old = Activity::factory()->create([
             'description' => 'Old activity',
-            'created_at' => now()->subDays(45),
-            'userId' => $this->user->id
+            'created_at'  => now()->subDays(45),
+            'userId'      => $this->user->id,
         ]);
 
         $request = new Request(['period' => 'last_30_days']);
@@ -153,14 +153,14 @@ class LaravelLoggerControllerTest extends TestCase
         // Create activities
         $thisYear = Activity::factory()->create([
             'description' => 'This year activity',
-            'created_at' => now()->subMonths(6),
-            'userId' => $this->user->id
+            'created_at'  => now()->subMonths(6),
+            'userId'      => $this->user->id,
         ]);
 
         $lastYear = Activity::factory()->create([
             'description' => 'Last year activity',
-            'created_at' => now()->subYear()->subMonth(),
-            'userId' => $this->user->id
+            'created_at'  => now()->subYear()->subMonth(),
+            'userId'      => $this->user->id,
         ]);
 
         $request = new Request(['period' => 'last_year']);
@@ -180,8 +180,8 @@ class LaravelLoggerControllerTest extends TestCase
 
         $activity = Activity::factory()->create([
             'description' => 'Test activity',
-            'created_at' => now()->subYear(),
-            'userId' => $this->user->id
+            'created_at'  => now()->subYear(),
+            'userId'      => $this->user->id,
         ]);
 
         $request = new Request(['period' => 'today']);
@@ -200,24 +200,24 @@ class LaravelLoggerControllerTest extends TestCase
         // Create test activities
         $activity1 = Activity::factory()->create([
             'description' => 'First activity',
-            'userId' => $this->user->id,
-            'route' => 'https://example.com/test1',
-            'ipAddress' => '192.168.1.1',
-            'userAgent' => 'Mozilla/5.0',
-            'methodType' => 'GET'
+            'userId'      => $this->user->id,
+            'route'       => 'https://example.com/test1',
+            'ipAddress'   => '192.168.1.1',
+            'userAgent'   => 'Mozilla/5.0',
+            'methodType'  => 'GET',
         ]);
 
         $activity2 = Activity::factory()->create([
             'description' => 'Second activity',
-            'userId' => $this->user->id,
-            'route' => 'https://example.com/test2',
-            'ipAddress' => '192.168.1.2',
-            'userAgent' => 'Chrome/91.0',
-            'methodType' => 'POST'
+            'userId'      => $this->user->id,
+            'route'       => 'https://example.com/test2',
+            'ipAddress'   => '192.168.1.2',
+            'userAgent'   => 'Chrome/91.0',
+            'methodType'  => 'POST',
         ]);
 
         $request = new Request(['format' => 'csv']);
-        
+
         $response = $this->controller->exportActivityLog($request);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -232,15 +232,15 @@ class LaravelLoggerControllerTest extends TestCase
         // Create test activities
         $activity = Activity::factory()->create([
             'description' => 'Test activity',
-            'userId' => $this->user->id,
-            'route' => 'https://example.com/test',
-            'ipAddress' => '192.168.1.1',
-            'userAgent' => 'Mozilla/5.0',
-            'methodType' => 'GET'
+            'userId'      => $this->user->id,
+            'route'       => 'https://example.com/test',
+            'ipAddress'   => '192.168.1.1',
+            'userAgent'   => 'Mozilla/5.0',
+            'methodType'  => 'GET',
         ]);
 
         $request = new Request(['format' => 'json']);
-        
+
         $response = $this->controller->exportActivityLog($request);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -250,7 +250,7 @@ class LaravelLoggerControllerTest extends TestCase
 
         $content = $response->getContent();
         $data = json_decode($content, true);
-        
+
         $this->assertIsArray($data);
         $this->assertCount(1, $data);
         $this->assertEquals($activity->id, $data[0]['id']);
@@ -263,15 +263,15 @@ class LaravelLoggerControllerTest extends TestCase
         // Create test activities
         $activity = Activity::factory()->create([
             'description' => 'Test activity',
-            'userId' => $this->user->id,
-            'route' => 'https://example.com/test',
-            'ipAddress' => '192.168.1.1',
-            'userAgent' => 'Mozilla/5.0',
-            'methodType' => 'GET'
+            'userId'      => $this->user->id,
+            'route'       => 'https://example.com/test',
+            'ipAddress'   => '192.168.1.1',
+            'userAgent'   => 'Mozilla/5.0',
+            'methodType'  => 'GET',
         ]);
 
         $request = new Request(['format' => 'excel']);
-        
+
         $response = $this->controller->exportActivityLog($request);
 
         $this->assertEquals(200, $response->getStatusCode());
@@ -284,7 +284,7 @@ class LaravelLoggerControllerTest extends TestCase
     public function it_returns_error_for_invalid_export_format()
     {
         $request = new Request(['format' => 'invalid']);
-        
+
         $response = $this->controller->exportActivityLog($request);
 
         $this->assertEquals(302, $response->getStatusCode());
@@ -296,35 +296,35 @@ class LaravelLoggerControllerTest extends TestCase
         // Create activities with different dates
         $today = Activity::factory()->create([
             'description' => 'Today activity',
-            'created_at' => now(),
-            'userId' => $this->user->id
+            'created_at'  => now(),
+            'userId'      => $this->user->id,
         ]);
 
         $yesterday = Activity::factory()->create([
             'description' => 'Yesterday activity',
-            'created_at' => now()->subDay(),
-            'userId' => $this->user->id
+            'created_at'  => now()->subDay(),
+            'userId'      => $this->user->id,
         ]);
 
         $lastWeek = Activity::factory()->create([
             'description' => 'Last week activity',
-            'created_at' => now()->subWeek(),
-            'userId' => $this->user->id
+            'created_at'  => now()->subWeek(),
+            'userId'      => $this->user->id,
         ]);
 
         // Export only today's activities
         $request = new Request([
             'format' => 'json',
-            'period' => 'today'
+            'period' => 'today',
         ]);
-        
+
         $response = $this->controller->exportActivityLog($request);
 
         $this->assertEquals(200, $response->getStatusCode());
-        
+
         $content = $response->getContent();
         $data = json_decode($content, true);
-        
+
         $this->assertCount(1, $data);
         $this->assertEquals($today->id, $data[0]['id']);
     }
@@ -335,32 +335,32 @@ class LaravelLoggerControllerTest extends TestCase
         // Create activities with different descriptions
         $loginActivity = Activity::factory()->create([
             'description' => 'User logged in',
-            'userId' => $this->user->id
+            'userId'      => $this->user->id,
         ]);
 
         $logoutActivity = Activity::factory()->create([
             'description' => 'User logged out',
-            'userId' => $this->user->id
+            'userId'      => $this->user->id,
         ]);
 
         $viewActivity = Activity::factory()->create([
             'description' => 'User viewed page',
-            'userId' => $this->user->id
+            'userId'      => $this->user->id,
         ]);
 
         // Export only login activities
         $request = new Request([
-            'format' => 'json',
-            'description' => 'logged in'
+            'format'      => 'json',
+            'description' => 'logged in',
         ]);
-        
+
         $response = $this->controller->exportActivityLog($request);
 
         $this->assertEquals(200, $response->getStatusCode());
-        
+
         $content = $response->getContent();
         $data = json_decode($content, true);
-        
+
         $this->assertCount(1, $data);
         $this->assertEquals($loginActivity->id, $data[0]['id']);
     }
@@ -371,7 +371,7 @@ class LaravelLoggerControllerTest extends TestCase
         Config::set('LaravelLogger.enableExport', false);
 
         $request = new Request(['format' => 'csv']);
-        
+
         $response = $this->controller->exportActivityLog($request);
 
         // Should still work but might have different behavior
@@ -383,15 +383,15 @@ class LaravelLoggerControllerTest extends TestCase
     {
         $activity = Activity::factory()->create([
             'description' => 'Test activity',
-            'userId' => $this->user->id
+            'userId'      => $this->user->id,
         ]);
 
         $request = new Request(['format' => 'json']);
-        
+
         $response = $this->controller->exportActivityLog($request);
         $content = $response->getContent();
         $data = json_decode($content, true);
-        
+
         $this->assertArrayHasKey('user_email', $data[0]);
         $this->assertEquals($this->user->email, $data[0]['user_email']);
     }
@@ -401,15 +401,15 @@ class LaravelLoggerControllerTest extends TestCase
     {
         $activity = Activity::factory()->create([
             'description' => 'Guest activity',
-            'userId' => null
+            'userId'      => null,
         ]);
 
         $request = new Request(['format' => 'json']);
-        
+
         $response = $this->controller->exportActivityLog($request);
         $content = $response->getContent();
         $data = json_decode($content, true);
-        
+
         $this->assertArrayHasKey('user_email', $data[0]);
         $this->assertNull($data[0]['user_email']);
     }
@@ -419,15 +419,15 @@ class LaravelLoggerControllerTest extends TestCase
     {
         $activity = Activity::factory()->create([
             'description' => 'Test activity',
-            'userId' => $this->user->id
+            'userId'      => $this->user->id,
         ]);
 
         $request1 = new Request(['format' => 'csv']);
         $response1 = $this->controller->exportActivityLog($request1);
-        
+
         // Wait a second to ensure different timestamps
         sleep(1);
-        
+
         $request2 = new Request(['format' => 'csv']);
         $response2 = $this->controller->exportActivityLog($request2);
 

@@ -21,8 +21,6 @@ class LogLockout
 
     /**
      * Handle the event.
-     *
-     *
      */
     public function handle(Lockout $event): void
     {

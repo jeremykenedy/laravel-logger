@@ -194,30 +194,30 @@ return [
     |--------------------------------------------------------------------------
     */
     'filterAndExport' => 'Filter and Export',
-    'fromDate' => 'From Date',
-    'toDate' => 'To Date',
-    'quickPeriod' => 'Quick Period',
-    'allTime' => 'All Time',
-    'today' => 'Today',
-    'yesterday' => 'Yesterday',
-    'last7Days' => 'Last 7 Days',
-    'last30Days' => 'Last 30 Days',
-    'last3Months' => 'Last 3 Months',
-    'last6Months' => 'Last 6 Months',
-    'lastYear' => 'Last Year',
-    'filter' => 'Filter',
-    'clearFilters' => 'Clear Filters',
+    'fromDate'        => 'From Date',
+    'toDate'          => 'To Date',
+    'quickPeriod'     => 'Quick Period',
+    'allTime'         => 'All Time',
+    'today'           => 'Today',
+    'yesterday'       => 'Yesterday',
+    'last7Days'       => 'Last 7 Days',
+    'last30Days'      => 'Last 30 Days',
+    'last3Months'     => 'Last 3 Months',
+    'last6Months'     => 'Last 6 Months',
+    'lastYear'        => 'Last Year',
+    'filter'          => 'Filter',
+    'clearFilters'    => 'Clear Filters',
 
     /*
     |--------------------------------------------------------------------------
     | Laravel Logger Language Lines - Export
     |--------------------------------------------------------------------------
     */
-    'exportData' => 'Export Data',
-    'exportCSV' => 'Export CSV',
-    'exportJSON' => 'Export JSON',
-    'exportExcel' => 'Export Excel',
+    'exportData'        => 'Export Data',
+    'exportCSV'         => 'Export CSV',
+    'exportJSON'        => 'Export JSON',
+    'exportExcel'       => 'Export Excel',
     'searchDescription' => 'Search by description...',
-    'allUsers' => 'All Users',
+    'allUsers'          => 'All Users',
 
 ];

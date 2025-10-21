@@ -21,8 +21,6 @@ class LogSuccessfulLogout
 
     /**
      * Handle the event.
-     *
-     *
      */
     public function handle(Logout $event): void
     {
