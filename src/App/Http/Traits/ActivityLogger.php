@@ -17,7 +17,6 @@ trait ActivityLogger
      * @param null $details
      * @param ?array $rel
      *
-     * @return void
      */
     public function activity($description = null, $details = null, array $rel = null)
     {
@@ -27,7 +26,7 @@ trait ActivityLogger
         if (Auth::check()) {
             $userType = trans('LaravelLogger::laravel-logger.userTypes.registered');
             $userIdField = config('LaravelLogger.defaultUserIDField');
-            $userId = Request::user()->{$userIdField};
+            $userId = Auth::user()->{$userIdField};
         }
 
         if (Crawler::isCrawler()) {
@@ -106,11 +105,9 @@ trait ActivityLogger
     /**
      * Store activity entry to database.
      *
-     * @param array $data
      *
-     * @return void
      */
-    private static function storeActivity($data)
+    private static function storeActivity(array $data): void
     {
         config('LaravelLogger.defaultActivityModel')::create([
             'description'   => $data['description'],
@@ -139,8 +136,8 @@ trait ActivityLogger
     private static function prepareErrorMessage($validatorErrors, $data)
     {
         $errors = json_decode(json_encode($validatorErrors, true));
-        array_walk($errors, function (&$value, $key) use ($data) {
-            array_push($value, "Value: $data[$key]");
+        array_walk($errors, function (array &$value, $key) use ($data): void {
+            $value[] = "Value: $data[$key]";
         });
 
         return json_encode($errors, true);

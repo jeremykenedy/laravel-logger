@@ -13,12 +13,10 @@ class LogActivity
     /**
      * Handle an incoming request.
      *
-     * @param Request  $request
-     * @param \Closure $next
      *
      * @return mixed
      */
-    public function handle($request, Closure $next, $description = null)
+    public function handle(Request $request, Closure $next, ?string $description = null)
     {
         if (config('LaravelLogger.loggerMiddlewareEnabled') && $this->shouldLog($request)) {
             $this->activity($description);
@@ -29,12 +27,8 @@ class LogActivity
 
     /**
      * Determine if the request has a URI that should log.
-     *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return bool
      */
-    protected function shouldLog($request)
+    protected function shouldLog(Request $request): bool
     {
         foreach (config('LaravelLogger.loggerMiddlewareExcept', []) as $except) {
             if ($except !== '/') {

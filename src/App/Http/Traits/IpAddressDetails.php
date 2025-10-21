@@ -38,10 +38,11 @@ trait IpAddressDetails
             'NA' => 'North America',
             'SA' => 'South America',
         ];
+        
         if (config('LaravelLogger.enableGeoPlugin', true) && filter_var($ip, FILTER_VALIDATE_IP) && in_array($purpose, $support)) {
             $geopluginUrl = config('LaravelLogger.geoPluginUrl', 'http://www.geoplugin.net/json.gp?ip=');
             $ipdat = @json_decode(file_get_contents($geopluginUrl.$ip));
-            if (@strlen(trim($ipdat->geoplugin_countryCode)) == 2) {
+            if (@strlen(trim($ipdat->geoplugin_countryCode)) === 2) {
                 switch ($purpose) {
                     case 'location':
                         $output = [
@@ -73,8 +74,6 @@ trait IpAddressDetails
                         $output = @$ipdat->geoplugin_city;
                         break;
                     case 'state':
-                        $output = @$ipdat->geoplugin_regionName;
-                        break;
                     case 'region':
                         $output = @$ipdat->geoplugin_regionName;
                         break;
