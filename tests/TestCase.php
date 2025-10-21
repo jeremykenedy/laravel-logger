@@ -12,7 +12,7 @@ abstract class TestCase extends BaseTestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         // Set up default configuration for testing
         Config::set('LaravelLogger.defaultActivityModel', \jeremykenedy\LaravelLogger\App\Models\Activity::class);
         Config::set('LaravelLogger.defaultUserModel', \App\Models\User::class);

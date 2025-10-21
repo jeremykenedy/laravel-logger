@@ -21,8 +21,6 @@ class LogAuthenticated
 
     /**
      * Handle ANY authenticated event.
-     *
-     *
      */
     public function handle(Authenticated $event): void
     {

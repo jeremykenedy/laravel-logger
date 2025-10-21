@@ -74,12 +74,12 @@ class LaravelLoggerController extends BaseController
             $totalActivities = 0;
         } elseif (config('LaravelLogger.loggerPaginationEnabled')) {
             $activities = config('LaravelLogger.defaultActivityModel')::orderBy('created_at', 'desc');
-            
+
             // Apply date filtering
             if (config('LaravelLogger.enableDateFiltering')) {
                 $activities = $this->applyDateFilter($activities, $request);
             }
-            
+
             if (config('LaravelLogger.enableSearch')) {
                 $activities = $this->searchActivityLog($activities, $request);
             }
@@ -143,23 +143,23 @@ class LaravelLoggerController extends BaseController
         } elseif (config('LaravelLogger.loggerPaginationEnabled')) {
             $userActivities = config('LaravelLogger.defaultActivityModel')::where('userId', $activity->userId)
             ->orderBy('created_at', 'desc');
-            
+
             // Apply date filtering
             if (config('LaravelLogger.enableDateFiltering')) {
                 $userActivities = $this->applyDateFilter($userActivities, $request);
             }
-            
+
             $userActivities = $userActivities->paginate(config('LaravelLogger.loggerPaginationPerPage'));
             $totalUserActivities = $userActivities->total();
         } else {
             $userActivities = config('LaravelLogger.defaultActivityModel')::where('userId', $activity->userId)
             ->orderBy('created_at', 'desc');
-            
+
             // Apply date filtering
             if (config('LaravelLogger.enableDateFiltering')) {
                 $userActivities = $this->applyDateFilter($userActivities, $request);
             }
-            
+
             $userActivities = $userActivities->get();
             $totalUserActivities = $userActivities->count();
         }
@@ -212,23 +212,23 @@ class LaravelLoggerController extends BaseController
         } elseif (config('LaravelLogger.loggerPaginationEnabled')) {
             $activities = config('LaravelLogger.defaultActivityModel')::onlyTrashed()
             ->orderBy('created_at', 'desc');
-            
+
             // Apply date filtering
             if (config('LaravelLogger.enableDateFiltering')) {
                 $activities = $this->applyDateFilter($activities, $request);
             }
-            
+
             $activities = $activities->paginate(config('LaravelLogger.loggerPaginationPerPage'));
             $totalActivities = $activities->total();
         } else {
             $activities = config('LaravelLogger.defaultActivityModel')::onlyTrashed()
             ->orderBy('created_at', 'desc');
-            
+
             // Apply date filtering
             if (config('LaravelLogger.enableDateFiltering')) {
                 $activities = $this->applyDateFilter($activities, $request);
             }
-            
+
             $activities = $activities->get();
             $totalActivities = $activities->count();
         }
@@ -324,6 +324,7 @@ class LaravelLoggerController extends BaseController
      * Apply date filtering to the activity log query.
      *
      * @param mixed $query
+     *
      * @return mixed
      */
     private function applyDateFilter($query, Request $request)
@@ -458,20 +459,21 @@ class LaravelLoggerController extends BaseController
      * Export activities to CSV format.
      *
      * @param mixed $activities
+     *
      * @return \Illuminate\Http\Response
      */
     private function exportToCsv($activities)
     {
-        $filename = 'activity_log_' . now()->format('Y-m-d_H-i-s') . '.csv';
-        
+        $filename = 'activity_log_'.now()->format('Y-m-d_H-i-s').'.csv';
+
         $headers = [
-            'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+            'Content-Type'        => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="'.$filename.'"',
         ];
 
-        $callback = function() use ($activities): void {
+        $callback = function () use ($activities): void {
             $file = fopen('php://output', 'w');
-            
+
             // CSV Headers
             fputcsv($file, [
                 'ID',
@@ -487,7 +489,7 @@ class LaravelLoggerController extends BaseController
                 'Referer',
                 'Method Type',
                 'Created At',
-                'Updated At'
+                'Updated At',
             ]);
 
             // CSV Data
@@ -506,7 +508,7 @@ class LaravelLoggerController extends BaseController
                     $activity->referer,
                     $activity->methodType,
                     $activity->created_at,
-                    $activity->updated_at
+                    $activity->updated_at,
                 ]);
             }
 
@@ -520,36 +522,37 @@ class LaravelLoggerController extends BaseController
      * Export activities to JSON format.
      *
      * @param mixed $activities
+     *
      * @return \Illuminate\Http\Response
      */
     private function exportToJson($activities)
     {
-        $filename = 'activity_log_' . now()->format('Y-m-d_H-i-s') . '.json';
-        
+        $filename = 'activity_log_'.now()->format('Y-m-d_H-i-s').'.json';
+
         $data = $activities->map(function ($activity): array {
             return [
-                'id' => $activity->id,
-                'description' => $activity->description,
-                'details' => $activity->details,
-                'user_type' => $activity->userType,
-                'user_id' => $activity->userId,
-                'user_email' => $activity->userDetails ? $activity->userDetails->email : null,
-                'route' => $activity->route,
-                'ip_address' => $activity->ipAddress,
-                'user_agent' => $activity->userAgent,
-                'locale' => $activity->locale,
-                'referer' => $activity->referer,
-                'method_type' => $activity->methodType,
-                'created_at' => $activity->created_at,
-                'updated_at' => $activity->updated_at,
-                'time_passed' => $activity->timePassed,
+                'id'                 => $activity->id,
+                'description'        => $activity->description,
+                'details'            => $activity->details,
+                'user_type'          => $activity->userType,
+                'user_id'            => $activity->userId,
+                'user_email'         => $activity->userDetails ? $activity->userDetails->email : null,
+                'route'              => $activity->route,
+                'ip_address'         => $activity->ipAddress,
+                'user_agent'         => $activity->userAgent,
+                'locale'             => $activity->locale,
+                'referer'            => $activity->referer,
+                'method_type'        => $activity->methodType,
+                'created_at'         => $activity->created_at,
+                'updated_at'         => $activity->updated_at,
+                'time_passed'        => $activity->timePassed,
                 'user_agent_details' => $activity->userAgentDetails,
-                'lang_details' => $activity->langDetails,
+                'lang_details'       => $activity->langDetails,
             ];
         });
 
         return response()->json($data, 200, [
-            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+            'Content-Disposition' => 'attachment; filename="'.$filename.'"',
         ]);
     }
 
@@ -557,22 +560,23 @@ class LaravelLoggerController extends BaseController
      * Export activities to Excel format.
      *
      * @param mixed $activities
+     *
      * @return \Illuminate\Http\Response
      */
     private function exportToExcel($activities)
     {
-        $filename = 'activity_log_' . now()->format('Y-m-d_H-i-s') . '.xlsx';
-        
+        $filename = 'activity_log_'.now()->format('Y-m-d_H-i-s').'.xlsx';
+
         // For Excel export, we'll use a simple CSV format with .xlsx extension
         // In a real implementation, you might want to use Laravel Excel package
         $headers = [
-            'Content-Type' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+            'Content-Type'        => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'Content-Disposition' => 'attachment; filename="'.$filename.'"',
         ];
 
-        $callback = function() use ($activities): void {
+        $callback = function () use ($activities): void {
             $file = fopen('php://output', 'w');
-            
+
             // Excel Headers
             fputcsv($file, [
                 'ID',
@@ -588,7 +592,7 @@ class LaravelLoggerController extends BaseController
                 'Referer',
                 'Method Type',
                 'Created At',
-                'Updated At'
+                'Updated At',
             ]);
 
             // Excel Data
@@ -607,7 +611,7 @@ class LaravelLoggerController extends BaseController
                     $activity->referer,
                     $activity->methodType,
                     $activity->created_at,
-                    $activity->updated_at
+                    $activity->updated_at,
                 ]);
             }
 

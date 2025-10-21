@@ -21,8 +21,6 @@ class LogPasswordReset
 
     /**
      * Handle the event.
-     *
-     *
      */
     public function handle(PasswordReset $event): void
     {

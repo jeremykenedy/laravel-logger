@@ -21,8 +21,6 @@ class LogFailedLogin
 
     /**
      * Handle the event.
-     *
-     *
      */
     public function handle(Failed $event): void
     {

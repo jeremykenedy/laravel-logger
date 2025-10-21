@@ -19,9 +19,9 @@ class DateFilteringTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        
+
         $this->controller = new LaravelLoggerController();
-        
+
         Config::set('LaravelLogger.defaultActivityModel', Activity::class);
         Config::set('LaravelLogger.enableDateFiltering', true);
     }
@@ -30,20 +30,20 @@ class DateFilteringTest extends TestCase
     public function it_filters_activities_by_exact_date()
     {
         $specificDate = Carbon::parse('2024-01-15');
-        
+
         $activity1 = Activity::factory()->create([
-            'created_at' => $specificDate,
-            'description' => 'Activity on specific date'
+            'created_at'  => $specificDate,
+            'description' => 'Activity on specific date',
         ]);
 
         $activity2 = Activity::factory()->create([
-            'created_at' => $specificDate->addDay(),
-            'description' => 'Activity on next day'
+            'created_at'  => $specificDate->addDay(),
+            'description' => 'Activity on next day',
         ]);
 
         $request = new Request([
             'date_from' => '2024-01-15',
-            'date_to' => '2024-01-15'
+            'date_to'   => '2024-01-15',
         ]);
 
         $query = Activity::query();
@@ -61,23 +61,23 @@ class DateFilteringTest extends TestCase
         $endDate = Carbon::parse('2024-01-31');
 
         $activity1 = Activity::factory()->create([
-            'created_at' => $startDate->addDays(5),
-            'description' => 'Activity in range'
+            'created_at'  => $startDate->addDays(5),
+            'description' => 'Activity in range',
         ]);
 
         $activity2 = Activity::factory()->create([
-            'created_at' => $startDate->addDays(10),
-            'description' => 'Another activity in range'
+            'created_at'  => $startDate->addDays(10),
+            'description' => 'Another activity in range',
         ]);
 
         $activity3 = Activity::factory()->create([
-            'created_at' => $endDate->addDays(5),
-            'description' => 'Activity outside range'
+            'created_at'  => $endDate->addDays(5),
+            'description' => 'Activity outside range',
         ]);
 
         $request = new Request([
             'date_from' => '2024-01-01',
-            'date_to' => '2024-01-31'
+            'date_to'   => '2024-01-31',
         ]);
 
         $query = Activity::query();
@@ -94,11 +94,11 @@ class DateFilteringTest extends TestCase
     public function it_filters_activities_by_today_period()
     {
         $today = Activity::factory()->today()->create([
-            'description' => 'Today activity'
+            'description' => 'Today activity',
         ]);
 
         $yesterday = Activity::factory()->yesterday()->create([
-            'description' => 'Yesterday activity'
+            'description' => 'Yesterday activity',
         ]);
 
         $request = new Request(['period' => 'today']);
@@ -115,11 +115,11 @@ class DateFilteringTest extends TestCase
     public function it_filters_activities_by_yesterday_period()
     {
         $today = Activity::factory()->today()->create([
-            'description' => 'Today activity'
+            'description' => 'Today activity',
         ]);
 
         $yesterday = Activity::factory()->yesterday()->create([
-            'description' => 'Yesterday activity'
+            'description' => 'Yesterday activity',
         ]);
 
         $request = new Request(['period' => 'yesterday']);
@@ -137,10 +137,10 @@ class DateFilteringTest extends TestCase
     {
         $today = Activity::factory()->today()->create();
         $threeDaysAgo = Activity::factory()->create([
-            'created_at' => now()->subDays(3)
+            'created_at' => now()->subDays(3),
         ]);
         $tenDaysAgo = Activity::factory()->create([
-            'created_at' => now()->subDays(10)
+            'created_at' => now()->subDays(10),
         ]);
 
         $request = new Request(['period' => 'last_7_days']);
@@ -159,11 +159,11 @@ class DateFilteringTest extends TestCase
     public function it_filters_activities_by_last_30_days_period()
     {
         $recent = Activity::factory()->create([
-            'created_at' => now()->subDays(15)
+            'created_at' => now()->subDays(15),
         ]);
 
         $old = Activity::factory()->create([
-            'created_at' => now()->subDays(45)
+            'created_at' => now()->subDays(45),
         ]);
 
         $request = new Request(['period' => 'last_30_days']);
@@ -180,11 +180,11 @@ class DateFilteringTest extends TestCase
     public function it_filters_activities_by_last_3_months_period()
     {
         $recent = Activity::factory()->create([
-            'created_at' => now()->subMonths(1)
+            'created_at' => now()->subMonths(1),
         ]);
 
         $old = Activity::factory()->create([
-            'created_at' => now()->subMonths(4)
+            'created_at' => now()->subMonths(4),
         ]);
 
         $request = new Request(['period' => 'last_3_months']);
@@ -201,11 +201,11 @@ class DateFilteringTest extends TestCase
     public function it_filters_activities_by_last_6_months_period()
     {
         $recent = Activity::factory()->create([
-            'created_at' => now()->subMonths(3)
+            'created_at' => now()->subMonths(3),
         ]);
 
         $old = Activity::factory()->create([
-            'created_at' => now()->subMonths(8)
+            'created_at' => now()->subMonths(8),
         ]);
 
         $request = new Request(['period' => 'last_6_months']);
@@ -222,11 +222,11 @@ class DateFilteringTest extends TestCase
     public function it_filters_activities_by_last_year_period()
     {
         $recent = Activity::factory()->create([
-            'created_at' => now()->subMonths(6)
+            'created_at' => now()->subMonths(6),
         ]);
 
         $old = Activity::factory()->create([
-            'created_at' => now()->subYear()->subMonth()
+            'created_at' => now()->subYear()->subMonth(),
         ]);
 
         $request = new Request(['period' => 'last_year']);
@@ -275,21 +275,21 @@ class DateFilteringTest extends TestCase
     public function it_combines_date_range_and_period_filters()
     {
         $activity1 = Activity::factory()->create([
-            'created_at' => now()->subDays(5)
+            'created_at' => now()->subDays(5),
         ]);
 
         $activity2 = Activity::factory()->create([
-            'created_at' => now()->subDays(15)
+            'created_at' => now()->subDays(15),
         ]);
 
         $activity3 = Activity::factory()->create([
-            'created_at' => now()->subDays(25)
+            'created_at' => now()->subDays(25),
         ]);
 
         $request = new Request([
             'date_from' => now()->subDays(10)->format('Y-m-d'),
-            'date_to' => now()->format('Y-m-d'),
-            'period' => 'last_30_days'
+            'date_to'   => now()->format('Y-m-d'),
+            'period'    => 'last_30_days',
         ]);
 
         $query = Activity::query();
@@ -305,13 +305,13 @@ class DateFilteringTest extends TestCase
     public function it_preserves_query_order()
     {
         $activity1 = Activity::factory()->create([
-            'created_at' => now()->subDays(1),
-            'description' => 'First activity'
+            'created_at'  => now()->subDays(1),
+            'description' => 'First activity',
         ]);
 
         $activity2 = Activity::factory()->create([
-            'created_at' => now()->subDays(2),
-            'description' => 'Second activity'
+            'created_at'  => now()->subDays(2),
+            'description' => 'Second activity',
         ]);
 
         $request = new Request(['period' => 'last_7_days']);
@@ -333,12 +333,12 @@ class DateFilteringTest extends TestCase
         config(['app.timezone' => 'UTC']);
 
         $activity = Activity::factory()->create([
-            'created_at' => Carbon::parse('2024-01-15 12:00:00', 'UTC')
+            'created_at' => Carbon::parse('2024-01-15 12:00:00', 'UTC'),
         ]);
 
         $request = new Request([
             'date_from' => '2024-01-15',
-            'date_to' => '2024-01-15'
+            'date_to'   => '2024-01-15',
         ]);
 
         $query = Activity::query();

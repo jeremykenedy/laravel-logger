@@ -103,9 +103,9 @@ return [
     | Laravel Logger Pagination Settings
     |--------------------------------------------------------------------------
     */
-    'loggerPaginationEnabled' => env('LARAVEL_LOGGER_PAGINATION_ENABLED', true),
+    'loggerPaginationEnabled'       => env('LARAVEL_LOGGER_PAGINATION_ENABLED', true),
     'loggerCursorPaginationEnabled' => env('LARAVEL_LOGGER_CURSOR_PAGINATION_ENABLED', false),
-    'loggerPaginationPerPage' => env('LARAVEL_LOGGER_PAGINATION_PER_PAGE', 25),
+    'loggerPaginationPerPage'       => env('LARAVEL_LOGGER_PAGINATION_PER_PAGE', 25),
 
     /*
     |--------------------------------------------------------------------------
