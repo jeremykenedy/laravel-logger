@@ -5,8 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 use jeremykenedy\LaravelLogger\App\Models\Activity;
 
-return new class extends Migration
-{
+return new class() extends Migration {
     /**
      * Run the migrations.
      */
@@ -17,16 +16,16 @@ return new class extends Migration
         $tableName = $activity->getTableName();
         $schema = Schema::connection($connection ?? config('database.default'));
 
-        if (! $schema->hasTable($tableName)) {
+        if (!$schema->hasTable($tableName)) {
             return;
         }
 
         $schema->table($tableName, function (Blueprint $table) use ($schema, $tableName) {
-            if (! $schema->hasColumn($tableName, 'relId')) {
+            if (!$schema->hasColumn($tableName, 'relId')) {
                 $table->unsignedBigInteger('relId')->index()->nullable();
             }
 
-            if (! $schema->hasColumn($tableName, 'relModel')) {
+            if (!$schema->hasColumn($tableName, 'relModel')) {
                 $table->string('relModel')->nullable();
             }
         });
@@ -42,7 +41,7 @@ return new class extends Migration
         $tableName = $activity->getTableName();
         $schema = Schema::connection($connection ?? config('database.default'));
 
-        if (! $schema->hasTable($tableName)) {
+        if (!$schema->hasTable($tableName)) {
             return;
         }
 
