@@ -22,7 +22,7 @@ Laravel logger is an activity event logger for your Laravel or Lumen application
 - [Configuration](#configuration)
   - [Environment File](#environment-file)
 - [Usage](#usage)
-  - [Authentication Middleware Usage](#authentication-middleware-usage)
+  - [Middleware Usage](#middleware-usage)
   - [Trait Usage](#trait-usage)
 - [Routes](#routes)
 - [Search & Filtering](#search--filtering)
