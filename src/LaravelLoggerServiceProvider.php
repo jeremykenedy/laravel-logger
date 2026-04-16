@@ -56,9 +56,9 @@ class LaravelLoggerServiceProvider extends ServiceProvider
 
         // Load translations from new Laravel 9+ structure if available, fallback to old structure
         if (is_dir(__DIR__.'/lang/')) {
-            $this->loadTranslationsFrom(__DIR__.'/lang/', 'LaravelLogger');
+            $this->loadTranslationsFrom(__DIR__.'/lang', 'LaravelLogger');
         } else {
-            $this->loadTranslationsFrom(__DIR__.'/resources/lang/', 'LaravelLogger');
+            $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'LaravelLogger');
         }
     }
 
@@ -77,7 +77,7 @@ class LaravelLoggerServiceProvider extends ServiceProvider
             $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         }
 
-        $this->loadViewsFrom(__DIR__.'/resources/views/', 'LaravelLogger');
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'LaravelLogger');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
         $this->registerEventListeners();
