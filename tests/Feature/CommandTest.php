@@ -88,7 +88,7 @@ class CommandTest extends TestCase
     {
         unlink($this->environment);
         $this->artisan('logger:switch', ['--css' => 'tailwind', '--no-interaction' => true])->assertExitCode(1);
-        $this->assertFileDoesNotExist($this->environment);
+        $this->assertFalse(is_file($this->environment));
     }
 
     public function test_spaced_exported_and_duplicate_assignments_with_crlf_are_updated(): void

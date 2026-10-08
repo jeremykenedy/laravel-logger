@@ -2,7 +2,8 @@
     'use strict';
     document.querySelectorAll('.logger-dashboard').forEach(function (dashboard) {
         var system = window.matchMedia('(prefers-color-scheme: dark)');
-        var choices = dashboard.querySelectorAll('[data-theme-choice]');
+        var toggle = dashboard.querySelector('[data-theme-toggle]');
+        var modes = ['light', 'dark', 'system'];
         if (dashboard.dataset.theme === 'system') {
             try {
                 var saved = localStorage.getItem('laravel-logger-theme');
@@ -14,16 +15,22 @@
             var resolved = theme === 'system' ? (system.matches ? 'dark' : 'light') : theme;
             dashboard.dataset.colorScheme = resolved;
             dashboard.dataset.bsTheme = resolved;
-            choices.forEach(function (button) {
-                button.setAttribute('aria-pressed', button.dataset.themeChoice === theme ? 'true' : 'false');
-            });
+            if (toggle) {
+                toggle.querySelectorAll('[data-theme-icon]').forEach(function (icon) {
+                    if (icon.dataset.themeIcon === theme) {
+                        icon.removeAttribute('hidden');
+                        toggle.setAttribute('aria-label', toggle.dataset.themeLabel + ': ' + icon.dataset.label);
+                        toggle.setAttribute('title', icon.dataset.label);
+                    } else {
+                        icon.setAttribute('hidden', '');
+                    }
+                });
+            }
         }
-        choices.forEach(function (button) {
-            button.addEventListener('click', function () {
-                dashboard.dataset.theme = button.dataset.themeChoice;
-                try { localStorage.setItem('laravel-logger-theme', dashboard.dataset.theme); } catch (error) {}
-                updateTheme();
-            });
+        if (toggle) toggle.addEventListener('click', function () {
+            dashboard.dataset.theme = modes[(modes.indexOf(dashboard.dataset.theme) + 1) % modes.length];
+            try { localStorage.setItem('laravel-logger-theme', dashboard.dataset.theme); } catch (error) {}
+            updateTheme();
         });
         if (system.addEventListener) system.addEventListener('change', updateTheme);
         else system.addListener(updateTheme);

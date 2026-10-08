@@ -39,6 +39,7 @@ class BrowserFixture extends TestCase
         config(['LaravelLogger.cssFramework' => $css, 'LaravelLogger.viewStyle' => in_array($css, ['bootstrap3', 'bootstrap4']) ? 'legacy' : 'modern']);
         config(['LaravelLogger.bootstapVersion' => $css === 'bootstrap3' ? '3' : '4']);
         config(['LaravelLogger.theme' => $_GET['theme'] ?? 'system']);
+        config(['LaravelLogger.enableThemeToggle' => ($_GET['toggle'] ?? '') !== 'off']);
         config(['LaravelLogger.enableSearch' => true]);
         foreach (['Updated billing address', 'Viewed account history', 'Signed in', 'Exported weekly report', 'Changed notification settings', 'Viewed dashboard', 'Updated account profile'] as $index => $description) {
             $this->createActivity(['description' => $description, 'userId' => $user->id, 'created_at' => now()->subHours($index * 5), 'methodType' => $index % 2 ? 'GET' : 'POST', 'route' => 'http://localhost/account/'.($index + 1)]);

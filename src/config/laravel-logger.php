@@ -153,6 +153,7 @@ return [
     'cssFramework' => env('LARAVEL_LOGGER_CSS_FRAMEWORK'),
     'viewStyle' => env('LARAVEL_LOGGER_VIEWS', 'legacy'),
     'theme' => env('LARAVEL_LOGGER_THEME', 'system'),
+    'enableThemeToggle' => env('LARAVEL_LOGGER_THEME_TOGGLE', true),
     'assetUrl' => env('LARAVEL_LOGGER_ASSET_URL', '/vendor/laravel-logger'),
 
     // The parent Blade file

@@ -65,6 +65,15 @@ class DashboardTest extends TestCase
         $this->get('/activity')->assertOk()->assertSee('dashboard.css');
     }
 
+    public function test_modern_theme_control_can_be_disabled_in_configuration(): void
+    {
+        $this->actingAs($this->createUser());
+        config(['LaravelLogger.viewStyle' => 'modern', 'LaravelLogger.theme' => 'dark']);
+        $this->get('/activity')->assertOk()->assertSee('data-theme-toggle', false);
+        config(['LaravelLogger.enableThemeToggle' => false]);
+        $this->get('/activity')->assertOk()->assertDontSee('data-theme-toggle', false)->assertSee('data-theme="dark"', false);
+    }
+
     public function test_detail_pages_return_404_for_missing_entries(): void
     {
         $this->actingAs($this->createUser());

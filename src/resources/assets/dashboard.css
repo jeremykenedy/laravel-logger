@@ -93,8 +93,7 @@
     .logger-details dd { margin-bottom: .75rem; }
 }
 
-.logger-dashboard .logger-theme { display: inline-flex; gap: .25rem; padding: .25rem; background: var(--logger-surface); border: 1px solid var(--logger-line); border-radius: .6rem; }
-.logger-dashboard .logger-theme button { display: grid; place-items: center; width: 36px; min-height: 36px; padding: 0; border: 0; background: transparent; color: var(--logger-muted); }
-.logger-dashboard .logger-theme button:hover { background: var(--logger-hover); color: var(--logger-ink); }
-.logger-dashboard .logger-theme button[aria-pressed="true"] { background: var(--logger-hover); color: var(--logger-link); box-shadow: inset 0 0 0 1px var(--logger-line); }
-.logger-dashboard .logger-theme svg { display: block; pointer-events: none; }
+.logger-dashboard button.logger-theme { display: grid; place-items: center; flex-shrink: 0; width: 42px; height: 42px; padding: 0; background: var(--logger-surface); color: var(--logger-muted); border: 1px solid var(--logger-line); border-radius: .6rem; }
+.logger-dashboard button.logger-theme:hover { background: var(--logger-hover); color: var(--logger-link); }
+.logger-dashboard .logger-theme svg { pointer-events: none; }
+.logger-dashboard .logger-theme svg[hidden] { display: none; }

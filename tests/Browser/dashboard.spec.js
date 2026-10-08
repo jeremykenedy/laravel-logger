@@ -23,16 +23,20 @@ for (const css of ['bootstrap5', 'tailwind']) {
         await page.emulateMedia({ colorScheme: 'light' });
         await page.goto(`/activity?css=${css}`);
         const dashboard = page.locator('.logger-dashboard');
-        const dark = page.getByRole('button', { name: 'Dark theme', exact: true });
-        const light = page.getByRole('button', { name: 'Light theme', exact: true });
-        const system = page.getByRole('button', { name: 'System theme', exact: true });
-        await expect(system).toHaveAttribute('aria-pressed', 'true');
+        const toggle = page.locator('[data-theme-toggle]');
+        await expect(toggle).toHaveCount(1);
+        await expect(toggle).toHaveAccessibleName('Change theme: System theme');
+        await expect(toggle.locator('svg:visible')).toHaveCount(1);
+        await expect(toggle.locator('svg:visible')).toHaveAttribute('data-theme-icon', 'system');
         await expect(dashboard).toHaveAttribute('data-color-scheme', 'light');
-        await dark.focus();
-        await expect(dark).toBeFocused();
-        await dark.press('Enter');
-        await expect(dark).toHaveAttribute('aria-pressed', 'true');
-        await expect(system).toHaveAttribute('aria-pressed', 'false');
+        await toggle.click();
+        await expect(toggle).toHaveAccessibleName('Change theme: Light theme');
+        await toggle.focus();
+        await expect(toggle).toBeFocused();
+        await toggle.press('Enter');
+        await expect(toggle).toHaveAccessibleName('Change theme: Dark theme');
+        await expect(toggle.locator('svg:visible')).toHaveCount(1);
+        await expect(toggle.locator('svg:visible')).toHaveAttribute('data-theme-icon', 'dark');
         await expect(dashboard).toHaveAttribute('data-color-scheme', 'dark');
         expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
         const colors = await page.locator('.logger-filters').evaluate(el => ({
@@ -48,15 +52,17 @@ for (const css of ['bootstrap5', 'tailwind']) {
         expect(colors.field).toBe('rgb(19, 29, 45)');
         expect(colors.scheme).toBe('dark');
         await page.reload();
-        await expect(dark).toHaveAttribute('aria-pressed', 'true');
+        await expect(toggle).toHaveAccessibleName('Change theme: Dark theme');
         await page.evaluate(() => {
             document.documentElement.classList.add('dark');
             document.documentElement.dataset.bsTheme = 'dark';
         });
-        await light.click();
+        await toggle.click();
+        await toggle.click();
         await expect(dashboard).toHaveAttribute('data-color-scheme', 'light');
         expect(await page.locator('.logger-filters').evaluate(el => getComputedStyle(el).color)).toBe('rgb(30, 41, 59)');
-        await system.click();
+        await toggle.click();
+        await toggle.click();
         await expect(dashboard).toHaveAttribute('data-theme', 'system');
         await expect(dashboard).toHaveAttribute('data-color-scheme', 'light');
         await page.emulateMedia({ colorScheme: 'dark' });
@@ -64,12 +70,22 @@ for (const css of ['bootstrap5', 'tailwind']) {
         await page.emulateMedia({ colorScheme: 'light' });
         await expect(dashboard).toHaveAttribute('data-color-scheme', 'light');
         await page.reload();
-        await expect(system).toHaveAttribute('aria-pressed', 'true');
+        await expect(toggle).toHaveAccessibleName('Change theme: System theme');
         await page.goto(`/activity?css=${css}&theme=dark`);
         await expect(dashboard).toHaveAttribute('data-color-scheme', 'dark');
-        await light.click();
+        await toggle.click();
+        await toggle.click();
         await page.reload();
         await expect(dashboard).toHaveAttribute('data-color-scheme', 'dark');
+    });
+
+    test(`${css} can hide the theme toggle without disabling the configured theme`, async ({ page }) => {
+        const errors = [];
+        page.on('pageerror', error => errors.push(error.message));
+        await page.goto(`/activity?css=${css}&theme=dark&toggle=off`);
+        await expect(page.locator('[data-theme-toggle]')).toHaveCount(0);
+        await expect(page.locator('.logger-dashboard')).toHaveAttribute('data-color-scheme', 'dark');
+        expect(errors).toEqual([]);
     });
 
     test(`${css} keeps detail and cleared headings readable in dark mode`, async ({ page }) => {

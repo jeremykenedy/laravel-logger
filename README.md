@@ -159,6 +159,7 @@ Published settings live in `config/laravel-logger.php`; package code reads the e
 | `cssFramework` | `null` | Retain `bootstapVersion`; otherwise select `bootstrap3`, `bootstrap4`, `bootstrap5`, or `tailwind` |
 | `viewStyle` | `legacy` | `legacy` or `modern`; Bootstrap 5 and Tailwind always use modern views |
 | `theme` | `system` | Modern views: `system`, `light`, or `dark` |
+| `enableThemeToggle` | `true` | Show the modern dashboard theme button (`LARAVEL_LOGGER_THEME_TOGGLE`) |
 | `assetUrl` | `/vendor/laravel-logger` | Published dashboard CSS and script URL |
 | `loggerBladeExtended` | `layouts.app` | Parent layout |
 | `bootstapVersion` | `4` | Existing Bootstrap 3/4 setting; spelling retained |
@@ -200,7 +201,7 @@ Published settings live in `config/laravel-logger.php`; package code reads the e
 | `enableFontAwesomeCDN`, `fontAwesomeCDN` | Enabled, package URL | Legacy icon font |
 | `loggerDatatablesCSScdn`, `loggerDatatablesJScdn`, `loggerDatatablesJSVendorCdn` | Package URLs | Legacy DataTables assets |
 
-Modern views do not load jQuery, Bootstrap JavaScript, Popper, Font Awesome, or DataTables. The sun, moon, and monitor buttons select light, dark, or system mode. System mode follows changes to the device's color scheme. The selected mode is saved for this dashboard, independently of the host application's theme. Explicit light or dark configuration takes precedence on page load.
+Modern views do not load jQuery, Bootstrap JavaScript, Popper, Font Awesome, or DataTables. A single theme button cycles through light, dark, and system mode. It displays the sun, moon, or monitor icon for the selected mode. Set `enableThemeToggle` to `false` in `config/laravel-logger.php`, or set `LARAVEL_LOGGER_THEME_TOGGLE=false`, to hide it. System mode follows changes to the device's color scheme. The selected mode is saved for this dashboard, independently of the host application's theme. Explicit light or dark configuration takes precedence on page load.
 
 IP logging uses Laravel's trusted-proxy configuration. Configure trusted proxies in the host application when traffic passes through Cloudflare or a load balancer.
 
