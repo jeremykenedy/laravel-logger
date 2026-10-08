@@ -14,11 +14,11 @@ class ActivityFilters
 
         foreach (['date_from' => '>=', 'date_to' => '<='] as $field => $operator) {
             if ($request->filled($field)) {
-                $query->whereDate('created_at', $operator, $request->get($field));
+                $query->whereDate('created_at', $operator, $request->input($field));
             }
         }
 
-        return $this->period($query, $request->get('period'));
+        return $this->period($query, $request->input('period'));
     }
 
     private function period($query, $period)

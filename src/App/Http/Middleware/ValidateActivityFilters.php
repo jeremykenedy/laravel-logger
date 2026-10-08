@@ -18,7 +18,7 @@ class ValidateActivityFilters
 
     public function handle(Request $request, Closure $next)
     {
-        $this->validator->make($request->query(), (new ActivityLogRequest)->rules())->validate();
+        $this->validator->make($request->query->all(), (new ActivityLogRequest)->rules())->validate();
 
         return $next($request);
     }

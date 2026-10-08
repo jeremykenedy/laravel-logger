@@ -188,10 +188,10 @@ class LaravelLoggerController extends BaseController
 
     public function liveSearch(Request $request)
     {
-        $filteredUsers = config('LaravelLogger.defaultUserModel')::when(request('userid'), function ($q) {
-            return $q->where(config('LaravelLogger.defaultUserIDField'), (int) request('userid', 0));
-        })->when(request('email'), function ($q) {
-            return $q->where('email', 'like', '%'.request('email').'%');
+        $filteredUsers = config('LaravelLogger.defaultUserModel')::when($request->input('userid'), function ($q) use ($request) {
+            return $q->where(config('LaravelLogger.defaultUserIDField'), (int) $request->input('userid', 0));
+        })->when($request->input('email'), function ($q) use ($request) {
+            return $q->where('email', 'like', '%'.$request->input('email').'%');
         });
 
         return response()->json($filteredUsers->get()->pluck('email', config('LaravelLogger.defaultUserIDField')), 200);
@@ -200,7 +200,7 @@ class LaravelLoggerController extends BaseController
     public function exportActivityLog(Request $request)
     {
         abort_unless(config('LaravelLogger.enableExport'), 403);
-        $format = $request->get('format', 'csv');
+        $format = $request->input('format', 'csv');
         $activities = $this->activityQuery();
 
         if (config('LaravelLogger.enableDateFiltering')) {
