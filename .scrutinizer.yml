@@ -8,6 +8,9 @@ filter:
 checks:
   php: true
 
+tools:
+  external_code_coverage: false
+
 build:
   environment:
     php:
