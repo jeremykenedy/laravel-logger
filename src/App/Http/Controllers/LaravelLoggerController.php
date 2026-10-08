@@ -8,7 +8,6 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
-use jeremykenedy\LaravelLogger\App\Http\Requests\ActivityLogRequest;
 use jeremykenedy\LaravelLogger\App\Http\Traits\IpAddressDetails;
 use jeremykenedy\LaravelLogger\App\Http\Traits\UserAgentDetails;
 use jeremykenedy\LaravelLogger\Support\Dashboard;
@@ -53,7 +52,7 @@ class LaravelLoggerController extends BaseController
         });
     }
 
-    public function showAccessLog(ActivityLogRequest $request)
+    public function showAccessLog(Request $request)
     {
         $activities = $this->paginateActivities($this->activityQuery(), $request, true);
 
@@ -64,7 +63,7 @@ class LaravelLoggerController extends BaseController
         ]);
     }
 
-    public function showAccessLogEntry(ActivityLogRequest $request, int $id)
+    public function showAccessLogEntry(Request $request, int $id)
     {
         $activity = config('LaravelLogger.defaultActivityModel')::findOrFail($id);
 
@@ -139,7 +138,7 @@ class LaravelLoggerController extends BaseController
         return redirect('activity')->with('success', trans('LaravelLogger::laravel-logger.messages.logClearedSuccessfuly'));
     }
 
-    public function showClearedActivityLog(ActivityLogRequest $request)
+    public function showClearedActivityLog(Request $request)
     {
         $activities = $this->paginateActivities($this->activityQuery()->onlyTrashed(), $request);
 
@@ -149,7 +148,7 @@ class LaravelLoggerController extends BaseController
         ]);
     }
 
-    public function showClearedAccessLogEntry(ActivityLogRequest $request, int $id)
+    public function showClearedAccessLogEntry(Request $request, int $id)
     {
         $activity = config('LaravelLogger.defaultActivityModel')::onlyTrashed()->findOrFail($id);
 
@@ -259,7 +258,7 @@ class LaravelLoggerController extends BaseController
         return response()->json($filteredUsers->get()->pluck('email', config('LaravelLogger.defaultUserIDField')), 200);
     }
 
-    public function exportActivityLog(ActivityLogRequest $request)
+    public function exportActivityLog(Request $request)
     {
         abort_unless(config('LaravelLogger.enableExport'), 403);
         $format = $request->get('format', 'csv');

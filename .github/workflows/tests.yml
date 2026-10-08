@@ -38,6 +38,7 @@ jobs:
           composer config audit.block-insecure false
           composer require --dev "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-update
           if [ '${{ matrix.dependencies }}' = 'lowest' ]; then
+            composer require 'jaybizzle/laravel-crawler-detect:^1.1' --no-update
             composer update --prefer-lowest --prefer-stable --no-interaction --prefer-dist
           else
             composer update --prefer-stable --no-interaction --prefer-dist

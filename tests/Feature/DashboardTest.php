@@ -2,7 +2,9 @@
 
 namespace jeremykenedy\LaravelLogger\Tests\Feature;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use jeremykenedy\LaravelLogger\App\Http\Controllers\LaravelLoggerController;
 use jeremykenedy\LaravelLogger\Tests\DenyAccess;
 use jeremykenedy\LaravelLogger\Tests\TestCase;
 
@@ -26,6 +28,16 @@ class DashboardTest extends TestCase
         $this->get('/activity')->assertOk()->assertViewIs('LaravelLogger::logger.activity-log');
         $this->assertSame('4', config('LaravelLogger.bootstapVersion'));
         $this->assertNull(config('LaravelLogger.cssFramework'));
+    }
+
+    public function test_host_controllers_can_still_pass_a_standard_request(): void
+    {
+        $this->actingAs($this->createUser());
+        $activity = $this->createActivity();
+        $controller = new LaravelLoggerController;
+        $request = Request::create('/activity');
+        $this->assertSame('LaravelLogger::logger.activity-log', $controller->showAccessLog($request)->name());
+        $this->assertSame($activity->id, $controller->showAccessLogEntry($request, $activity->id)->getData()['activity']->id);
     }
 
     public function test_all_view_choices_render_lists_details_and_cleared_entries(): void
