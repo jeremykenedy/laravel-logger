@@ -33,6 +33,7 @@ build:
       tests:
         override:
           - command: XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-filter src --coverage-clover coverage/clover.xml
+            idle_timeout: 600
             coverage:
               file: coverage/clover.xml
               format: clover
