@@ -29,3 +29,12 @@ vendor/
 /vendor
 /log
 .php_cs.cache
+
+.phpunit.cache/
+.phpunit.result.cache
+.phpstan-cache/
+coverage/
+node_modules/
+test-results/
+playwright-report/
+tests/Browser/tailwind.css

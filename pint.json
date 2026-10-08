@@ -1,0 +1,5 @@
+{
+    "preset": "laravel",
+    "exclude": ["src/database/migrations"],
+    "rules": {"no_unused_imports": true, "ordered_class_elements": false}
+}

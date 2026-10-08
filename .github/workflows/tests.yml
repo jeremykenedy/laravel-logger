@@ -1,0 +1,93 @@
+name: Tests
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: PHP ${{ matrix.php }} / Laravel ${{ matrix.laravel }} / ${{ matrix.dependencies }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {php: '8.0', laravel: '^8.40', testbench: '^6.23', dependencies: highest}
+          - {php: '8.1', laravel: '^9.0', testbench: '^7.0', dependencies: highest}
+          - {php: '8.1', laravel: '^10.0', testbench: '^8.0', dependencies: highest}
+          - {php: '8.2', laravel: '^11.0', testbench: '^9.0', dependencies: highest}
+          - {php: '8.2', laravel: '^12.0', testbench: '^10.0', dependencies: highest}
+          - {php: '8.3', laravel: '^13.0', testbench: '^11.0', dependencies: highest}
+          - {php: '8.5', laravel: '^13.0', testbench: '^11.0', dependencies: highest}
+          - {php: '8.0', laravel: '^8.40', testbench: '^6.23', dependencies: lowest}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, intl, pdo_sqlite, zip, xmlwriter
+          coverage: none
+          tools: composer:v2
+      - name: Resolve test framework
+        run: |
+          composer config audit.block-insecure false
+          composer require --dev "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-update
+          if [ '${{ matrix.dependencies }}' = 'lowest' ]; then
+            composer update --prefer-lowest --prefer-stable --no-interaction --prefer-dist
+          else
+            composer update --prefer-stable --no-interaction --prefer-dist
+          fi
+      - run: composer test
+
+  quality:
+    name: Formatting, analysis, and dependency audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: mbstring, intl, pdo_sqlite, zip, xmlwriter
+          coverage: none
+          tools: composer:v2
+      - run: composer validate --strict
+      - run: composer update --no-interaction --prefer-dist
+      - run: composer lint
+      - run: composer analyse
+      - run: composer audit
+
+  browser:
+    name: Browser tests and coverage
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: mbstring, intl, pdo_sqlite, zip, xmlwriter
+          coverage: xdebug
+          tools: composer:v2
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+          cache: npm
+      - run: composer update --no-interaction --prefer-dist
+      - run: vendor/bin/phpunit --coverage-filter src --coverage-clover coverage/clover.xml
+      - run: npm ci
+      - run: npm run lint:js
+      - run: npm audit
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: test-results
+          path: |
+            coverage/
+            test-results/
+          if-no-files-found: ignore

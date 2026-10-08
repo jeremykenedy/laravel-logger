@@ -10,13 +10,6 @@ use Jaybizzle\LaravelCrawlerDetect\Facades\LaravelCrawlerDetect as Crawler;
 
 trait ActivityLogger
 {
-    /**
-     * Laravel Logger Log Activity.
-     *
-     * @param null   $description
-     * @param null   $details
-     * @param ?array $rel
-     */
     public function activity($description = null, $details = null, ?array $rel = null)
     {
         $userType = trans('LaravelLogger::laravel-logger.userTypes.guest');
@@ -35,7 +28,7 @@ trait ActivityLogger
             }
         }
 
-        if (!$description) {
+        if (! $description) {
             switch (strtolower(Request::method())) {
                 case 'post':
                     $verb = trans('LaravelLogger::laravel-logger.verbTypes.created');
@@ -59,13 +52,7 @@ trait ActivityLogger
             $description = $verb.' '.Request::path();
         }
 
-        if (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
-            $ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
-        } elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-        } else {
-            $ip = Request::ip();
-        }
+        $ip = Request::ip();
 
         $relId = null;
         $relModel = null;
@@ -75,21 +62,20 @@ trait ActivityLogger
         }
 
         $data = [
-            'description'   => $description,
-            'details'       => $details,
-            'userType'      => $userType,
-            'userId'        => $userId,
-            'route'         => Request::fullUrl(),
-            'ipAddress'     => $ip,
-            'userAgent'     => Request::header('user-agent'),
-            'locale'        => Request::header('accept-language'),
-            'referer'       => Request::header('referer'),
-            'methodType'    => Request::method(),
-            'relId'         => $relId,
-            'relModel'      => $relModel,
+            'description' => $description,
+            'details' => $details,
+            'userType' => $userType,
+            'userId' => $userId,
+            'route' => Request::fullUrl(),
+            'ipAddress' => $ip,
+            'userAgent' => Request::header('user-agent'),
+            'locale' => Request::header('accept-language'),
+            'referer' => Request::header('referer'),
+            'methodType' => Request::method(),
+            'relId' => $relId,
+            'relModel' => $relModel,
         ];
 
-        // Validation Instance
         $validator = Validator::make($data, config('LaravelLogger.defaultActivityModel')::rules());
         if ($validator->fails()) {
             $errors = self::prepareErrorMessage($validator->errors(), $data);
@@ -101,42 +87,31 @@ trait ActivityLogger
         }
     }
 
-    /**
-     * Store activity entry to database.
-     */
     private static function storeActivity(array $data): void
     {
         config('LaravelLogger.defaultActivityModel')::create([
-            'description'   => $data['description'],
-            'details'       => $data['details'],
-            'userType'      => $data['userType'],
-            'userId'        => $data['userId'],
-            'route'         => $data['route'],
-            'ipAddress'     => $data['ipAddress'],
-            'userAgent'     => $data['userAgent'],
-            'locale'        => $data['locale'],
-            'referer'       => $data['referer'],
-            'methodType'    => $data['methodType'],
-            'relId'         => $data['relId'],
-            'relModel'      => $data['relModel'],
+            'description' => $data['description'],
+            'details' => $data['details'],
+            'userType' => $data['userType'],
+            'userId' => $data['userId'],
+            'route' => $data['route'],
+            'ipAddress' => $data['ipAddress'],
+            'userAgent' => $data['userAgent'],
+            'locale' => $data['locale'],
+            'referer' => $data['referer'],
+            'methodType' => $data['methodType'],
+            'relId' => $data['relId'],
+            'relModel' => $data['relModel'],
         ]);
     }
 
-    /**
-     * Prepare Error Message (add the actual value of the error field).
-     *
-     * @param $validator
-     * @param $data
-     *
-     * @return string
-     */
     private static function prepareErrorMessage($validatorErrors, $data)
     {
-        $errors = json_decode(json_encode($validatorErrors, true));
+        $errors = $validatorErrors->toArray();
         array_walk($errors, function (array &$value, $key) use ($data): void {
-            $value[] = "Value: $data[$key]";
+            $value[] = 'Value: '.(is_scalar($data[$key]) || $data[$key] === null ? (string) $data[$key] : json_encode($data[$key]));
         });
 
-        return json_encode($errors, true);
+        return json_encode($errors);
     }
 }

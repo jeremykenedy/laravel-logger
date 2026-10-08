@@ -4,36 +4,22 @@ namespace jeremykenedy\LaravelLogger\App\Http\Traits;
 
 trait UserAgentDetails
 {
-    /**
-     * Get the user's agents details.
-     *
-     * @param $ua
-     *
-     * @return array
-     */
     public static function details($ua)
     {
-        $ua = is_null($ua) ? $_SERVER['HTTP_USER_AGENT'] : $ua;
-        // Enumerate all common platforms, this is usually placed in braces (order is important! First come first serve..)
+        $ua = is_null($ua) ? ($_SERVER['HTTP_USER_AGENT'] ?? '') : $ua;
+
         $platforms = 'Windows|iPad|iPhone|Macintosh|Android|BlackBerry|Unix|Linux|X11|CrOS';
 
-        // All browsers except MSIE/Trident and..
-        // NOT for browsers that use this syntax: Version/0.xx Browsername
         $browsers = 'Firefox|Chrome|Opera';
 
-        // Specifically for browsers that use this syntax: Version/0.xx Browername
         $browsers_v = 'Safari|Mobile'; // Mobile is mentioned in Android and BlackBerry UA's
 
-        // Fill in your most common engines..
         $engines = 'Gecko|Trident|Webkit|Presto';
 
-        // Regex the crap out of the user agent, making multiple selections and..
         $regex_pat = "/((Mozilla)\/[\d\.]+|(Opera)\/[\d\.]+)\s\(.*?((MSIE)\s([\d\.]+).*?(Windows)|({$platforms})).*?\s.*?({$engines})[\/\s]+[\d\.]+(\;\srv\:([\d\.]+)|.*?).*?(Version[\/\s]([\d\.]+)(.*?({$browsers_v})|$)|(({$browsers})[\/\s]+([\d\.]+))|$).*/i";
 
-        // .. placing them in this order, delimited by |
         $replace_pat = '$7$8|$2$3|$9|${17}${15}$5$3|${18}${13}$6${11}';
 
-        // Run the preg_replace .. and explode on |
         $ua_array = explode('|', preg_replace($regex_pat, $replace_pat, $ua, PREG_PATTERN_ORDER));
 
         if (count($ua_array) > 1) {
@@ -60,7 +46,6 @@ trait UserAgentDetails
             $return['version'] = '-';
         }
 
-        // Replace some browsernames e.g. MSIE -> Internet Explorer
         switch (strtolower($return['browser'])) {
             case 'msie':
             case 'trident':
@@ -85,24 +70,13 @@ trait UserAgentDetails
         return $return;
     }
 
-    /**
-     * Return the locales language from PHP's Local
-     * http://php.net/manual/en/class.locale.php
-     * http://php.net/manual/en/locale.acceptfromhttp.php.
-     *
-     * @param string $locale :: LIKE "fr,fr-FR;q=0.8,en-US;q=0.5,en;q=0.3" > return 'fr-FR';
-     *                       Fallback if No Locale CLASS @sudwebdesign
-     *
-     * @return string (Example: "en_US")
-     */
     public static function localeLang($locale)
     {
         if (class_exists('Locale')) {
-            return \Locale::acceptFromHttp($locale);
+            return \Locale::acceptFromHttp((string) $locale);
         }
 
-        $a = explode(',', $locale);
-        $a = $a ?? explode(';', $a[1]);
+        $a = explode(',', (string) $locale);
 
         return $a[0];
     }

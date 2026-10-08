@@ -13,17 +13,17 @@ class ActivityFactory extends Factory
     {
         return [
             'description' => $this->faker->sentence(3),
-            'details'     => $this->faker->paragraph(),
-            'userType'    => $this->faker->randomElement(['Guest', 'Registered', 'Crawler']),
-            'userId'      => $this->faker->numberBetween(1, 100),
-            'route'       => $this->faker->url(),
-            'ipAddress'   => $this->faker->ipv4(),
-            'userAgent'   => $this->faker->userAgent(),
-            'locale'      => $this->faker->locale(),
-            'referer'     => $this->faker->optional()->url(),
-            'methodType'  => $this->faker->randomElement(['GET', 'POST', 'PUT', 'DELETE', 'PATCH']),
-            'created_at'  => $this->faker->dateTimeBetween('-1 year', 'now'),
-            'updated_at'  => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'details' => $this->faker->paragraph(),
+            'userType' => $this->faker->randomElement(['Guest', 'Registered', 'Crawler']),
+            'userId' => $this->faker->numberBetween(1, 100),
+            'route' => $this->faker->url(),
+            'ipAddress' => $this->faker->ipv4(),
+            'userAgent' => $this->faker->userAgent(),
+            'locale' => $this->faker->locale(),
+            'referer' => $this->faker->optional()->url(),
+            'methodType' => $this->faker->randomElement(['GET', 'POST', 'PUT', 'DELETE', 'PATCH']),
+            'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
     }
 
@@ -100,7 +100,7 @@ class ActivityFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'userType' => 'Guest',
-                'userId'   => null,
+                'userId' => null,
             ];
         });
     }
@@ -113,7 +113,7 @@ class ActivityFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'userType' => 'Registered',
-                'userId'   => $this->faker->numberBetween(1, 100),
+                'userId' => $this->faker->numberBetween(1, 100),
             ];
         });
     }
@@ -125,8 +125,8 @@ class ActivityFactory extends Factory
     {
         return $this->state(function (array $attributes) {
             return [
-                'userType'  => 'Crawler',
-                'userId'    => null,
+                'userType' => 'Crawler',
+                'userId' => null,
                 'userAgent' => $this->faker->randomElement([
                     'Googlebot/2.1',
                     'Bingbot/2.0',
@@ -145,8 +145,8 @@ class ActivityFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'description' => 'User logged in',
-                'methodType'  => 'POST',
-                'route'       => '/login',
+                'methodType' => 'POST',
+                'route' => '/login',
             ];
         });
     }
@@ -159,8 +159,8 @@ class ActivityFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'description' => 'User logged out',
-                'methodType'  => 'POST',
-                'route'       => '/logout',
+                'methodType' => 'POST',
+                'route' => '/logout',
             ];
         });
     }
@@ -173,8 +173,8 @@ class ActivityFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'description' => 'User viewed page',
-                'methodType'  => 'GET',
-                'route'       => $this->faker->randomElement([
+                'methodType' => 'GET',
+                'route' => $this->faker->randomElement([
                     '/dashboard',
                     '/profile',
                     '/settings',
@@ -192,8 +192,8 @@ class ActivityFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'description' => 'User created resource',
-                'methodType'  => 'POST',
-                'route'       => $this->faker->randomElement([
+                'methodType' => 'POST',
+                'route' => $this->faker->randomElement([
                     '/posts',
                     '/users',
                     '/products',
@@ -211,8 +211,8 @@ class ActivityFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'description' => 'User updated resource',
-                'methodType'  => 'PUT',
-                'route'       => $this->faker->randomElement([
+                'methodType' => 'PUT',
+                'route' => $this->faker->randomElement([
                     '/posts/1',
                     '/users/1',
                     '/products/1',
@@ -230,8 +230,8 @@ class ActivityFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
                 'description' => 'User deleted resource',
-                'methodType'  => 'DELETE',
-                'route'       => $this->faker->randomElement([
+                'methodType' => 'DELETE',
+                'route' => $this->faker->randomElement([
                     '/posts/1',
                     '/users/1',
                     '/products/1',

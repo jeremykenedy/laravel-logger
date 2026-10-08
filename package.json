@@ -1,0 +1,14 @@
+{
+    "name": "laravel-logger-tests",
+    "private": true,
+    "scripts": {
+        "test:browser": "playwright test",
+        "lint:js": "node --check src/resources/assets/dashboard.js",
+        "pretest:browser": "tailwindcss -i tests/Browser/tailwind.input.css -o tests/Browser/tailwind.css --minify"
+    },
+    "devDependencies": {
+        "@playwright/test": "^1.58.0",
+        "@tailwindcss/cli": "4.3.0",
+        "tailwindcss": "4.3.0"
+    }
+}

@@ -1,474 +1,293 @@
-![Laravel Logger](https://github-project-images.s3-us-west-2.amazonaws.com/laravel-blocker/laravel-logger-logo.png)
+<p align="center">
+    <picture>
+        <source media="(prefers-color-scheme: dark)" srcset="art/banner-dark.svg">
+        <source media="(prefers-color-scheme: light)" srcset="art/banner-light.svg">
+        <img src="art/banner-light.svg" alt="Laravel Logger" width="800">
+    </picture>
+</p>
 
-# Laravel Activity Logger
+<p align="center">Activity logging and a searchable activity dashboard for Laravel applications.</p>
 
-Laravel logger is an activity event logger for your Laravel or Lumen application. It comes out the box with ready to use with dashboard to view your activity. Laravel logger can be added as a middleware or called through a trait. Easily have an Activity Log. This package is easily configurable and customizable. Supports Laravel 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 6, 7, 8 and 9+
+<p align="center">
+    <a href="https://packagist.org/packages/jeremykenedy/laravel-logger"><img src="https://poser.pugx.org/jeremykenedy/laravel-logger/d/total.svg" alt="Total Downloads"></a>
+    <a href="https://packagist.org/packages/jeremykenedy/laravel-logger"><img src="https://poser.pugx.org/jeremykenedy/laravel-logger/v/stable.svg" alt="Latest Stable Version"></a>
+    <a href="https://github.com/jeremykenedy/laravel-logger/actions/workflows/tests.yml"><img src="https://github.com/jeremykenedy/laravel-logger/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
+    <a href="https://github.styleci.io/repos/109630720"><img src="https://github.styleci.io/repos/109630720/shield?branch=master" alt="StyleCI"></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License MIT"></a>
+</p>
 
-[![Latest Stable Version](https://poser.pugx.org/jeremykenedy/laravel-logger/v/stable)](https://packagist.org/packages/jeremykenedy/laravel-logger)
-[![Total Downloads](https://poser.pugx.org/jeremykenedy/laravel-logger/downloads)](https://packagist.org/packages/jeremykenedy/laravel-logger)
-<a href="https://styleci.io/repos/109630720">
-<img src="https://styleci.io/repos/109630720/shield?branch=master" alt="StyleCI" style="border-radius: 3px;">
-</a>
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/jeremykenedy/laravel-logger/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/jeremykenedy/laravel-logger/?branch=master)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## Table of Contents
 
-#### Table of contents
-
-- [Features](#features)
+- [Framework Support](#framework-support)
 - [Requirements](#requirements)
-- [Integrations](#integrations)
-- [Laravel Installation Instructions](#laravel-installation-instructions)
-- [Lumen Installation Instructions](#lumen-installation-instructions)
+- [Installation](#installation)
+- [Quick Start](#quick-start)
+- [Features](#features)
 - [Configuration](#configuration)
-  - [Environment File](#environment-file)
-- [Usage](#usage)
-  - [Middleware Usage](#middleware-usage)
-  - [Trait Usage](#trait-usage)
-- [Routes](#routes)
-- [Search & Filtering](#search--filtering)
-- [Screenshots](#screenshots)
-- [File Tree](#file-tree)
-- [Opening an Issue](#opening-an-issue)
+- [Changing Frameworks](#changing-frameworks)
+- [Artisan Commands](#artisan-commands)
+- [Testing](#testing)
 - [License](#license)
 
-### Features
+## Framework Support
 
-| Laravel Activity Logger Features                                                  |
-| :-------------------------------------------------------------------------------- |
-| Logs login page visits                                                            |
-| Logs user logins                                                                  |
-| Logs user logouts                                                                 |
-| Routing Events can recording using middleware                                     |
-| Records activity timestamps                                                       |
-| Records activity description                                                      |
-| Records activity details (optional)                                               |
-| Records model related to the activity (optional)                                  |
-| Records activity user type with crawler detection                                 |
-| Records activity Method                                                           |
-| Records activity Route                                                            |
-| Records activity Ip Address                                                       |
-| Records activity User Agent                                                       |
-| Records activity Browser Language                                                 |
-| Records activity referrer                                                         |
-| Customizable activity model                                                       |
-| Activity panel dashboard                                                          |
-| Individual activity drilldown report dashboard                                    |
-| Activity Drilldown looks up Id Address meta information                           |
-| Activity Drilldown shows user roles if enabled                                    |
-| Activity Drilldown shows associated user events                                   |
-| Activity log can be cleared, restored, and destroyed using eloquent softdeletes   |
-| Cleared activity logs can be viewed and have drilldown ability                    |
-| Uses font awesome, cdn assets can be optionally called in configuration           |
-| Uses [Geoplugin API](http://www.geoplugin.com/) for drilldown IP meta information |
-| Uses Language localization files                                                  |
-| Lots of [configuration](#configuration) options                                   |
-| **NEW: Date filtering** - Filter activities by date range or predefined periods   |
-| **NEW: Export functionality** - Export activities to CSV, JSON, and Excel formats |
-| **NEW: Enhanced search** - Improved search with date filtering support            |
-| **NEW: Performance optimizations** - Better handling of large datasets            |
+| Choice | Dashboard | Default |
+|--------|-----------|---------|
+| Bootstrap 4 and Blade | Existing views, including published overrides | Yes |
+| Bootstrap 3 and Blade | Existing panel-based views | No |
+| Bootstrap 5 and Blade | Modern dashboard with dark mode | No |
+| Tailwind CSS and Blade | Modern dashboard with dark mode | No |
 
-### Requirements
+`composer update` does not switch frameworks or replace your views or configuration. The default remains Bootstrap 4 with the existing Blade views. Modern views can also be selected explicitly for Bootstrap 3 or 4.
 
-- [Laravel 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 6, and 7+](https://laravel.com/docs/installation)
-- [jaybizzle/laravel-crawler-detect](https://github.com/JayBizzle/Laravel-Crawler-Detect) included dependency in composer.json (for crawler detection)
+The test matrix covers Laravel 8 through 13. The Composer runtime PHP constraint is unchanged. The package's existing anonymous migration requires PHP 8.0 or later for fresh migrations. Earlier framework installations are historical compatibility targets, not newly verified by this matrix. Cursor pagination requires a Laravel version that provides `cursorPaginate`.
 
-### :film_strip: Video Tour
+The dashboard is rendered by Blade. Livewire, Vue, React, and Svelte applications can link to it without installing another frontend runtime. This package does not ship separate client-side dashboards.
 
-If you'd prefer a more visual review of this package, please watch this video on Laravel Package Tutorial.
+## Requirements
 
-[<img src="https://img.youtube.com/vi/mHLSv9XhTuk/0.jpg" width="350">](https://youtu.be/mHLSv9XhTuk)
+- A Laravel application with authentication and a database connection.
+- A parent Blade layout, `layouts.app` by default.
+- Bootstrap or Tailwind assets in the host application. The modern Bootstrap 5 views can load Bootstrap CSS from a CDN when `enableBootstrapCssCDN` is enabled.
+- PHP's zip and XMLWriter extensions for Excel exports.
+- `jaybizzle/laravel-crawler-detect`, installed by Composer.
 
-### Integrations
-
-Laravel logger can work out the box with or without the following roles packages:
-
-- [jeremykenedy/laravel-roles](https://github.com/jeremykenedy/laravel-roles)
-- [spatie/laravel-permission](https://github.com/spatie/laravel-permission)
-- [Zizaco/entrust](https://github.com/Zizaco/entrust)
-- [romanbican/roles](https://github.com/romanbican/roles)
-- [ultraware/roles](https://github.com/ultraware/roles)
-
-### Laravel Installation Instructions
-
-1. From your projects root folder in terminal run:
+## Installation
 
 ```bash
-    composer require jeremykenedy/laravel-logger
+composer require jeremykenedy/laravel-logger
+php artisan logger:install
+php artisan migrate
 ```
 
-2. Register the package
+The installer detects an existing `config/laravel-logger.php` and asks before continuing. In unattended deployments, use `logger:update`, or `logger:install --force` to skip that confirmation. Configuration and published view overrides are preserved even with `--force`. Database migrations remain a separate step.
 
-- Laravel 5.5 and up
-  Uses package auto discovery feature, no need to edit the `config/app.php` file.
-
-- Laravel 5.4 and below
-  Register the package with laravel in `config/app.php` under `providers` with the following:
-
-```php
-    'providers' => [
-        jeremykenedy\LaravelLogger\LaravelLoggerServiceProvider::class,
-    ];
-```
-
-3. Run the migration to add the table to record the activities to:
-
-```php
-    php artisan migrate
-```
-
-- Note: If you want to specify a different table or connection make sure you update your `.env` file with the needed configuration variables.
-
-4. Optionally Update your `.env` file and associated settings (see [Environment File](#environment-file) section)
-
-5. Optionally publish the packages views, config file, assets, and language files by running the following from your projects root folder:
+For a modern dashboard:
 
 ```bash
-    php artisan vendor:publish --tag=LaravelLogger
+php artisan logger:install --css=bootstrap5 --views=modern --theme=system
 ```
 
-### Lumen Installation Instructions
+The installer publishes configuration if missing and dashboard assets to `public/vendor/laravel-logger`. Views remain in the package unless `--publish-views` is supplied. Existing `vendor:publish --tag=LaravelLogger` and `LaravelLogger-legacy` language publishing continue to work.
 
-##### This installs laravel-logger without the GUI
+The parent layout must render `content`, `template_linked_css`, and `footer_scripts`, or the section names in your configuration:
 
-1. From your projects root folder in terminal run:
+```blade
+<head>
+    @yield('template_linked_css')
+</head>
+<body>
+    @yield('content')
+    @yield('footer_scripts')
+</body>
+```
+
+For layouts using stacks, set `bladePlacement` to `stack` and use `@stack` for the CSS and script placements. The dashboard honors your layout and does not load a second application shell.
+
+Laravel 5.4 and earlier require manual provider registration. Existing Lumen installations should keep their manual crawler provider and activity middleware registration, copy the configuration, and set `LARAVEL_LOGGER_DISABLE_ROUTES=true`; they do not use the dashboard or the new setup commands.
+
+## Quick Start
+
+Attach the `activity` middleware to routes you want recorded:
+
+```php
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'activity']);
+```
+
+Or use the trait in your controller or service:
+
+```php
+use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
+
+class AccountController extends Controller
+{
+    use ActivityLogger;
+
+    public function update()
+    {
+        $this->activity('Updated account', 'Changed billing address', [
+            'id' => 42,
+            'model' => Account::class,
+        ]);
+    }
+}
+```
+
+Visit `/activity` while signed in. The existing `rolesEnabled` and `rolesMiddlware` settings can restrict the dashboard and exports to an administrative role. Without those settings, any authenticated user has access, matching existing behavior.
+
+Use a regular link from the frontend your application already uses:
+
+```blade
+{{-- Blade or Livewire --}}
+<a href="{{ route('activity') }}">Activity log</a>
+```
+
+```vue
+<!-- Vue -->
+<a href="/activity">Activity log</a>
+```
+
+```jsx
+// React
+<a href="/activity">Activity log</a>
+```
+
+```svelte
+<!-- Svelte -->
+<a href="/activity">Activity log</a>
+```
+
+## Features
+
+- Route middleware, manual activity logging, and configurable authentication listeners.
+- Registered users, guests, and crawler detection.
+- Search by description, user, method, route, and IP address.
+- Inclusive date ranges and preset periods, including cursor-paginated lists.
+- CSV, JSON, and valid Excel workbook downloads with the same filters as the dashboard.
+- Activity details and related user history.
+- Clear, restore, and permanently delete cleared logs through existing routes.
+- Configurable activity model, user model, user identifier, table, and connection.
+- Existing translation namespaces and published view overrides.
+- Opt-in modern views with responsive tables, keyboard focus, and light, dark, or system themes.
+
+## Configuration
+
+Published settings live in `config/laravel-logger.php`; package code reads the existing `LaravelLogger` configuration namespace. Missing options in older published config files receive package defaults.
+
+| Option | Default | Purpose |
+|--------|---------|---------|
+| `cssFramework` | `null` | Retain `bootstapVersion`; otherwise select `bootstrap3`, `bootstrap4`, `bootstrap5`, or `tailwind` |
+| `viewStyle` | `legacy` | `legacy` or `modern`; Bootstrap 5 and Tailwind always use modern views |
+| `theme` | `system` | Modern views: `system`, `light`, or `dark` |
+| `assetUrl` | `/vendor/laravel-logger` | Published dashboard CSS and script URL |
+| `loggerBladeExtended` | `layouts.app` | Parent layout |
+| `bootstapVersion` | `4` | Existing Bootstrap 3/4 setting; spelling retained |
+| `bootstrapCardClasses` | Empty | Existing card classes |
+| `bladePlacement` | `yield` | CSS/script sections or `stack` |
+| `bladePlacementCss` | `template_linked_css` | CSS placement name |
+| `bladePlacementJs` | `footer_scripts` | Script placement name |
+| `loggerDatabaseConnection` | `DB_CONNECTION` or `mysql` | Activity database connection |
+| `loggerDatabaseTable` | `laravel_logger_activity` | Activity table |
+| `defaultActivityModel` | Package `Activity` model | Custom activity model |
+| `defaultUserModel` | `App\Models\User` | User model; older applications can keep `App\User` |
+| `defaultUserIDField` | `id` | User identifier field |
+| `rolesEnabled` | `false` | Enable role middleware |
+| `rolesMiddlware` | `role:admin` | Existing role middleware name; spelling retained |
+| `loggerMiddlewareEnabled` | `true` | Enable activity middleware |
+| `loggerMiddlewareExcept` | Empty array | URI patterns excluded from logging |
+| `disableRoutes` | `false` | Register your own package routes |
+| `enableSearch` | `false` | Search filters |
+| `searchFields` | `description,user,method,route,ip` | Enabled search fields |
+| `enableDateFiltering` | `true` | Date filters |
+| `enableExport` | `true` | Export UI and endpoint |
+| `loggerPaginationEnabled` | `true` | Page-number pagination |
+| `loggerCursorPaginationEnabled` | `false` | Cursor pagination |
+| `loggerPaginationPerPage` | `25` | Page size |
+| `loggerDatatables` | `false` | Legacy DataTables integration |
+| `enableSubMenu` | `true` | Dashboard navigation and bulk action controls |
+| `enableDrillDown` | `true` | Links to individual activities |
+| `enableLiveSearch` | `true` | Legacy user lookup interface |
+| `enablePackageFlashMessageBlade` | `true` | Flash messages |
+| `logDBActivityLogFailuresToFile` | `true` | Report validation failures to the application log |
+| `enableGeoPlugin` | `true` | External IP lookup on detail pages |
+| `geoPluginUrl` | GeoPlugin endpoint | Custom IP lookup endpoint |
+| `logAllAuthEvents`, `logAuthAttempts` | `false` | Broad authentication logging |
+| `logFailedAuthAttempts`, `logLockOut`, `logPasswordReset`, `logSuccessfulLogin`, `logSuccessfulLogout` | `true` | Individual authentication event logging |
+| `enablejQueryCDN`, `JQueryCDN` | Enabled, package URL | Legacy jQuery assets |
+| `enableBootstrapCssCDN`, `bootstrapCssCDN` | Enabled, Bootstrap 4 URL | Bootstrap CSS; disable when bundled by your application |
+| `enableBootstrapJsCDN`, `bootstrapJsCDN` | Enabled, Bootstrap 4 URL | Legacy Bootstrap script |
+| `enablePopperJsCDN`, `popperJsCDN` | Enabled, package URL | Legacy Popper script |
+| `enableFontAwesomeCDN`, `fontAwesomeCDN` | Enabled, package URL | Legacy icon font |
+| `loggerDatatablesCSScdn`, `loggerDatatablesJScdn`, `loggerDatatablesJSVendorCdn` | Package URLs | Legacy DataTables assets |
+
+Modern views do not load jQuery, Bootstrap JavaScript, Popper, Font Awesome, or DataTables. The sun, moon, and monitor buttons select light, dark, or system mode. System mode follows changes to the device's color scheme. The selected mode is saved for this dashboard, independently of the host application's theme. Explicit light or dark configuration takes precedence on page load.
+
+IP logging uses Laravel's trusted-proxy configuration. Configure trusted proxies in the host application when traffic passes through Cloudflare or a load balancer.
+
+Filter and export examples:
+
+```text
+/activity?date_from=2026-10-01&date_to=2026-10-07
+/activity?period=last_7_days&description=Updated
+/activity/export?format=csv&period=today
+/activity/export?format=json&user=42
+/activity/export?format=excel&method=POST
+```
+
+All dashboard, lookup, export, clear, restore, and delete routes retain `web`, `auth`, and `activity` middleware. Route names remain `activity`, `cleared`, `clear-activity`, `destroy-activity`, `restore-activity`, `liveSearch`, and `export-activity`.
+
+## Changing Frameworks
+
+Run the interactive updater:
 
 ```bash
-    composer require jeremykenedy/laravel-logger
+php artisan logger:update
 ```
 
-2. Register the package
-
-Register the package with laravel in `bootstrap/app.php` with the following:
-
-```php
-    $app->register(\Jaybizzle\LaravelCrawlerDetect\LaravelCrawlerDetectServiceProvider::class);
-    $app->configure('laravel-logger');
-    $app->register(\jeremykenedy\LaravelLogger\LaravelLoggerServiceProvider::class);
-    $app->routeMiddleware(['activity' => \jeremykenedy\LaravelLogger\App\Http\Middleware\LogActivity::class, ]);
-```
-
-3. Copy the configuration file [laravel-logger.php](src/config/laravel-logger.php) to your `config/` directory
-
-##### Set LARAVEL_LOGGER_DISABLE_ROUTES=true in your .env file!
-
-4. Run the migration to add the table to record the activities to:
-
-```php
-    php artisan migrate
-```
-
-- Note: If you want to specify a different table or connection make sure you update your `.env` file with the needed configuration variables.
-
-5. Optionally Update your `.env` file and associated settings (see [Environment File](#environment-file) section)
-
-### Configuration
-
-Laravel Activity Logger can be configured in directly in `/config/laravel-logger.php` if you published the assets.
-Or you can variables to your `.env` file.
-
-##### Environment File
-
-Here are the `.env` file variables available:
-
-```dotenv
-LARAVEL_LOGGER_DATABASE_CONNECTION=mysql
-LARAVEL_LOGGER_DATABASE_TABLE=laravel_logger_activity
-LARAVEL_LOGGER_ROLES_ENABLED=true
-LARAVEL_LOGGER_ROLES_MIDDLWARE=role:admin
-LARAVEL_LOGGER_MIDDLEWARE_ENABLED=true
-LARAVEL_LOGGER_MIDDLEWARE_EXCEPT=
-LARAVEL_LOGGER_ACTIVITY_MODEL=jeremykenedy\LaravelLogger\App\Models\Activity
-LARAVEL_LOGGER_USER_MODEL=App\User
-LARAVEL_LOGGER_USER_ID_FIELD=id
-LARAVEL_LOGGER_DISABLE_ROUTES=false
-LARAVEL_LOGGER_PAGINATION_ENABLED=true
-LARAVEL_LOGGER_CURSOR_PAGINATION_ENABLED=false
-LARAVEL_LOGGER_PAGINATION_PER_PAGE=25
-LARAVEL_LOGGER_DATATABLES_ENABLED=true
-LARAVEL_LOGGER_ENABLE_SEARCH=true
-LARAVEL_LOGGER_SEARCH_FIELDS=description,user,method,route,ip
-LARAVEL_LOGGER_ENABLE_DATE_FILTERING=true
-LARAVEL_LOGGER_ENABLE_EXPORT=true
-LARAVEL_LOGGER_DASHBOARD_MENU_ENABLED=true
-LARAVEL_LOGGER_DASHBOARD_DRILLABLE=true
-LARAVEL_LOGGER_LOG_RECORD_FAILURES_TO_FILE=true
-LARAVEL_LOGGER_FLASH_MESSAGE_BLADE_ENABLED=true
-LARAVEL_LOGGER_LAYOUT=layouts.app
-LARAVEL_LOGGER_BOOTSTRAP_VERSION=4
-LARAVEL_LOGGER_BLADE_PLACEMENT=stack                    #option: yield or stack
-LARAVEL_LOGGER_BLADE_PLACEMENT_CSS=css-header           #placement name
-LARAVEL_LOGGER_BLADE_PLACEMENT_JS=scripts-footer        #placement name
-LARAVEL_LOGGER_JQUERY_CDN_ENABLED=true
-LARAVEL_LOGGER_JQUERY_CDN_URL=https://code.jquery.com/jquery-2.2.4.min.js
-LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_ENABLED=true
-LARAVEL_LOGGER_BOOTSTRAP_CSS_CDN_URL=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css
-LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_ENABLED=true
-LARAVEL_LOGGER_BOOTSTRAP_JS_CDN_URL=https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js
-LARAVEL_LOGGER_POPPER_JS_CDN_ENABLED=true
-LARAVEL_LOGGER_POPPER_JS_CDN_URL=https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js
-LARAVEL_LOGGER_FONT_AWESOME_CDN_ENABLED=true
-LARAVEL_LOGGER_FONT_AWESOME_CDN_URL=https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css
-```
-
-### Usage
-
-##### Middleware Usage
-
-Events for laravel authentication scaffolding are listened for as providers and are enabled via middleware.
-You can add events to your routes and controllers via the middleware:
-
-```php
-activity
-```
-
-Example to start recording page views using middlware in `web.php`:
-
-```php
-Route::group(['middleware' => ['web', 'activity']], function () {
-    Route::get('/', 'WelcomeController@welcome')->name('welcome');
-});
-```
-
-This middlware can be enabled/disabled in the configuration settings.
-
-##### Trait Usage
-
-Events can be recorded directly by using the trait.
-When using the trait you can customize the event description.
-
-To use the trait:
-
-1. Include the call in the head of your class file:
-
-   ```php
-       use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
-   ```
-
-2. Include the trait call in the opening of your class:
-
-   ```php
-       use ActivityLogger;
-   ```
-
-3. You can record the activity by calling the traits method:
-
-   ```
-       ActivityLogger::activity("Logging this activity.");
-   ```
-
-   Or as bellow to include extended activity details:
-
-   ```
-       ActivityLogger::activity("Logging this activity.", "Additional activity details.");
-   ```
-
-   Or even including the model related to the activity:
-
-   ```
-       ActivityLogger::activity("Logging this activity.", "Additional activity details.", ["id" => 1, "model" => "App\Models\User"]);
-   ```
-
-### Routes
-
-##### Laravel Activity Dashbaord Routes
-
-- `/activity` - Main activity dashboard
-- `/activity/cleared` - Cleared activities dashboard
-- `/activity/log/{id}` - Individual activity details
-- `/activity/cleared/log/{id}` - Individual cleared activity details
-- `/activity/export` - Export activities (supports CSV, JSON, Excel formats)
-
-#### Custom package routes
-
-If you wish to change the route paths, names or other options you can disable the default routes in your `.env` file by setting
-
-```dotenv
-LARAVEL_LOGGER_DISABLE_ROUTES=true
-```
-
-If you are on an existing install, you will also need update your `laravel-logger.php` config file to add the config option:
-
-```php
-'disableRoutes' => env('LARAVEL_LOGGER_DISABLE_ROUTES', false),
-```
-
-You can then add the routes directly to your application's `routes/web.php` file, and customise as required.
-
-```php
-Route::group(['prefix' => 'activity', 'namespace' => 'jeremykenedy\LaravelLogger\App\Http\Controllers', 'middleware' => ['web', 'auth', 'activity']], function () {
-
-    // Dashboards
-    Route::get('/', 'LaravelLoggerController@showAccessLog')->name('activity');
-    Route::get('/cleared', ['uses' => 'LaravelLoggerController@showClearedActivityLog'])->name('cleared');
-
-    // Drill Downs
-    Route::get('/log/{id}', 'LaravelLoggerController@showAccessLogEntry');
-    Route::get('/cleared/log/{id}', 'LaravelLoggerController@showClearedAccessLogEntry');
-
-    // Export
-    Route::get('/export', ['uses' => 'LaravelLoggerController@exportActivityLog'])->name('export-activity');
-
-    // Forms
-    Route::delete('/clear-activity', ['uses' => 'LaravelLoggerController@clearActivityLog'])->name('clear-activity');
-    Route::delete('/destroy-activity', ['uses' => 'LaravelLoggerController@destroyActivityLog'])->name('destroy-activity');
-    Route::post('/restore-log', ['uses' => 'LaravelLoggerController@restoreClearedActivityLog'])->name('restore-activity');
-});
-```
-
-### Search & Filtering
-
-Enhanced search functionality with date filtering and export capabilities.
-
-### High Performance Paginator
-
-When dealing with millions activity records, default behavior of not paginate records or [Laravel's paginator](https://laravel.com/docs/pagination#paginating-eloquent-results) (enabled `LARAVEL_LOGGER_PAGINATION_ENABLED=true`) may lead to huge performance penalties. For that use case you may set `LARAVEL_LOGGER_CURSOR_PAGINATION_ENABLED=true` to enable [Laravel's Cursor Pagination](https://laravel.com/docs/pagination#cursor-pagination) feature. This will heavily improve Laravel Logger page loading time. If you choose to do so it's advisable to read [Cursor vs. Offset Pagination](https://laravel.com/docs/pagination#cursor-vs-offset-pagination) section on Laravel's documentation to get acquainted with Cursor Pagination limitations.
-
-##### .env file
-
-add these configurations to your .env file to control the logging search and filtering
-
-```
-LARAVEL_LOGGER_ENABLE_SEARCH=true
-LARAVEL_LOGGER_SEARCH_FIELDS=description,user,method,route,ip
-LARAVEL_LOGGER_ENABLE_DATE_FILTERING=true
-LARAVEL_LOGGER_ENABLE_EXPORT=true
-```
-
-##### Date Filtering
-
-Filter activities by:
-
-- Date range (from/to dates)
-- Predefined periods (today, yesterday, last 7/30 days, last 3/6 months, last year)
-
-##### Export Functionality
-
-Export activities in multiple formats:
-
-- CSV format with proper headers
-- JSON format with structured data
-- Excel format (.xlsx)
-
-##### Usage Examples
-
-```
-# Filter by date range
-/activity?date_from=2024-01-01&date_to=2024-12-31
-
-# Filter by predefined period
-/activity?period=last_7_days
-
-# Export filtered data
-/activity/export?format=csv&period=last_30_days
-/activity/export?format=json&date_from=2024-01-01
-```
-
-### Screenshots
-
-![dashboard](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/1-dashboard.jpg)
-![drilldown](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/2-drilldown.jpg)
-![confirm-clear](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/3-confirm-clear.jpg)
-![log-cleared-msg](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/4-log-cleared-msg.jpg)
-![cleared-log](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/5-cleared-log.jpg)
-![confirm-restore](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/5-confirm-restore.jpg)
-![confirm-destroy](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/6-confirm-destroy.jpg)
-![success-destroy](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/7-success-destroy.jpg)
-![success-restored](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/8-success-restored.jpg)
-![cleared-drilldown](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/9-cleared-drilldown.jpg)
-
-### File Tree
+Or pass the choices directly:
 
 ```bash
-├── .env.travis
-├── .gitignore
-├── .travis.yml
-├── CODE_OF_CONDUCT.md
-├── LICENSE
-├── README.md
-├── composer.json
-└── src
-    ├── .env.example
-    ├── LaravelLoggerServiceProvider.php
-    ├── app
-    │   ├── Http
-    │   │   ├── Controllers
-    │   │   │   └── LaravelLoggerController.php
-    │   │   ├── Middleware
-    │   │   │   └── LogActivity.php
-    │   │   └── Traits
-    │   │       ├── ActivityLogger.php
-    │   │       ├── IpAddressDetails.php
-    │   │       └── UserAgentDetails.php
-    │   ├── Listeners
-    │   │   ├── LogAuthenticated.php
-    │   │   ├── LogAuthenticationAttempt.php
-    │   │   ├── LogFailedLogin.php
-    │   │   ├── LogLockout.php
-    │   │   ├── LogPasswordReset.php
-    │   │   ├── LogSuccessfulLogin.php
-    │   │   └── LogSuccessfulLogout.php
-    │   ├── Logic
-    │   │   └── helpers.php
-    │   └── Models
-    │       └── Activity.php
-    ├── config
-    │   └── laravel-logger.php
-    ├── database
-    │   └── migrations
-    │       └── 2017_11_04_103444_create_laravel_logger_activity_table.php
-    ├── resources
-    │   ├── lang
-    │   │   ├── de
-    │   │   │   └── laravel-logger.php
-    │   │   └── en
-    │   │       └── laravel-logger.php
-    │   └── views
-    │       ├── forms
-    │       │   ├── clear-activity-log.blade.php
-    │       │   ├── delete-activity-log.blade.php
-    │       │   └── restore-activity-log.blade.php
-    │       ├── logger
-    │       │   ├── activity-log-cleared.blade.php
-    │       │   ├── activity-log-item.blade.php
-    │       │   ├── activity-log.blade.php
-    │       │   └── partials
-    │       │       └── activity-table.blade.php
-    │       ├── modals
-    │       │   └── confirm-modal.blade.php
-    │       ├── partials
-    │       │   ├── form-search.blade.php
-    │       │   ├── form-status.blade.php
-    │       │   ├── scripts.blade.php
-    │       │   └── styles.blade.php
-    │       └── scripts
-    │           ├── add-title-attribute.blade.php
-    │           ├── clickable-row.blade.php
-    │           ├── confirm-modal.blade.php
-    │           ├── datatables.blade.php
-    │           └── tooltip.blade.php
-    └── routes
-        └── web.php
+php artisan logger:update --css=bootstrap5 --views=modern --theme=system
+php artisan logger:switch --css=tailwind
+php artisan logger:switch --css=bootstrap4 --views=legacy
 ```
 
-- Tree command can be installed using brew: `brew install tree`
-- File tree generated using command `tree -a -I '.git|node_modules|vendor|storage|tests'`
+| Option | Values | Purpose |
+|--------|--------|---------|
+| `--css` | `bootstrap3`, `bootstrap4`, `bootstrap5`, `tailwind` | CSS framework |
+| `--views` | `legacy`, `modern` | View set |
+| `--theme` | `system`, `light`, `dark` | Modern dashboard theme |
+| `--frontend` | `blade` | Existing server-rendered frontend |
+| `--publish-views` | Flag | Copy missing views without overwriting custom views |
 
-### Opening an Issue
+The update command preserves configuration and view overrides while refreshing package assets. The switch command makes the same validated setting changes without prompts. These commands use your application's configured environment file and do not install npm packages or optional Laravel packages. Run `php artisan config:clear` first if configuration is cached, then rebuild that cache after switching.
 
-Before opening an issue there are a couple of considerations:
+After switching, run `npm run build` in applications that bundle their CSS. Tailwind needs to scan both the views and the PHP class strings. For Tailwind 4, add these paths relative to `resources/css/app.css`:
 
-- You are all awesome!
-- **Read the instructions** and make sure all steps were _followed correctly_.
-- **Check** that the issue is not _specific to your development environment_ setup.
-- **Provide** _duplication steps_.
-- **Attempt to look into the issue**, and if you _have a solution, make a pull request_.
-- **Show that you have made an attempt** to _look into the issue_.
-- **Check** to see if the issue you are _reporting is a duplicate_ of a previous reported issue.
-- **Following these instructions show me that you have tried.**
-- If you have a questions send me an email to jeremykenedy@gmail.com
-- Need some help, I can do my best on Slack: https://opensourcehelpgroup.slack.com
-- Please be considerate that this is an open source project that I provide to the community for FREE when opening an issue.
+```css
+@source "../../vendor/jeremykenedy/laravel-logger/src/resources/views";
+@source "../../vendor/jeremykenedy/laravel-logger/src/Support/Dashboard.php";
+```
 
-### License
+For Tailwind 3, add those paths to `content` in `tailwind.config.js`. Disable `enableBootstrapCssCDN` if your layout already bundles Bootstrap. Optional UI packages can remain in your application's layout; Logger does not require them or change their configuration.
 
-Laravel-logger is licensed under the MIT license. Enjoy!
+## Artisan Commands
+
+| Command | Description | Options |
+|---------|-------------|---------|
+| `logger:install` | Publish missing configuration and install dashboard assets; detect existing installation | `--css`, `--frontend`, `--views`, `--theme`, `--publish-views`, `--force` |
+| `logger:update` | Update assets and choose framework settings interactively | Same options |
+| `logger:switch` | Change settings through flags without prompts | Same options |
+
+Install options:
+
+| Flag | Description |
+|------|-------------|
+| `--css=` | `bootstrap3`, `bootstrap4`, `bootstrap5`, or `tailwind` |
+| `--frontend=` | `blade`; other frontends use links to the existing dashboard |
+| `--views=` | `legacy` or `modern` |
+| `--theme=` | `system`, `light`, or `dark` |
+| `--publish-views` | Publish missing view files; preserve existing files |
+| `--force` | Skip the existing-installation confirmation; does not overwrite config or views |
+| `--no-interaction` | Use supplied options and current settings |
+
+The existing publish tags remain available. `LaravelLogger-config`, `LaravelLogger-views`, and `LaravelLogger-assets` allow individual publishing. Use `vendor:publish --tag=LaravelLogger-views --force` only when you intentionally want to replace view customizations.
+
+## Testing
+
+```bash
+composer install
+composer test
+composer lint
+composer analyse
+npm ci
+npm run test:browser
+```
+
+Tests run against an isolated SQLite database through Orchestra Testbench. See [TESTING.md](TESTING.md) for the matrix, browser fixture, and coverage commands. [FEATURES.md](FEATURES.md) describes filtering and export behavior. The existing [video tour](https://youtu.be/mHLSv9XhTuk) and [legacy dashboard screenshots](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/1-dashboard.jpg) remain useful for applications using the original views.
+
+Scrutinizer analysis: [project dashboard](https://scrutinizer-ci.com/g/jeremykenedy/laravel-logger/).
+
+## License
+
+This package is open-sourced software licensed under the [MIT license](LICENSE).

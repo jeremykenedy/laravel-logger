@@ -1,0 +1,7 @@
+preset: laravel
+
+finder:
+  exclude:
+    - vendor
+    - node_modules
+    - src/database/migrations

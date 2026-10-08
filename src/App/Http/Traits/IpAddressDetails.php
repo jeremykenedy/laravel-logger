@@ -4,20 +4,14 @@ namespace jeremykenedy\LaravelLogger\App\Http\Traits;
 
 trait IpAddressDetails
 {
-    /**
-     * Get the Location of the IP Address.
-     *
-     * @param string $ip          (optional, no value will always return NULL)
-     * @param string $purpose     (optional)
-     * @param bool   $deep_detect (optional)
-     *
-     * @return string
-     */
     public static function checkIP($ip = null, $purpose = 'location', $deep_detect = true)
     {
+        if (! config('LaravelLogger.enableGeoPlugin', true)) {
+            return null;
+        }
         $output = null;
         if (filter_var($ip, FILTER_VALIDATE_IP) === false) {
-            $ip = $_SERVER['REMOTE_ADDR'];
+            $ip = $_SERVER['REMOTE_ADDR'] ?? null;
             if ($deep_detect) {
                 if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP)) {
                     $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
@@ -27,7 +21,7 @@ trait IpAddressDetails
                 }
             }
         }
-        $purpose = str_replace(['name', "\n", "\t", ' ', '-', '_'], null, strtolower(trim($purpose)));
+        $purpose = str_replace(['name', "\n", "\t", ' ', '-', '_'], '', strtolower(trim($purpose)));
         $support = ['country', 'countrycode', 'state', 'region', 'city', 'location', 'address'];
         $continents = [
             'AF' => 'Africa',
@@ -39,25 +33,25 @@ trait IpAddressDetails
             'SA' => 'South America',
         ];
 
-        if (config('LaravelLogger.enableGeoPlugin', true) && filter_var($ip, FILTER_VALIDATE_IP) && in_array($purpose, $support)) {
+        if (filter_var($ip, FILTER_VALIDATE_IP) && in_array($purpose, $support)) {
             $geopluginUrl = config('LaravelLogger.geoPluginUrl', 'http://www.geoplugin.net/json.gp?ip=');
-            $ipdat = @json_decode(file_get_contents($geopluginUrl.$ip));
+            $ipdat = @json_decode(file_get_contents($geopluginUrl.$ip, false, stream_context_create(['http' => ['timeout' => 3]])));
             if (@strlen(trim($ipdat->geoplugin_countryCode)) === 2) {
                 switch ($purpose) {
                     case 'location':
                         $output = [
-                            'city'           => @$ipdat->geoplugin_city,
-                            'state'          => @$ipdat->geoplugin_regionName,
-                            'country'        => @$ipdat->geoplugin_countryName,
-                            'countryCode'    => @$ipdat->geoplugin_countryCode,
-                            'continent'      => @$continents[strtoupper($ipdat->geoplugin_continentCode)],
+                            'city' => @$ipdat->geoplugin_city,
+                            'state' => @$ipdat->geoplugin_regionName,
+                            'country' => @$ipdat->geoplugin_countryName,
+                            'countryCode' => @$ipdat->geoplugin_countryCode,
+                            'continent' => @$continents[strtoupper($ipdat->geoplugin_continentCode)],
                             'continent_code' => @$ipdat->geoplugin_continentCode,
-                            'latitude'       => @$ipdat->geoplugin_latitude,
-                            'longitude'      => @$ipdat->geoplugin_longitude,
-                            'currencyCode'   => @$ipdat->geoplugin_currencyCode,
-                            'areaCode'       => @$ipdat->geoplugin_areaCode,
-                            'dmaCode'        => @$ipdat->geoplugin_dmaCode,
-                            'region'         => @$ipdat->geoplugin_region,
+                            'latitude' => @$ipdat->geoplugin_latitude,
+                            'longitude' => @$ipdat->geoplugin_longitude,
+                            'currencyCode' => @$ipdat->geoplugin_currencyCode,
+                            'areaCode' => @$ipdat->geoplugin_areaCode,
+                            'dmaCode' => @$ipdat->geoplugin_dmaCode,
+                            'region' => @$ipdat->geoplugin_region,
                         ];
                         break;
                     case 'address':

@@ -8,17 +8,17 @@ return [
     |--------------------------------------------------------------------------
     */
     'userTypes' => [
-        'guest'      => 'Gast',
+        'guest' => 'Gast',
         'registered' => 'Registriert',
-        'crawler'    => 'Suchmaschine',
+        'crawler' => 'Suchmaschine',
     ],
 
     'verbTypes' => [
-        'created'    => 'Erstellt',
-        'edited'     => 'Bearbeitet',
-        'deleted'    => 'Gelöscht',
-        'viewed'     => 'Angesehen',
-        'crawled'    => 'Gesucht (Crwaler)',
+        'created' => 'Erstellt',
+        'edited' => 'Bearbeitet',
+        'deleted' => 'Gelöscht',
+        'viewed' => 'Angesehen',
+        'crawled' => 'Gesucht (Crwaler)',
     ],
 
     'tooltips' => [
@@ -31,31 +31,31 @@ return [
     |--------------------------------------------------------------------------
     */
     'dashboard' => [
-        'title'     => 'Aktivitätslog',
-        'subtitle'  => 'Ereignisse',
+        'title' => 'Aktivitätslog',
+        'subtitle' => 'Ereignisse',
 
-        'labels'    => [
-            'id'            => 'ID',
-            'time'          => 'Zeit',
-            'description'   => 'Beschreibung',
-            'user'          => 'Nutzer',
-            'method'        => 'Methode',
-            'route'         => 'Route',
-            'ipAddress'     => 'IP <span class="hidden-sm hidden-xs">Adresse</span>',
-            'agent'         => '<span class="hidden-sm hidden-xs">User </span>Agent',
-            'deleteDate'    => 'Deleted <span class="hidden-sm hidden-xs">am</span>',
+        'labels' => [
+            'id' => 'ID',
+            'time' => 'Zeit',
+            'description' => 'Beschreibung',
+            'user' => 'Nutzer',
+            'method' => 'Methode',
+            'route' => 'Route',
+            'ipAddress' => 'IP <span class="hidden-sm hidden-xs">Adresse</span>',
+            'agent' => '<span class="hidden-sm hidden-xs">User </span>Agent',
+            'deleteDate' => 'Deleted <span class="hidden-sm hidden-xs">am</span>',
         ],
 
-        'menu'      => [
-            'alt'           => 'Aktivitätslog Menü',
-            'clear'         => 'Lösche Aktivitätslog',
-            'show'          => 'Zeige gelöschte Logs',
-            'back'          => 'Zurück zum Log',
+        'menu' => [
+            'alt' => 'Aktivitätslog Menü',
+            'clear' => 'Lösche Aktivitätslog',
+            'show' => 'Zeige gelöschte Logs',
+            'back' => 'Zurück zum Log',
         ],
 
-        'search'    => [
-            'all'           => 'All',
-            'search'        => 'Suche',
+        'search' => [
+            'all' => 'All',
+            'search' => 'Suche',
         ],
     ],
 
@@ -66,45 +66,45 @@ return [
     */
 
     'drilldown' => [
-        'title'                 => 'Aktivitätslog :id',
-        'title-details'         => 'Aktivitätsdetails',
-        'title-ip-details'      => 'IP Informationen',
-        'title-user-details'    => 'Nutzer Informationen',
-        'title-user-activity'   => 'Nutzer Aktivität',
+        'title' => 'Aktivitätslog :id',
+        'title-details' => 'Aktivitätsdetails',
+        'title-ip-details' => 'IP Informationen',
+        'title-user-details' => 'Nutzer Informationen',
+        'title-user-activity' => 'Nutzer Aktivität',
 
-        'buttons'   => [
-            'back'      => '<span class="hidden-xs hidden-sm">Zurück zum </span><span class="hidden-xs">Aktivitätslog</span>',
+        'buttons' => [
+            'back' => '<span class="hidden-xs hidden-sm">Zurück zum </span><span class="hidden-xs">Aktivitätslog</span>',
         ],
 
         'labels' => [
-            'userRoles'     => 'Nutzerrolle',
-            'userLevel'     => 'Level',
+            'userRoles' => 'Nutzerrolle',
+            'userLevel' => 'Level',
         ],
 
         'list-group' => [
-            'labels'    => [
-                'id'            => 'Aktivitätslog ID:',
-                'ip'            => 'IP Adresse',
-                'description'   => 'Beschreibung',
-                'details'       => 'Einzelheiten',
-                'userType'      => 'Nutzertyp',
-                'userId'        => 'Nutzer ID',
-                'route'         => 'Route',
-                'agent'         => 'User Agent',
-                'locale'        => 'Sprache',
-                'referer'       => 'Referer (Ursprung)',
+            'labels' => [
+                'id' => 'Aktivitätslog ID:',
+                'ip' => 'IP Adresse',
+                'description' => 'Beschreibung',
+                'details' => 'Einzelheiten',
+                'userType' => 'Nutzertyp',
+                'userId' => 'Nutzer ID',
+                'route' => 'Route',
+                'agent' => 'User Agent',
+                'locale' => 'Sprache',
+                'referer' => 'Referer (Ursprung)',
 
-                'methodType'    => 'Methoden Typus',
-                'createdAt'     => 'Ereignisausführung',
-                'updatedAt'     => 'Bearbeitet am',
-                'deletedAt'     => 'Gelöscht am',
-                'timePassed'    => 'Letzte Aktivität',
-                'userName'      => 'Nutzer',
+                'methodType' => 'Methoden Typus',
+                'createdAt' => 'Ereignisausführung',
+                'updatedAt' => 'Bearbeitet am',
+                'deletedAt' => 'Gelöscht am',
+                'timePassed' => 'Letzte Aktivität',
+                'userName' => 'Nutzer',
                 'userFirstName' => 'Vorname',
-                'userLastName'  => 'Nachname',
+                'userLastName' => 'Nachname',
                 'userFulltName' => 'Name',
-                'userEmail'     => 'Email',
-                'userSignupIp'  => 'Anmelde Ip',
+                'userEmail' => 'Email',
+                'userSignupIp' => 'Anmelde Ip',
                 'userCreatedAt' => 'Erstellt',
                 'userUpdatedAt' => 'Bearbeitet',
             ],
@@ -124,20 +124,20 @@ return [
 
     'modals' => [
         'shared' => [
-            'btnCancel'     => 'Abbrechen',
-            'btnConfirm'    => 'Bestätigen',
+            'btnCancel' => 'Abbrechen',
+            'btnConfirm' => 'Bestätigen',
         ],
         'clearLog' => [
-            'title'     => 'Lösche Aktivitätslog',
-            'message'   => 'Sind Sie sicher, dass Sie das Aktivitätslog löschen möchten?',
+            'title' => 'Lösche Aktivitätslog',
+            'message' => 'Sind Sie sicher, dass Sie das Aktivitätslog löschen möchten?',
         ],
         'deleteLog' => [
-            'title'     => 'Unwiederbringliches Löschen des Aktivitätslogs',
-            'message'   => 'Sind Sie sicher, dass Sie das Aktivitätslog löschen möchten?',
+            'title' => 'Unwiederbringliches Löschen des Aktivitätslogs',
+            'message' => 'Sind Sie sicher, dass Sie das Aktivitätslog löschen möchten?',
         ],
         'restoreLog' => [
-            'title'     => 'Wiederherstellen des Aktivitätslogs',
-            'message'   => 'Sind Sie sicher, dass Sie das Aktivitätslog wiederherstellen möchten?',
+            'title' => 'Wiederherstellen des Aktivitätslogs',
+            'message' => 'Sind Sie sicher, dass Sie das Aktivitätslog wiederherstellen möchten?',
         ],
     ],
 
@@ -148,9 +148,9 @@ return [
     */
 
     'messages' => [
-        'logClearedSuccessfuly'   => 'Aktivitätslog erfolgreich geleert',
+        'logClearedSuccessfuly' => 'Aktivitätslog erfolgreich geleert',
         'logDestroyedSuccessfuly' => 'Aktivitätslog erfolgreich gelöscht',
-        'logRestoredSuccessfuly'  => 'Aktivitätslog erfolgreich wiederhergestellt',
+        'logRestoredSuccessfuly' => 'Aktivitätslog erfolgreich wiederhergestellt',
     ],
 
     /*
@@ -160,11 +160,11 @@ return [
     */
 
     'dashboardCleared' => [
-        'title'     => 'Gelöschte Aktivitäten',
-        'subtitle'  => 'Gelöschte Ereignisse',
+        'title' => 'Gelöschte Aktivitäten',
+        'subtitle' => 'Gelöschte Ereignisse',
 
-        'menu'      => [
-            'deleteAll'  => 'Lösche alle Aktivitäten',
+        'menu' => [
+            'deleteAll' => 'Lösche alle Aktivitäten',
             'restoreAll' => 'Aktivitäten wiederherstellen',
         ],
     ],

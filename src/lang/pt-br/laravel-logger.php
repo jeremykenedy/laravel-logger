@@ -8,27 +8,27 @@ return [
     |--------------------------------------------------------------------------
     */
     'userTypes' => [
-        'guest'      => 'Não-registrado',
+        'guest' => 'Não-registrado',
         'registered' => 'Registrado',
-        'crawler'    => 'Rastreador',
+        'crawler' => 'Rastreador',
     ],
 
     'verbTypes' => [
-        'created'    => 'Criou',
-        'edited'     => 'Editou',
-        'deleted'    => 'Excluiu',
-        'viewed'     => 'Visualizou',
-        'crawled'    => 'Rastreou',
+        'created' => 'Criou',
+        'edited' => 'Editou',
+        'deleted' => 'Excluiu',
+        'viewed' => 'Visualizou',
+        'crawled' => 'Rastreou',
     ],
 
     'listenerTypes' => [
-        'auth'       => 'Ação de Autenticação',
-        'attempt'    => 'Tentativa de Autenticação',
-        'failed'     => 'Falhou na Tentativa de Login',
-        'lockout'    => 'Bloqueado',
-        'reset'      => 'Redefiniu Senha',
-        'login'      => 'Acessou o sistema',
-        'logout'     => 'Saiu do sistema',
+        'auth' => 'Ação de Autenticação',
+        'attempt' => 'Tentativa de Autenticação',
+        'failed' => 'Falhou na Tentativa de Login',
+        'lockout' => 'Bloqueado',
+        'reset' => 'Redefiniu Senha',
+        'login' => 'Acessou o sistema',
+        'logout' => 'Saiu do sistema',
     ],
 
     'tooltips' => [
@@ -41,31 +41,31 @@ return [
     |--------------------------------------------------------------------------
     */
     'dashboard' => [
-        'title'     => 'Registro de Ações',
-        'subtitle'  => 'Eventos',
+        'title' => 'Registro de Ações',
+        'subtitle' => 'Eventos',
 
-        'labels'    => [
-            'id'            => 'Id',
-            'time'          => 'Tempo',
-            'description'   => 'Descrição',
-            'user'          => 'Usuário',
-            'method'        => 'Método HTTP',
-            'route'         => 'Rota',
-            'ipAddress'     => 'Endereço <span class="hidden-sm hidden-xs">IP</span>',
-            'agent'         => '<span class="hidden-sm hidden-xs">Agente de </span>Usuário',
-            'deleteDate'    => '<span class="hidden-sm hidden-xs">Data de </span>Exclusão',
+        'labels' => [
+            'id' => 'Id',
+            'time' => 'Tempo',
+            'description' => 'Descrição',
+            'user' => 'Usuário',
+            'method' => 'Método HTTP',
+            'route' => 'Rota',
+            'ipAddress' => 'Endereço <span class="hidden-sm hidden-xs">IP</span>',
+            'agent' => '<span class="hidden-sm hidden-xs">Agente de </span>Usuário',
+            'deleteDate' => '<span class="hidden-sm hidden-xs">Data de </span>Exclusão',
         ],
 
-        'menu'      => [
-            'alt'           => 'Menu do Registro de Ações',
-            'clear'         => 'Remover Registros de Ações',
-            'show'          => 'Mostrar Registros Removidos',
-            'back'          => 'Voltar para o Registro de Ações',
+        'menu' => [
+            'alt' => 'Menu do Registro de Ações',
+            'clear' => 'Remover Registros de Ações',
+            'show' => 'Mostrar Registros Removidos',
+            'back' => 'Voltar para o Registro de Ações',
         ],
 
-        'search'    => [
-            'all'           => 'Todos',
-            'search'        => 'Pesquisar',
+        'search' => [
+            'all' => 'Todos',
+            'search' => 'Pesquisar',
         ],
     ],
 
@@ -76,45 +76,45 @@ return [
     */
 
     'drilldown' => [
-        'title'                 => 'Registro de Ações :id',
-        'title-details'         => 'Detalhes de Ações',
-        'title-ip-details'      => 'Detalhes de Endereço de IP',
-        'title-user-details'    => 'Detalhes de Usuário',
-        'title-user-activity'   => 'Ações Adicionais de Usuário',
+        'title' => 'Registro de Ações :id',
+        'title-details' => 'Detalhes de Ações',
+        'title-ip-details' => 'Detalhes de Endereço de IP',
+        'title-user-details' => 'Detalhes de Usuário',
+        'title-user-activity' => 'Ações Adicionais de Usuário',
 
-        'buttons'   => [
-            'back'      => '<span class="hidden-xs hidden-sm">Voltar para </span><span class="hidden-xs">Registro de Ações</span>',
+        'buttons' => [
+            'back' => '<span class="hidden-xs hidden-sm">Voltar para </span><span class="hidden-xs">Registro de Ações</span>',
         ],
 
         'labels' => [
-            'userRoles'     => 'Funções de Usuário',
-            'userLevel'     => 'Nível',
+            'userRoles' => 'Funções de Usuário',
+            'userLevel' => 'Nível',
         ],
 
         'list-group' => [
-            'labels'    => [
-                'id'            => 'Registro de Ações ID:',
-                'ip'            => 'Endereço IP',
-                'description'   => 'Descrição',
-                'details'       => 'Detalhes',
-                'userType'      => 'Tipo de Usuário',
-                'userId'        => 'Id de Usuário',
-                'route'         => 'Rota',
-                'agent'         => 'Agente de Usuário',
-                'locale'        => 'Local',
-                'referer'       => 'Referenciador',
+            'labels' => [
+                'id' => 'Registro de Ações ID:',
+                'ip' => 'Endereço IP',
+                'description' => 'Descrição',
+                'details' => 'Detalhes',
+                'userType' => 'Tipo de Usuário',
+                'userId' => 'Id de Usuário',
+                'route' => 'Rota',
+                'agent' => 'Agente de Usuário',
+                'locale' => 'Local',
+                'referer' => 'Referenciador',
 
-                'methodType'    => 'Tipo de Método',
-                'createdAt'     => 'Criado Em',
-                'updatedAt'     => 'Atualizado Em',
-                'deletedAt'     => 'Excluído Em',
-                'timePassed'    => 'Tempo passado',
-                'userName'      => 'Nome de Usuário',
+                'methodType' => 'Tipo de Método',
+                'createdAt' => 'Criado Em',
+                'updatedAt' => 'Atualizado Em',
+                'deletedAt' => 'Excluído Em',
+                'timePassed' => 'Tempo passado',
+                'userName' => 'Nome de Usuário',
                 'userFirstName' => 'Primeiro Nome',
-                'userLastName'  => 'Sobrenome',
+                'userLastName' => 'Sobrenome',
                 'userFulltName' => 'Nome Completo',
-                'userEmail'     => 'Email de Usuário',
-                'userSignupIp'  => 'Ip de Inscrição',
+                'userEmail' => 'Email de Usuário',
+                'userSignupIp' => 'Ip de Inscrição',
                 'userCreatedAt' => 'Criado',
                 'userUpdatedAt' => 'Atualizado',
             ],
@@ -134,20 +134,20 @@ return [
 
     'modals' => [
         'shared' => [
-            'btnCancel'     => 'Cancelar',
-            'btnConfirm'    => 'Confirmar',
+            'btnCancel' => 'Cancelar',
+            'btnConfirm' => 'Confirmar',
         ],
         'clearLog' => [
-            'title'     => 'Remover registros de Ações',
-            'message'   => 'Você tem certeza que deseja remover os registros de ações?',
+            'title' => 'Remover registros de Ações',
+            'message' => 'Você tem certeza que deseja remover os registros de ações?',
         ],
         'deleteLog' => [
-            'title'     => 'Excluir permanentemente o Registro de Ações',
-            'message'   => 'Você tem certeza que deseja EXCLUIR PERMANENTEMENTE o registro de ações?',
+            'title' => 'Excluir permanentemente o Registro de Ações',
+            'message' => 'Você tem certeza que deseja EXCLUIR PERMANENTEMENTE o registro de ações?',
         ],
         'restoreLog' => [
-            'title'     => 'Restaurar registros de ações removidos',
-            'message'   => 'Você tem certeza que deseja restaurar os registros de ações removidos?',
+            'title' => 'Restaurar registros de ações removidos',
+            'message' => 'Você tem certeza que deseja restaurar os registros de ações removidos?',
         ],
     ],
 
@@ -158,9 +158,9 @@ return [
     */
 
     'messages' => [
-        'logClearedSuccessfuly'   => 'Registros de ações removidos com sucesso',
+        'logClearedSuccessfuly' => 'Registros de ações removidos com sucesso',
         'logDestroyedSuccessfuly' => 'Registros de ações excluídos com sucesso',
-        'logRestoredSuccessfuly'  => 'Registros de ações restaurados com sucesso',
+        'logRestoredSuccessfuly' => 'Registros de ações restaurados com sucesso',
     ],
 
     /*
@@ -170,11 +170,11 @@ return [
     */
 
     'dashboardCleared' => [
-        'title'     => 'Registros de Ações Removidos',
-        'subtitle'  => 'Eventos Removidos',
+        'title' => 'Registros de Ações Removidos',
+        'subtitle' => 'Eventos Removidos',
 
-        'menu'      => [
-            'deleteAll'  => 'Remover Todos os Registros de Ações',
+        'menu' => [
+            'deleteAll' => 'Remover Todos os Registros de Ações',
             'restoreAll' => 'Restaurar Todos os Registros de Ações',
         ],
     ],

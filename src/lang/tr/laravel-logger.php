@@ -8,17 +8,17 @@ return [
     |--------------------------------------------------------------------------
     */
     'userTypes' => [
-        'guest'      => 'Misafir',
+        'guest' => 'Misafir',
         'registered' => 'Kayıtlı',
-        'crawler'    => 'Yancı',
+        'crawler' => 'Yancı',
     ],
 
     'verbTypes' => [
-        'created'    => 'Oluşturuldu',
-        'edited'     => 'Düzenlendi',
-        'deleted'    => 'Silindi',
-        'viewed'     => 'Gösterildi',
-        'crawled'    => 'crawled',
+        'created' => 'Oluşturuldu',
+        'edited' => 'Düzenlendi',
+        'deleted' => 'Silindi',
+        'viewed' => 'Gösterildi',
+        'crawled' => 'crawled',
     ],
 
     'tooltips' => [
@@ -31,31 +31,31 @@ return [
     |--------------------------------------------------------------------------
     */
     'dashboard' => [
-        'title'     => 'Aktivite Kayıtları',
-        'subtitle'  => 'Etkinlik',
+        'title' => 'Aktivite Kayıtları',
+        'subtitle' => 'Etkinlik',
 
-        'labels'    => [
-            'id'            => 'NO',
-            'time'          => 'Zaman',
-            'description'   => 'Tanım',
-            'user'          => 'Kullanıcı',
-            'method'        => 'Method',
-            'route'         => 'Yönlendirme',
-            'ipAddress'     => 'IP <span class="hidden-sm hidden-xs">Adresi</span>',
-            'agent'         => '<span class="hidden-sm hidden-xs">Kullanıcı </span>Tarayıcısı',
-            'deleteDate'    => '<span class="hidden-sm hidden-xs">Silinme </span>Zamanı',
+        'labels' => [
+            'id' => 'NO',
+            'time' => 'Zaman',
+            'description' => 'Tanım',
+            'user' => 'Kullanıcı',
+            'method' => 'Method',
+            'route' => 'Yönlendirme',
+            'ipAddress' => 'IP <span class="hidden-sm hidden-xs">Adresi</span>',
+            'agent' => '<span class="hidden-sm hidden-xs">Kullanıcı </span>Tarayıcısı',
+            'deleteDate' => '<span class="hidden-sm hidden-xs">Silinme </span>Zamanı',
         ],
 
-        'menu'      => [
-            'alt'           => 'Aktivite kayıt menüsü',
-            'clear'         => 'Aktivite kayıtlarını temizle',
-            'show'          => 'Temizlenen kayıtları göster',
-            'back'          => 'Aktivite kayıtlarına geri dön',
+        'menu' => [
+            'alt' => 'Aktivite kayıt menüsü',
+            'clear' => 'Aktivite kayıtlarını temizle',
+            'show' => 'Temizlenen kayıtları göster',
+            'back' => 'Aktivite kayıtlarına geri dön',
         ],
 
-        'search'    => [
-            'all'           => 'Hepsi',
-            'search'        => 'Ara',
+        'search' => [
+            'all' => 'Hepsi',
+            'search' => 'Ara',
         ],
     ],
 
@@ -66,45 +66,45 @@ return [
     */
 
     'drilldown' => [
-        'title'                 => 'Aktivite NO: :id',
-        'title-details'         => 'Aktivite detayı',
-        'title-ip-details'      => 'IP Adres Detayı',
-        'title-user-details'    => 'Kullanıcı Detayı',
-        'title-user-activity'   => 'Ek Kullanıcı Etkinliği',
+        'title' => 'Aktivite NO: :id',
+        'title-details' => 'Aktivite detayı',
+        'title-ip-details' => 'IP Adres Detayı',
+        'title-user-details' => 'Kullanıcı Detayı',
+        'title-user-activity' => 'Ek Kullanıcı Etkinliği',
 
-        'buttons'   => [
-            'back'      => '<span class="hidden-xs hidden-sm">Aktivite Kayıtlarına </span><span class="hidden-xs">geri dön</span>',
+        'buttons' => [
+            'back' => '<span class="hidden-xs hidden-sm">Aktivite Kayıtlarına </span><span class="hidden-xs">geri dön</span>',
         ],
 
         'labels' => [
-            'userRoles'     => 'Kullanıcı Rolleri',
-            'userLevel'     => 'Seviye',
+            'userRoles' => 'Kullanıcı Rolleri',
+            'userLevel' => 'Seviye',
         ],
 
         'list-group' => [
-            'labels'    => [
-                'id'            => 'Aktivite Kayıt NO:',
-                'ip'            => 'IP Adresi',
-                'description'   => 'Tanım',
-                'details'       => 'Detay',
-                'userType'      => 'Kullanıcı Türü',
-                'userId'        => 'Kullanıcı NO',
-                'route'         => 'Yönlendirme',
-                'agent'         => 'Tarayıcı',
-                'locale'        => 'Yerel',
-                'referer'       => 'Yönlendirilen',
+            'labels' => [
+                'id' => 'Aktivite Kayıt NO:',
+                'ip' => 'IP Adresi',
+                'description' => 'Tanım',
+                'details' => 'Detay',
+                'userType' => 'Kullanıcı Türü',
+                'userId' => 'Kullanıcı NO',
+                'route' => 'Yönlendirme',
+                'agent' => 'Tarayıcı',
+                'locale' => 'Yerel',
+                'referer' => 'Yönlendirilen',
 
-                'methodType'    => 'Yöntem Türü',
-                'createdAt'     => 'Etkinlik Zamanı',
-                'updatedAt'     => 'Güncellenme',
-                'deletedAt'     => 'Silinme',
-                'timePassed'    => 'Zaman geçti',
-                'userName'      => 'Kullanıcı adı',
+                'methodType' => 'Yöntem Türü',
+                'createdAt' => 'Etkinlik Zamanı',
+                'updatedAt' => 'Güncellenme',
+                'deletedAt' => 'Silinme',
+                'timePassed' => 'Zaman geçti',
+                'userName' => 'Kullanıcı adı',
                 'userFirstName' => 'AD',
-                'userLastName'  => 'SOYAD',
+                'userLastName' => 'SOYAD',
                 'userFulltName' => 'TAM AD',
-                'userEmail'     => 'E-Posta',
-                'userSignupIp'  => 'Kayıt Olduğu IP',
+                'userEmail' => 'E-Posta',
+                'userSignupIp' => 'Kayıt Olduğu IP',
                 'userCreatedAt' => 'Oluşturuldu',
                 'userUpdatedAt' => 'Güncellendi',
             ],
@@ -124,20 +124,20 @@ return [
 
     'modals' => [
         'shared' => [
-            'btnCancel'     => 'Vazgeç',
-            'btnConfirm'    => 'Onayla',
+            'btnCancel' => 'Vazgeç',
+            'btnConfirm' => 'Onayla',
         ],
         'clearLog' => [
-            'title'     => 'Etkinlik Günlüğünü Temizle',
-            'message'   => 'Etkinlik günlüğünü temizlemek istediğinizden emin misiniz?',
+            'title' => 'Etkinlik Günlüğünü Temizle',
+            'message' => 'Etkinlik günlüğünü temizlemek istediğinizden emin misiniz?',
         ],
         'deleteLog' => [
-            'title'     => 'Etkinlik Günlüğünü Kalıcı Olarak Sil',
-            'message'   => 'Etkinlik günlüğünü kalıcı olarak SİLMEK istediğinizden emin misiniz?',
+            'title' => 'Etkinlik Günlüğünü Kalıcı Olarak Sil',
+            'message' => 'Etkinlik günlüğünü kalıcı olarak SİLMEK istediğinizden emin misiniz?',
         ],
         'restoreLog' => [
-            'title'     => 'Temizlenen Etkinlik Günlüğünü Geri Yükle',
-            'message'   => 'Temizlenen etkinlik günlüklerini geri yüklemek istediğinizden emin misiniz?',
+            'title' => 'Temizlenen Etkinlik Günlüğünü Geri Yükle',
+            'message' => 'Temizlenen etkinlik günlüklerini geri yüklemek istediğinizden emin misiniz?',
         ],
     ],
 
@@ -148,9 +148,9 @@ return [
     */
 
     'messages' => [
-        'logClearedSuccessfuly'   => 'Aktivite kayıtları başarıyla temizlendi',
+        'logClearedSuccessfuly' => 'Aktivite kayıtları başarıyla temizlendi',
         'logDestroyedSuccessfuly' => 'Aktivite kaydı başarıyla temizlendi',
-        'logRestoredSuccessfuly'  => 'Aktivite kaydı başarıyla yüklendi',
+        'logRestoredSuccessfuly' => 'Aktivite kaydı başarıyla yüklendi',
     ],
 
     /*
@@ -160,11 +160,11 @@ return [
     */
 
     'dashboardCleared' => [
-        'title'     => 'Etkinlik kayıtları temizlendi',
-        'subtitle'  => 'Etkinlikler temizlendi',
+        'title' => 'Etkinlik kayıtları temizlendi',
+        'subtitle' => 'Etkinlikler temizlendi',
 
-        'menu'      => [
-            'deleteAll'  => 'Tüm aktivite kayıtlarını sil',
+        'menu' => [
+            'deleteAll' => 'Tüm aktivite kayıtlarını sil',
             'restoreAll' => 'Tüm aktivite kayıtlarını yedekle',
         ],
     ],

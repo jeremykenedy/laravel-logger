@@ -1,0 +1,29 @@
+filter:
+  excluded_paths:
+    - vendor/*
+    - tests/*
+    - database/factories/*
+    - node_modules/*
+
+checks:
+  php: true
+
+build:
+  environment:
+    php:
+      version: '8.3'
+  dependencies:
+    override:
+      - composer update --no-interaction --prefer-dist
+  nodes:
+    tests:
+      tests:
+        override:
+          - command: vendor/bin/phpunit --coverage-filter src --coverage-clover coverage/clover.xml
+            coverage:
+              file: coverage/clover.xml
+              format: clover
+    analysis:
+      tests:
+        override:
+          - php-scrutinizer-run

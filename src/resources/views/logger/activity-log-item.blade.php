@@ -24,7 +24,7 @@
     @push(config('LaravelLogger.bladePlacementJs'))
 @endif
 
-@include('LaravelLogger::partials.scripts', ['activities' => $userActivities])
+@include('LaravelLogger::partials.scripts', ['activities' => $userActivities ?? collect()])
 
 @if(config('LaravelLogger.bladePlacement') == 'yield')
     @endsection
@@ -346,7 +346,7 @@
                                 @endif
                             </li>
                             <li class="list-group-item">
-                                @include('LaravelLogger::logger.partials.activity-table', ['activities' => $userActivities])
+                                @include('LaravelLogger::logger.partials.activity-table', ['activities' => $userActivities ?? collect()])
                             </li>
                         </ul>
                         <br />
