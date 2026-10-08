@@ -45,7 +45,6 @@ class UserAgentParser
         $replacement = '$7$8|$2$3|$9|${17}${15}$5$3|${18}${13}$6${11}';
 
         return explode('|', preg_replace($pattern, $replacement, $ua, PREG_PATTERN_ORDER));
-
     }
 
     private function version(string $version): string
