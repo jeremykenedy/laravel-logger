@@ -11,8 +11,8 @@ class GeoDetailsTest extends TestCase
 
     protected function setUp(): void
     {
-        parent::setUp();
         $this->prefix = sys_get_temp_dir().'/logger_geo_'.uniqid().'_';
+        parent::setUp();
         config(['LaravelLogger.enableGeoPlugin' => true, 'LaravelLogger.geoPluginUrl' => 'file://'.$this->prefix]);
     }
 
