@@ -298,6 +298,7 @@ class LaravelLoggerController extends BaseController
 
         $callback = function () use ($activities): void {
             $file = fopen('php://output', 'w');
+            $escape = PHP_VERSION_ID < 70400 ? '\\' : '';
 
             fputcsv($file, [
                 'ID',
@@ -314,7 +315,7 @@ class LaravelLoggerController extends BaseController
                 'Method Type',
                 'Created At',
                 'Updated At',
-            ], ',', '"', '');
+            ], ',', '"', $escape);
 
             foreach ($activities as $activity) {
                 fputcsv($file, array_map([ExcelExport::class, 'safeCell'], [
@@ -332,7 +333,7 @@ class LaravelLoggerController extends BaseController
                     $activity->methodType,
                     $activity->created_at,
                     $activity->updated_at,
-                ]), ',', '"', '');
+                ]), ',', '"', $escape);
             }
 
             fclose($file);

@@ -24,6 +24,14 @@ class ExportTest extends TestCase
         $this->assertStringContainsString("'=HYPERLINK", $csv);
         $this->assertStringContainsString('First, second', $csv);
         $this->assertStringContainsString('.csv', $response->headers->get('Content-Disposition'));
+        $stream = fopen('php://memory', 'r+');
+        fwrite($stream, $csv);
+        rewind($stream);
+        fgetcsv($stream, 0, ',', '"', '\\');
+        $row = fgetcsv($stream, 0, ',', '"', '\\');
+        fclose($stream);
+        $this->assertSame("'=HYPERLINK(\"http://example.com\")", $row[1]);
+        $this->assertSame("First, second\nthird", $row[2]);
     }
 
     public function test_json_export_preserves_fields_and_applies_search(): void
