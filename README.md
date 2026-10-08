@@ -9,14 +9,20 @@
 <p align="center">Activity logging and a searchable activity dashboard for Laravel applications.</p>
 
 <p align="center">
-    <a href="https://github.com/jeremykenedy"><img src="https://img.shields.io/github/followers/jeremykenedy?label=Follow&amp;style=social" alt="Follow @jeremykenedy"></a>
-    <a href="https://github.com/jeremykenedy/laravel-logger/stargazers"><img src="https://img.shields.io/github/stars/jeremykenedy/laravel-logger?style=social" alt="Star laravel-logger on GitHub"></a>
-    <a href="https://github.com/sponsors/jeremykenedy"><img src="https://img.shields.io/static/v1?label=Sponsor&amp;message=%E2%9D%A4&amp;logo=GitHub&amp;color=%23fe8e86" alt="Sponsor me on GitHub"></a>
+    
+    
+    
     <a href="https://packagist.org/packages/jeremykenedy/laravel-logger"><img src="https://poser.pugx.org/jeremykenedy/laravel-logger/d/total.svg" alt="Total Downloads"></a>
     <a href="https://packagist.org/packages/jeremykenedy/laravel-logger"><img src="https://poser.pugx.org/jeremykenedy/laravel-logger/v/stable.svg" alt="Latest Stable Version"></a>
     <a href="https://github.com/jeremykenedy/laravel-logger/actions/workflows/tests.yml"><img src="https://github.com/jeremykenedy/laravel-logger/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
     <a href="https://github.styleci.io/repos/109630720"><img src="https://github.styleci.io/repos/109630720/shield?branch=master" alt="StyleCI"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License MIT"></a>
+</p>
+
+<p align="center">
+    <a href="https://github.com/jeremykenedy"><img src="https://img.shields.io/github/followers/jeremykenedy?label=Follow&amp;style=social" alt="Follow @jeremykenedy"></a>
+    <a href="https://github.com/jeremykenedy/laravel-logger/stargazers"><img src="https://img.shields.io/github/stars/jeremykenedy/laravel-logger?style=social" alt="Star laravel-logger on GitHub"></a>
+    <a href="https://github.com/sponsors/jeremykenedy"><img src="https://img.shields.io/static/v1?label=Sponsor&amp;message=%E2%9D%A4&amp;logo=GitHub&amp;color=%23fe8e86" alt="Sponsor me on GitHub"></a>
 </p>
 
 ## Table of Contents
