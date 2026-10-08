@@ -32,7 +32,7 @@ build:
           ports: [3306]
       tests:
         override:
-          - command: XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-filter src --coverage-clover coverage/clover.xml
+          - command: XDEBUG_MODE=coverage php -d mysqlnd.net_read_timeout=10 vendor/bin/phpunit --testdox --coverage-filter src --coverage-clover coverage/clover.xml
             idle_timeout: 600
             coverage:
               file: coverage/clover.xml
