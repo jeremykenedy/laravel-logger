@@ -23,19 +23,24 @@ class EnvironmentSettings
         $contents = $this->files->get($path);
         $newline = strpos($contents, "\r\n") !== false ? "\r\n" : "\n";
         foreach ($settings as $key => $value) {
-            $assignment = $key.'='.$value;
-            $pattern = '/^[\t ]*(?:export[\t ]+)?'.preg_quote($key, '/').'[\t ]*=.*$/m';
-            if (preg_match($pattern, $contents)) {
-                $contents = preg_replace_callback($pattern, function () use ($assignment, $newline) {
-                    return $assignment.($newline === "\r\n" ? "\r" : '');
-                }, $contents);
-            } else {
-                $contents = rtrim($contents, "\r\n").$newline.$assignment.$newline;
-            }
+            $contents = $this->assignment($contents, $key, $value, $newline);
         }
 
         if ($this->files->put($path, $contents, true) === false) {
             throw new RuntimeException('Unable to save the environment file.');
         }
+    }
+
+    private function assignment(string $contents, string $key, $value, string $newline): string
+    {
+        $assignment = $key.'='.$value;
+        $pattern = '/^[\t ]*(?:export[\t ]+)?'.preg_quote($key, '/').'[\t ]*=.*$/m';
+        if (! preg_match($pattern, $contents)) {
+            return rtrim($contents, "\r\n").$newline.$assignment.$newline;
+        }
+
+        return preg_replace_callback($pattern, function () use ($assignment, $newline) {
+            return $assignment.($newline === "\r\n" ? "\r" : '');
+        }, $contents);
     }
 }

@@ -12,6 +12,7 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Request as RequestFacade;
 use jeremykenedy\LaravelLogger\App\Http\Traits\ActivityLogger;
 use jeremykenedy\LaravelLogger\App\Models\Activity;
 use jeremykenedy\LaravelLogger\Tests\TestCase;
@@ -111,5 +112,24 @@ class LoggingTest extends TestCase
         $this->assertSame('-', $activity->userAgentDetails['browser']);
         $this->actingAs($this->createUser());
         $this->get('/activity')->assertOk();
+    }
+
+    public function test_default_descriptions_follow_the_request_method(): void
+    {
+        foreach (['POST' => 'Created', 'PUT' => 'Edited', 'PATCH' => 'Edited', 'DELETE' => 'Deleted', 'GET' => 'Viewed', 'OPTIONS' => 'Viewed'] as $method => $verb) {
+            $this->app->instance('request', Request::create('http://localhost/records', $method));
+            RequestFacade::clearResolvedInstance('request');
+            $this->logger()->activity();
+            $this->assertSame($verb.' records', Activity::orderBy('id', 'desc')->first()->description);
+        }
+    }
+
+    public function test_malformed_user_agent_does_not_break_activity_pages(): void
+    {
+        $activity = $this->createActivity(['userAgent' => 'broken|header']);
+        $this->assertSame('-', $activity->userAgentDetails['browser']);
+        $this->actingAs($this->createUser());
+        $this->get('/activity')->assertOk();
+        $this->get('/activity/log/'.$activity->id)->assertOk();
     }
 }

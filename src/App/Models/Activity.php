@@ -4,7 +4,7 @@ namespace jeremykenedy\LaravelLogger\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use jeremykenedy\LaravelLogger\App\Http\Traits\UserAgentDetails;
+use jeremykenedy\LaravelLogger\Support\UserAgentParser;
 
 class Activity extends Model
 {
@@ -93,6 +93,6 @@ class Activity extends Model
 
     public function getUserAgentDetailsAttribute()
     {
-        return UserAgentDetails::details($this->getAttribute('userAgent'));
+        return (new UserAgentParser)->parse($this->getAttribute('userAgent'));
     }
 }
