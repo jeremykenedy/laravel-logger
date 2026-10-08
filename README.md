@@ -9,9 +9,6 @@
 <p align="center">Activity logging and a searchable activity dashboard for Laravel applications.</p>
 
 <p align="center">
-    
-    
-    
     <a href="https://packagist.org/packages/jeremykenedy/laravel-logger"><img src="https://poser.pugx.org/jeremykenedy/laravel-logger/d/total.svg" alt="Total Downloads"></a>
     <a href="https://packagist.org/packages/jeremykenedy/laravel-logger"><img src="https://poser.pugx.org/jeremykenedy/laravel-logger/v/stable.svg" alt="Latest Stable Version"></a>
     <a href="https://github.com/jeremykenedy/laravel-logger/actions/workflows/tests.yml"><img src="https://github.com/jeremykenedy/laravel-logger/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
