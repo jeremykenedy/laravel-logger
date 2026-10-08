@@ -33,7 +33,10 @@
         "laravel": {
             "providers": [
                 "jeremykenedy\\LaravelLogger\\LaravelLoggerServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Crawler": "jeremykenedy\\LaravelLogger\\Facades\\Crawler"
+            }
         }
     },
     "config": {

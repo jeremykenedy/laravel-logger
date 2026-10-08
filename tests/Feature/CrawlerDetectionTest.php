@@ -2,6 +2,9 @@
 
 namespace jeremykenedy\LaravelLogger\Tests\Feature;
 
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Foundation\AliasLoader;
+use Illuminate\Foundation\PackageManifest;
 use Illuminate\Http\Request;
 use Jaybizzle\LaravelCrawlerDetect\Facades\LaravelCrawlerDetect;
 use Jaybizzle\LaravelCrawlerDetect\LaravelCrawlerDetectServiceProvider;
@@ -155,5 +158,23 @@ class CrawlerDetectionTest extends TestCase
         $detector = new \Jaybizzle\CrawlerDetect\CrawlerDetect(null, 'Bingbot/2.0');
         $this->assertInstanceOf(CrawlerDetect::class, $detector);
         $this->assertTrue($detector->isCrawler());
+    }
+
+    public function test_package_discovery_preserves_the_global_crawler_alias(): void
+    {
+        $path = sys_get_temp_dir().'/logger_discovery_'.uniqid();
+        mkdir($path.'/vendor/composer', 0777, true);
+        $files = new Filesystem;
+        try {
+            $package = json_decode(file_get_contents(__DIR__.'/../../composer.json'), true);
+            file_put_contents($path.'/vendor/composer/installed.json', json_encode(['packages' => [$package]]));
+            $aliases = (new PackageManifest($files, $path, $path.'/packages.php'))->aliases();
+            $this->assertSame(Crawler::class, $aliases['Crawler']);
+            AliasLoader::getInstance($aliases)->register();
+            $this->app->instance('request', Request::create('/discovered-crawler', 'GET', [], [], [], ['HTTP_USER_AGENT' => 'Googlebot/2.1']));
+            $this->assertTrue(\Crawler::isCrawler());
+        } finally {
+            $files->deleteDirectory($path);
+        }
     }
 }
