@@ -72,6 +72,8 @@ class LaravelLoggerServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->register(CrawlerDetectServiceProvider::class);
+
         if (file_exists(config_path('laravel-logger.php'))) {
             $this->mergeConfigFrom(config_path('laravel-logger.php'), 'LaravelLogger');
             $this->mergeConfigFrom(__DIR__.'/config/laravel-logger.php', 'LaravelLogger');

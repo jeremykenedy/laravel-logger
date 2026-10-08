@@ -4,7 +4,6 @@ namespace jeremykenedy\LaravelLogger\Tests;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Jaybizzle\LaravelCrawlerDetect\LaravelCrawlerDetectServiceProvider;
 use jeremykenedy\LaravelLogger\App\Models\Activity;
 use jeremykenedy\LaravelLogger\LaravelLoggerServiceProvider;
 use Orchestra\Testbench\TestCase as BaseTestCase;
@@ -13,14 +12,13 @@ abstract class TestCase extends BaseTestCase
 {
     protected function getPackageProviders($app)
     {
-        return [LaravelLoggerServiceProvider::class, LaravelCrawlerDetectServiceProvider::class];
+        return [LaravelLoggerServiceProvider::class];
     }
 
     protected function getEnvironmentSetUp($app)
     {
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', ['driver' => 'sqlite', 'database' => ':memory:', 'prefix' => '']);
-        $app['config']->set('LaravelLogger.loggerDatabaseConnection', 'sqlite');
+        $app['config']->set('database', array_replace($app['config']->get('database'), require __DIR__.'/fixtures/config/database.php'));
+        $app['config']->set('LaravelLogger.loggerDatabaseConnection', $app['config']->get('database.default'));
         $app['config']->set('LaravelLogger.defaultUserModel', User::class);
         $app['config']->set('LaravelLogger.enableGeoPlugin', false);
         $app['config']->set('LaravelLogger.enableSearch', true);
@@ -34,7 +32,7 @@ abstract class TestCase extends BaseTestCase
     {
         parent::setUp();
         $this->app['view']->getFinder()->setPaths([__DIR__.'/fixtures/views']);
-        $this->artisan('migrate', ['--database' => 'sqlite', '--force' => true]);
+        $this->artisan('migrate:fresh', ['--database' => $this->app['config']->get('database.default'), '--force' => true]);
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');

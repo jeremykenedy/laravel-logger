@@ -20,9 +20,19 @@ build:
       - composer update --no-interaction --prefer-dist
   nodes:
     tests:
+      environment:
+        variables:
+          LOGGER_TEST_DB_CONNECTION: mysql
+      services:
+        mysql:
+          image: mysql:8.4
+          env:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+            MYSQL_DATABASE: laravel_logger_testing
+          ports: [3306]
       tests:
         override:
-          - command: vendor/bin/phpunit --coverage-filter src --coverage-clover coverage/clover.xml
+          - command: XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-filter src --coverage-clover coverage/clover.xml
             coverage:
               file: coverage/clover.xml
               format: clover

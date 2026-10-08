@@ -50,7 +50,6 @@ The dashboard is rendered by Blade. Livewire, Vue, React, and Svelte application
 - A parent Blade layout, `layouts.app` by default.
 - Bootstrap or Tailwind assets in the host application. The modern Bootstrap 5 views can load Bootstrap CSS from a CDN when `enableBootstrapCssCDN` is enabled.
 - PHP's zip and XMLWriter extensions for Excel exports.
-- `jaybizzle/laravel-crawler-detect`, installed by Composer.
 
 ## Installation
 
@@ -84,7 +83,9 @@ The parent layout must render `content`, `template_linked_css`, and `footer_scri
 
 For layouts using stacks, set `bladePlacement` to `stack` and use `@stack` for the CSS and script placements. The dashboard honors your layout and does not load a second application shell.
 
-Laravel 5.4 and earlier require manual provider registration. Existing Lumen installations should keep their manual crawler provider and activity middleware registration, copy the configuration, and set `LARAVEL_LOGGER_DISABLE_ROUTES=true`; they do not use the dashboard or the new setup commands.
+Laravel 5.4 and earlier require manual Logger provider registration. Existing Lumen installations should keep their activity middleware registration, copy the configuration, and set `LARAVEL_LOGGER_DISABLE_ROUTES=true`; they do not use the dashboard or the new setup commands.
+
+Crawler detection is included in Laravel Logger. Composer no longer installs `jaybizzle/laravel-crawler-detect` or `jaybizzle/crawler-detect`. Existing manual crawler provider registration, the old crawler facade, and the `LaravelCrawlerDetect` container binding remain supported through compatibility aliases. If your application explicitly requires either package, Composer keeps that dependency and its classes take precedence. Logger preserves custom detector bindings. The bundled patterns are shipped with the package and update when Logger is released.
 
 ## Quick Start
 
@@ -140,7 +141,7 @@ Use a regular link from the frontend your application already uses:
 ## Features
 
 - Route middleware, manual activity logging, and configurable authentication listeners.
-- Registered users, guests, and crawler detection.
+- Registered users, guests, and built-in crawler detection, including alternate user-agent headers.
 - Search by description, user, method, route, and IP address.
 - Inclusive date ranges and preset periods, including cursor-paginated lists.
 - CSV, JSON, and valid Excel workbook downloads with the same filters as the dashboard.
@@ -286,6 +287,8 @@ npm run test:browser
 ```
 
 Tests run against an isolated SQLite database through Orchestra Testbench. See [TESTING.md](TESTING.md) for the matrix, browser fixture, and coverage commands. [FEATURES.md](FEATURES.md) describes filtering and export behavior. The existing [video tour](https://youtu.be/mHLSv9XhTuk) and [legacy dashboard screenshots](https://s3-us-west-2.amazonaws.com/github-project-images/laravel-logger/1-dashboard.jpg) remain useful for applications using the original views.
+
+The bundled crawler pattern and test data notices are in [THIRD_PARTY_LICENSES.md](THIRD_PARTY_LICENSES.md).
 
 Scrutinizer analysis: [project dashboard](https://scrutinizer-ci.com/g/jeremykenedy/laravel-logger/).
 

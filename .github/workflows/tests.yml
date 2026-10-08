@@ -42,11 +42,34 @@ jobs:
           fi
           composer require --dev "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-update
           if [ '${{ matrix.dependencies }}' = 'lowest' ]; then
-            composer require 'jaybizzle/laravel-crawler-detect:^1.1' --no-update
             composer update --prefer-lowest --prefer-stable --no-interaction --prefer-dist
           else
             composer update --prefer-stable --no-interaction --prefer-dist
           fi
+      - run: composer test
+
+  mysql:
+    name: MySQL 8.4 / Laravel 13
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+          MYSQL_DATABASE: laravel_logger_testing
+        ports: ['3306:3306']
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
+    env:
+      LOGGER_TEST_DB_CONNECTION: mysql
+    steps:
+      - uses: actions/checkout@v6
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: mbstring, intl, pdo_mysql, zip, xmlwriter
+          coverage: none
+          tools: composer:v2
+      - run: composer update --no-interaction --prefer-dist
       - run: composer test
 
   quality:

@@ -18,15 +18,15 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "php": ">=7.3.0|^8.0",
-        "jaybizzle/laravel-crawler-detect": "1.*"
+        "php": ">=7.3.0|^8.0"
     },
     "autoload": {
         "psr-4": {
             "jeremykenedy\\LaravelLogger\\": "src/"
         },
         "files": [
-            "src/App/Logic/helpers.php"
+            "src/App/Logic/helpers.php",
+            "src/Support/crawler-compatibility.php"
         ]
     },
     "extra": {
