@@ -1,0 +1,99 @@
+.logger-dashboard {
+    --logger-bg: #f5f7fb;
+    --logger-surface: #fff;
+    --logger-input: #fff;
+    --logger-ink: #1e293b;
+    --logger-muted: #64748b;
+    --logger-line: #dce3ed;
+    --logger-hover: #edf2f9;
+    --logger-link: #1d4ed8;
+    --bs-body-color: var(--logger-ink);
+    --bs-body-bg: var(--logger-surface);
+    --bs-border-color: var(--logger-line);
+    color-scheme: light;
+    color: var(--logger-ink);
+    background: var(--logger-bg);
+    max-width: 1440px;
+    min-height: 100vh;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+}
+.logger-dashboard[data-color-scheme="dark"],
+.logger-dashboard[data-theme="dark"]:not([data-color-scheme]) {
+    --logger-bg: #111827;
+    --logger-surface: #1b2536;
+    --logger-input: #131d2d;
+    --logger-ink: #e5eaf3;
+    --logger-muted: #a5b3c7;
+    --logger-line: #364359;
+    --logger-hover: #253248;
+    --logger-link: #93c5fd;
+    color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+    .logger-dashboard[data-theme="system"]:not([data-color-scheme]) {
+        --logger-bg: #111827;
+        --logger-surface: #1b2536;
+        --logger-input: #131d2d;
+        --logger-ink: #e5eaf3;
+        --logger-muted: #a5b3c7;
+        --logger-line: #364359;
+        --logger-hover: #253248;
+        --logger-link: #93c5fd;
+        color-scheme: dark;
+    }
+}
+.logger-dashboard h1 { font-size: 1.9rem; font-weight: 650; margin: 0; }
+.logger-dashboard h2 { font-size: 1.1rem; font-weight: 600; margin: 0; }
+.logger-heading, .logger-toolbar, .logger-actions, .logger-export { display: flex; gap: .75rem; align-items: center; flex-wrap: wrap; }
+.logger-heading, .logger-toolbar { justify-content: space-between; }
+.logger-heading { margin-bottom: 1.5rem; }
+.logger-heading p { color: var(--logger-muted); margin: .4rem 0 0; }
+.logger-dashboard section, .logger-filters { background: var(--logger-surface); color: var(--logger-ink); border: 1px solid var(--logger-line); border-radius: .75rem; margin: 1.25rem 0; overflow: hidden; }
+.logger-toolbar, .logger-details { padding: 1.25rem; }
+.logger-nav { display: flex; gap: 1.5rem; border-bottom: 1px solid var(--logger-line); margin-bottom: 1rem; }
+.logger-nav a { padding: .7rem 0; }
+.logger-nav a[aria-current="page"] { border-bottom: 3px solid var(--logger-link); font-weight: 600; }
+.logger-dashboard a { color: var(--logger-link); text-decoration: none; }
+.logger-dashboard a:hover { text-decoration: underline; }
+.logger-dashboard button, .logger-actions a, .logger-export a, .logger-pagination a, .logger-dashboard > a { min-height: 38px; border: 1px solid var(--logger-line); border-radius: .375rem; padding: .5rem .85rem; background: var(--logger-surface); color: var(--logger-ink); cursor: pointer; font: inherit; font-size: .9rem; }
+.logger-dashboard button[type="submit"] { background: #1d4ed8; border-color: #1d4ed8; color: #fff; }
+.logger-dashboard button[type="submit"].logger-danger { background: #b91c1c; border-color: #b91c1c; }
+.logger-dashboard :focus-visible { outline: 3px solid #60a5fa; outline-offset: 3px; }
+.logger-filters { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 1rem; padding: 1.25rem; }
+.logger-filters label { display: block; font-size: .875rem; font-weight: 500; }
+.logger-filters input, .logger-filters select { display: block; width: 100%; margin-top: .4rem; min-height: 42px; padding: .5rem .7rem; border: 1px solid var(--logger-line); border-radius: .375rem; background: var(--logger-input); color: var(--logger-ink); font: inherit; }
+.logger-filters .logger-actions { align-self: end; }
+.logger-table-scroll { overflow-x: auto; }
+.logger-dashboard table { width: 100%; border-collapse: collapse; margin: 0; background: var(--logger-surface); color: var(--logger-ink); }
+.logger-dashboard th, .logger-dashboard td { padding: .95rem 1.25rem; text-align: left; border-bottom: 1px solid var(--logger-line); background: transparent; color: inherit; box-shadow: none; vertical-align: top; }
+.logger-dashboard th { font-size: .8rem; font-weight: 600; color: var(--logger-muted); white-space: nowrap; }
+.logger-dashboard td { font-size: .875rem; }
+.logger-dashboard thead { background: var(--logger-input); }
+.logger-dashboard tbody tr:hover { background: var(--logger-hover); }
+.logger-dashboard td:first-child { min-width: 260px; max-width: 450px; overflow-wrap: anywhere; }
+.logger-dashboard time { white-space: nowrap; }
+.logger-route { display: block; margin-top: .3rem; color: var(--logger-muted); font-size: .8rem; overflow-wrap: anywhere; }
+.logger-method { display: inline-block; border: 1px solid var(--logger-line); border-radius: .25rem; padding: .1rem .4rem; font-size: .75rem; font-weight: 600; }
+.logger-count { margin-left: .5rem; color: var(--logger-muted); font-size: .875rem; }
+.logger-dashboard td.logger-empty { text-align: center; padding: 3rem 1.25rem; color: var(--logger-muted); }
+.logger-pagination { display: flex; justify-content: space-between; gap: 1rem; padding: 1rem 1.25rem; }
+.logger-notice { padding: .75rem 1rem; border-left: 3px solid var(--logger-link); background: var(--logger-hover); }
+.logger-details dl { display: grid; grid-template-columns: minmax(120px, 180px) 1fr; gap: .75rem 1.5rem; margin: 1.25rem 0 0; }
+.logger-details dt { font-size: .875rem; color: var(--logger-muted); font-weight: 500; }
+.logger-details dd { margin: 0; overflow-wrap: anywhere; }
+@media (max-width: 600px) {
+    .logger-dashboard { padding: 1.25rem .75rem; }
+    .logger-dashboard h1 { font-size: 1.5rem; }
+    .logger-heading { align-items: start; }
+    .logger-filters { grid-template-columns: 1fr; }
+    .logger-details dl { grid-template-columns: 1fr; gap: .25rem; }
+    .logger-details dd { margin-bottom: .75rem; }
+}
+
+.logger-dashboard button.logger-theme { display: grid; place-items: center; flex-shrink: 0; width: 42px; height: 42px; padding: 0; background: var(--logger-surface); color: var(--logger-muted); border: 1px solid var(--logger-line); border-radius: .6rem; }
+.logger-dashboard button.logger-theme:hover { background: var(--logger-hover); color: var(--logger-link); }
+.logger-dashboard .logger-theme svg { pointer-events: none; }
+.logger-dashboard .logger-theme svg[hidden] { display: none; }

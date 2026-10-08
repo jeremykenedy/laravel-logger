@@ -4,15 +4,7 @@ includes:
 parameters:
     paths:
         - src/
-    
-    # The level 8 is the highest level
+    configDirectories:
+        - src/config
     level: 5
-    
-    ignoreErrors:
-        # Ignore errors about missing classes in vendor packages
-        - '#Class .* not found#'
-    
-    excludePaths:
-        - vendor/
-    
-    reportUnmatchedIgnoredErrors: false
+    tmpDir: .phpstan-cache

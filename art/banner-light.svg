@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" role="img" aria-labelledby="title description">
+  <title id="title">Laravel Logger</title>
+  <desc id="description">Activity logging, searchable history, and exports for Laravel.</desc>
+
+  <rect width="800" height="200" rx="16" fill="#fff" stroke="#e5e7eb"/>
+  <g font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+    <text x="36" y="80" font-size="40" font-weight="700" letter-spacing="-.5" fill="#0f172a">Laravel Logger</text>
+    <text x="38" y="111" font-size="14" fill="#64748b">A clear record of what happened in your application.</text>
+    <rect x="38" y="134" width="92" height="22" rx="11" fill="#f5f3ff" stroke="#6d28d9" stroke-width=".8" opacity="1"/>
+    <text x="84.0" y="148" font-size="10" font-weight="500" text-anchor="middle" fill="#6d28d9">Activity history</text>
+    <rect x="140" y="134" width="92" height="22" rx="11" fill="#eff6ff" stroke="#3b82f6" stroke-width=".8" opacity="1"/>
+    <text x="186.0" y="148" font-size="10" font-weight="500" text-anchor="middle" fill="#3b82f6">Search and filter</text>
+    <rect x="242" y="134" width="83" height="22" rx="11" fill="#f0fdf4" stroke="#166534" stroke-width=".8" opacity="1"/>
+    <text x="283.5" y="148" font-size="10" font-weight="500" text-anchor="middle" fill="#166534">Data exports</text>
+    <rect x="335" y="134" width="84" height="22" rx="11" fill="#fffbeb" stroke="#b45309" stroke-width=".8" opacity="1"/>
+    <text x="377.0" y="148" font-size="10" font-weight="500" text-anchor="middle" fill="#b45309">Dark mode</text>
+  </g>
+  <g transform="translate(570 35)">
+    <rect width="186" height="130" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <path d="M16 25H170" stroke="#3b82f6" opacity=".4"/>
+    <circle cx="21" cy="13" r="3" fill="#3b82f6"/><circle cx="32" cy="13" r="3" fill="#64748b"/>
+    <path d="M32 43V104" stroke="#3b82f6" stroke-width="2" opacity=".4"/>
+    <circle cx="32" cy="46" r="5" fill="#3b82f6"/><circle cx="32" cy="74" r="5" fill="#22c55e"/><circle cx="32" cy="102" r="5" fill="#f59e0b"/>
+    <path d="M49 43H147M49 51H112M49 71H157M49 79H129M49 99H136M49 107H100" stroke="#64748b" stroke-width="3" stroke-linecap="round"/>
+  </g>
+</svg>

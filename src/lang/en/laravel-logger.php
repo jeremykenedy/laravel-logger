@@ -1,6 +1,15 @@
 <?php
 
 return [
+    'themeToggle' => 'Change theme',
+    'themes' => ['light' => 'Light theme', 'dark' => 'Dark theme', 'system' => 'System theme'],
+    'noActivities' => 'No activity matches these filters.',
+    'time' => 'Recorded at',
+    'paginationLabel' => 'Activity pages',
+    'previous' => 'Previous',
+    'next' => 'Next',
+    'searchLabels' => ['description' => 'Description', 'method' => 'Method', 'route' => 'Route', 'ip' => 'IP address'],
+    'detailLabels' => ['id' => 'ID', 'description' => 'Description', 'details' => 'Details', 'route' => 'Route', 'ipAddress' => 'IP address', 'userAgent' => 'User agent', 'locale' => 'Language', 'referer' => 'Referrer', 'methodType' => 'Method', 'created_at' => 'Recorded at', 'updated_at' => 'Updated at', 'deleted_at' => 'Cleared at'],
 
     /*
     |--------------------------------------------------------------------------
@@ -8,27 +17,27 @@ return [
     |--------------------------------------------------------------------------
     */
     'userTypes' => [
-        'guest'      => 'Guest',
+        'guest' => 'Guest',
         'registered' => 'Registered',
-        'crawler'    => 'Crawler',
+        'crawler' => 'Crawler',
     ],
 
     'verbTypes' => [
-        'created'    => 'Created',
-        'edited'     => 'Edited',
-        'deleted'    => 'Deleted',
-        'viewed'     => 'Viewed',
-        'crawled'    => 'crawled',
+        'created' => 'Created',
+        'edited' => 'Edited',
+        'deleted' => 'Deleted',
+        'viewed' => 'Viewed',
+        'crawled' => 'crawled',
     ],
 
     'listenerTypes' => [
-        'auth'       => 'Authenticated Activity',
-        'attempt'    => 'Authenticated Attempt',
-        'failed'     => 'Failed Login Attempt',
-        'lockout'    => 'Locked Out',
-        'reset'      => 'Reset Password',
-        'login'      => 'Logged In',
-        'logout'     => 'Logged Out',
+        'auth' => 'Authenticated Activity',
+        'attempt' => 'Authenticated Attempt',
+        'failed' => 'Failed Login Attempt',
+        'lockout' => 'Locked Out',
+        'reset' => 'Reset Password',
+        'login' => 'Logged In',
+        'logout' => 'Logged Out',
     ],
 
     'tooltips' => [
@@ -41,31 +50,31 @@ return [
     |--------------------------------------------------------------------------
     */
     'dashboard' => [
-        'title'     => 'Activity Log',
-        'subtitle'  => 'Events',
+        'title' => 'Activity Log',
+        'subtitle' => 'Events',
 
-        'labels'    => [
-            'id'            => 'Id',
-            'time'          => 'Time',
-            'description'   => 'Description',
-            'user'          => 'User',
-            'method'        => 'Method',
-            'route'         => 'Route',
-            'ipAddress'     => 'Ip <span class="hidden-sm hidden-xs">Address</span>',
-            'agent'         => '<span class="hidden-sm hidden-xs">User </span>Agent',
-            'deleteDate'    => '<span class="hidden-sm hidden-xs">Date </span>Deleted',
+        'labels' => [
+            'id' => 'Id',
+            'time' => 'Time',
+            'description' => 'Description',
+            'user' => 'User',
+            'method' => 'Method',
+            'route' => 'Route',
+            'ipAddress' => 'Ip <span class="hidden-sm hidden-xs">Address</span>',
+            'agent' => '<span class="hidden-sm hidden-xs">User </span>Agent',
+            'deleteDate' => '<span class="hidden-sm hidden-xs">Date </span>Deleted',
         ],
 
-        'menu'      => [
-            'alt'           => 'Activity Log Menu',
-            'clear'         => 'Clear Activity Log',
-            'show'          => 'Show Cleared Logs',
-            'back'          => 'Back to Activity Log',
+        'menu' => [
+            'alt' => 'Activity Log Menu',
+            'clear' => 'Clear Activity Log',
+            'show' => 'Show Cleared Logs',
+            'back' => 'Back to Activity Log',
         ],
 
-        'search'    => [
-            'all'           => 'All',
-            'search'        => 'Search',
+        'search' => [
+            'all' => 'All',
+            'search' => 'Search',
         ],
     ],
 
@@ -76,45 +85,45 @@ return [
     */
 
     'drilldown' => [
-        'title'                 => 'Activity Log :id',
-        'title-details'         => 'Activity Details',
-        'title-ip-details'      => 'Ip Address Details',
-        'title-user-details'    => 'User Details',
-        'title-user-activity'   => 'Additional User Activity',
+        'title' => 'Activity Log :id',
+        'title-details' => 'Activity Details',
+        'title-ip-details' => 'Ip Address Details',
+        'title-user-details' => 'User Details',
+        'title-user-activity' => 'Additional User Activity',
 
-        'buttons'   => [
-            'back'      => '<span class="hidden-xs hidden-sm">Back to </span><span class="hidden-xs">Activity Log</span>',
+        'buttons' => [
+            'back' => '<span class="hidden-xs hidden-sm">Back to </span><span class="hidden-xs">Activity Log</span>',
         ],
 
         'labels' => [
-            'userRoles'     => 'User Roles',
-            'userLevel'     => 'Level',
+            'userRoles' => 'User Roles',
+            'userLevel' => 'Level',
         ],
 
         'list-group' => [
-            'labels'    => [
-                'id'            => 'Activity Log ID:',
-                'ip'            => 'Ip Address',
-                'description'   => 'Description',
-                'details'       => 'Details',
-                'userType'      => 'User Type',
-                'userId'        => 'User Id',
-                'route'         => 'Route',
-                'agent'         => 'User Agent',
-                'locale'        => 'Locale',
-                'referer'       => 'Referer',
+            'labels' => [
+                'id' => 'Activity Log ID:',
+                'ip' => 'Ip Address',
+                'description' => 'Description',
+                'details' => 'Details',
+                'userType' => 'User Type',
+                'userId' => 'User Id',
+                'route' => 'Route',
+                'agent' => 'User Agent',
+                'locale' => 'Locale',
+                'referer' => 'Referer',
 
-                'methodType'    => 'Method Type',
-                'createdAt'     => 'Event Time',
-                'updatedAt'     => 'Updated At',
-                'deletedAt'     => 'Deleted At',
-                'timePassed'    => 'Time Passed',
-                'userName'      => 'Username',
+                'methodType' => 'Method Type',
+                'createdAt' => 'Event Time',
+                'updatedAt' => 'Updated At',
+                'deletedAt' => 'Deleted At',
+                'timePassed' => 'Time Passed',
+                'userName' => 'Username',
                 'userFirstName' => 'First Name',
-                'userLastName'  => 'Last Name',
+                'userLastName' => 'Last Name',
                 'userFulltName' => 'Full Name',
-                'userEmail'     => 'User Email',
-                'userSignupIp'  => 'Signup Ip',
+                'userEmail' => 'User Email',
+                'userSignupIp' => 'Signup Ip',
                 'userCreatedAt' => 'Created',
                 'userUpdatedAt' => 'Updated',
             ],
@@ -134,20 +143,20 @@ return [
 
     'modals' => [
         'shared' => [
-            'btnCancel'     => 'Cancel',
-            'btnConfirm'    => 'Confirm',
+            'btnCancel' => 'Cancel',
+            'btnConfirm' => 'Confirm',
         ],
         'clearLog' => [
-            'title'     => 'Clear Activity Log',
-            'message'   => 'Are you sure you want to clear the activity log?',
+            'title' => 'Clear Activity Log',
+            'message' => 'Are you sure you want to clear the activity log?',
         ],
         'deleteLog' => [
-            'title'     => 'Permanently Delete Activity Log',
-            'message'   => 'Are you sure you want to permanently DELETE the activity log?',
+            'title' => 'Permanently Delete Activity Log',
+            'message' => 'Are you sure you want to permanently DELETE the activity log?',
         ],
         'restoreLog' => [
-            'title'     => 'Restore Cleared Activity Log',
-            'message'   => 'Are you sure you want to restore the cleared activity logs?',
+            'title' => 'Restore Cleared Activity Log',
+            'message' => 'Are you sure you want to restore the cleared activity logs?',
         ],
     ],
 
@@ -158,9 +167,9 @@ return [
     */
 
     'messages' => [
-        'logClearedSuccessfuly'   => 'Activity log cleared successfully',
+        'logClearedSuccessfuly' => 'Activity log cleared successfully',
         'logDestroyedSuccessfuly' => 'Activity log deleted successfully',
-        'logRestoredSuccessfuly'  => 'Activity log restored successfully',
+        'logRestoredSuccessfuly' => 'Activity log restored successfully',
     ],
 
     /*
@@ -170,11 +179,11 @@ return [
     */
 
     'dashboardCleared' => [
-        'title'     => 'Cleared Activity Logs',
-        'subtitle'  => 'Cleared Events',
+        'title' => 'Cleared Activity Logs',
+        'subtitle' => 'Cleared Events',
 
-        'menu'      => [
-            'deleteAll'  => 'Delete All Activity Logs',
+        'menu' => [
+            'deleteAll' => 'Delete All Activity Logs',
             'restoreAll' => 'Restore All Activity Logs',
         ],
     ],
@@ -194,30 +203,30 @@ return [
     |--------------------------------------------------------------------------
     */
     'filterAndExport' => 'Filter and Export',
-    'fromDate'        => 'From Date',
-    'toDate'          => 'To Date',
-    'quickPeriod'     => 'Quick Period',
-    'allTime'         => 'All Time',
-    'today'           => 'Today',
-    'yesterday'       => 'Yesterday',
-    'last7Days'       => 'Last 7 Days',
-    'last30Days'      => 'Last 30 Days',
-    'last3Months'     => 'Last 3 Months',
-    'last6Months'     => 'Last 6 Months',
-    'lastYear'        => 'Last Year',
-    'filter'          => 'Filter',
-    'clearFilters'    => 'Clear Filters',
+    'fromDate' => 'From Date',
+    'toDate' => 'To Date',
+    'quickPeriod' => 'Quick Period',
+    'allTime' => 'All Time',
+    'today' => 'Today',
+    'yesterday' => 'Yesterday',
+    'last7Days' => 'Last 7 Days',
+    'last30Days' => 'Last 30 Days',
+    'last3Months' => 'Last 3 Months',
+    'last6Months' => 'Last 6 Months',
+    'lastYear' => 'Last Year',
+    'filter' => 'Filter',
+    'clearFilters' => 'Clear Filters',
 
     /*
     |--------------------------------------------------------------------------
     | Laravel Logger Language Lines - Export
     |--------------------------------------------------------------------------
     */
-    'exportData'        => 'Export Data',
-    'exportCSV'         => 'Export CSV',
-    'exportJSON'        => 'Export JSON',
-    'exportExcel'       => 'Export Excel',
+    'exportData' => 'Export Data',
+    'exportCSV' => 'Export CSV',
+    'exportJSON' => 'Export JSON',
+    'exportExcel' => 'Export Excel',
     'searchDescription' => 'Search by description...',
-    'allUsers'          => 'All Users',
+    'allUsers' => 'All Users',
 
 ];

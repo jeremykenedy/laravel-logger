@@ -1,16 +1,9 @@
 <?php
 
-if (!function_exists('showCleanRoutUrl')) {
-    /**
-     * Clean the url for the front end to display.
-     *
-     * @param string $link
-     *
-     * @return echo string
-     */
+if (! function_exists('showCleanRoutUrl')) {
     function showCleanRoutUrl($link): void
     {
-        $parsedUrl = parse_url($link);
+        $parsedUrl = parse_url((string) $link);
         $routeUrl = '';
         if (isset($parsedUrl['path'])) {
             $routeUrl .= $parsedUrl['path'];
@@ -18,6 +11,6 @@ if (!function_exists('showCleanRoutUrl')) {
         if (isset($parsedUrl['query'])) {
             $routeUrl .= '?'.$parsedUrl['query'];
         }
-        echo $routeUrl;
+        echo e($routeUrl);
     }
 }

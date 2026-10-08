@@ -1,0 +1,43 @@
+filter:
+  excluded_paths:
+    - vendor/*
+    - tests/*
+    - database/factories/*
+    - node_modules/*
+
+checks:
+  php: true
+
+tools:
+  external_code_coverage: false
+
+build:
+  environment:
+    php:
+      version: '8.2'
+  dependencies:
+    override:
+      - composer update --no-interaction --prefer-dist
+  nodes:
+    tests:
+      environment:
+        variables:
+          LOGGER_TEST_DB_CONNECTION: mysql
+      services:
+        mysql:
+          image: mysql:8.4
+          env:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+            MYSQL_DATABASE: laravel_logger_testing
+          ports: [3306]
+      tests:
+        override:
+          - command: XDEBUG_MODE=coverage php -d mysqlnd.net_read_timeout=10 vendor/bin/phpunit --testdox --coverage-filter src --coverage-clover coverage/clover.xml
+            idle_timeout: 600
+            coverage:
+              file: coverage/clover.xml
+              format: clover
+    analysis:
+      tests:
+        override:
+          - php-scrutinizer-run

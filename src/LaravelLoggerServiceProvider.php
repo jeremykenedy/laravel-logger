@@ -54,8 +54,13 @@ class LaravelLoggerServiceProvider extends ServiceProvider
     {
         $this->app['router']->middlewareGroup('activity', [LogActivity::class]);
 
+        $this->app['view']->composer('LaravelLogger::modern.*', function ($view) {
+            $view->with('loggerCss', Support\Dashboard::css());
+            $view->with('loggerClasses', Support\Dashboard::classes());
+        });
+
         // Load translations from new Laravel 9+ structure if available, fallback to old structure
-        if (is_dir(__DIR__.'/lang/')) {
+        if (is_dir(__DIR__.'/lang')) {
             $this->loadTranslationsFrom(__DIR__.'/lang', 'LaravelLogger');
         } else {
             $this->loadTranslationsFrom(__DIR__.'/resources/lang', 'LaravelLogger');
@@ -67,13 +72,16 @@ class LaravelLoggerServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->register(CrawlerDetectServiceProvider::class);
+
         if (file_exists(config_path('laravel-logger.php'))) {
             $this->mergeConfigFrom(config_path('laravel-logger.php'), 'LaravelLogger');
+            $this->mergeConfigFrom(__DIR__.'/config/laravel-logger.php', 'LaravelLogger');
         } else {
             $this->mergeConfigFrom(__DIR__.'/config/laravel-logger.php', 'LaravelLogger');
         }
 
-        if (config(self::DISABLE_DEFAULT_ROUTES_CONFIG) == false) {
+        if (! config('LaravelLogger.disableRoutes') && ! config(self::DISABLE_DEFAULT_ROUTES_CONFIG)) {
             $this->loadRoutesFrom(__DIR__.'/routes/web.php');
         }
 
@@ -82,6 +90,10 @@ class LaravelLoggerServiceProvider extends ServiceProvider
 
         $this->registerEventListeners();
         $this->publishFiles();
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([Console\InstallCommand::class, Console\UpdateCommand::class, Console\SwitchCommand::class]);
+        }
     }
 
     /**
@@ -114,6 +126,10 @@ class LaravelLoggerServiceProvider extends ServiceProvider
     {
         $publishTag = 'LaravelLogger';
 
+        $this->publishes([__DIR__.'/resources/assets' => public_path('vendor/laravel-logger')], [$publishTag, 'LaravelLogger-assets']);
+        $this->publishes([__DIR__.'/config/laravel-logger.php' => config_path('laravel-logger.php')], 'LaravelLogger-config');
+        $this->publishes([__DIR__.'/resources/views' => resource_path('views/vendor/LaravelLogger')], 'LaravelLogger-views');
+
         $this->publishes([
             __DIR__.'/config/laravel-logger.php' => base_path('config/laravel-logger.php'),
         ], $publishTag);
@@ -123,7 +139,7 @@ class LaravelLoggerServiceProvider extends ServiceProvider
         ], $publishTag);
 
         // Publish language files to Laravel 9+ structure if available, fallback to old structure
-        if (is_dir(__DIR__.'/lang/')) {
+        if (is_dir(__DIR__.'/lang')) {
             // Laravel 9+ structure
             $this->publishes([
                 __DIR__.'/lang' => base_path('lang/vendor/'.$publishTag),

@@ -88,7 +88,7 @@ if (request()->is('activity/cleared')) {
                             switch ($activity->userType) {
                                 case trans('LaravelLogger::laravel-logger.userTypes.registered'):
                                     $userTypeClass = 'success';
-                                    $userLabel = $activity->userDetails['name'];
+                                    $userLabel = $activity->userDetails ? $activity->userDetails->name : $activity->userType;
                                     break;
 
                                 case trans('LaravelLogger::laravel-logger.userTypes.crawler'):
@@ -262,7 +262,7 @@ if (request()->is('activity/cleared')) {
 @elseif(config('LaravelLogger.loggerPaginationEnabled'))
     <div class="text-center">
         <div class="d-flex justify-content-center">
-            {!! $activities->links('vendor.pagination.bootstrap-4') !!}
+            {!! $activities->links('pagination::bootstrap-4') !!}
         </div>
         <p>
             {!! trans('LaravelLogger::laravel-logger.pagination.countText', ['firstItem' => $activities->firstItem(), 'lastItem' => $activities->lastItem(), 'total' => $activities->total(), 'perPage' => $activities->perPage()]) !!}

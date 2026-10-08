@@ -2,47 +2,65 @@
     "name": "jeremykenedy/laravel-logger",
     "description": "Laravel Logger Package",
     "keywords": [
-            "Laravel activity",
-            "Laravel activity logger",
-            "Laravel activity log",
-            "Laravel logger",
-            "Laravel log"
-        ],
+        "Laravel activity",
+        "Laravel activity logger",
+        "Laravel activity log",
+        "Laravel logger",
+        "Laravel log"
+    ],
     "license": "MIT",
     "type": "package",
     "authors": [
         {
-            "name": "jeremykenedy",
+            "name": "Jeremy Kenedy",
             "email": "jeremykenedy@gmail.com"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "require": {
-        "php": ">=7.3.0|^8.0",
-        "jaybizzle/laravel-crawler-detect": "1.*"
+        "php": ">=7.3.0|^8.0"
     },
     "autoload": {
         "psr-4": {
             "jeremykenedy\\LaravelLogger\\": "src/"
         },
         "files": [
-            "src/App/Logic/helpers.php"
+            "src/App/Logic/helpers.php",
+            "src/Support/crawler-compatibility.php"
         ]
     },
     "extra": {
         "laravel": {
             "providers": [
                 "jeremykenedy\\LaravelLogger\\LaravelLoggerServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Crawler": "jeremykenedy\\LaravelLogger\\Facades\\Crawler"
+            }
         }
     },
     "config": {
         "sort-packages": true
     },
-    "minimum-stability": "stable",
     "require-dev": {
-        "larastan/larastan": "^3.7",
-        "rector/rector": "^2.2",
-        "rector/rector-laravel": "^2.1"
+        "larastan/larastan": "^1.0|^2.0|^3.7",
+        "laravel/pint": "^1.0",
+        "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0",
+        "phpstan/phpstan": "^1.12|^2.1",
+        "phpunit/phpunit": "^8.5|^9.6|^10.5|^11.5|^12.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "jeremykenedy\\LaravelLogger\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit",
+        "lint": "pint --test",
+        "analyse": "phpstan analyse --memory-limit=1G"
+    },
+    "suggest": {
+        "ext-zip": "Required for Excel workbook exports.",
+        "ext-xmlwriter": "Required for Excel workbook exports."
     }
 }
