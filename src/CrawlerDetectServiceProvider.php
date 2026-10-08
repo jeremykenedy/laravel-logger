@@ -16,7 +16,7 @@ class CrawlerDetectServiceProvider extends ServiceProvider
             });
         }
 
-        $this->app->rebinding('request', function ($app) {
+        $this->app->rebinding('request', function () {
             Crawler::clearResolvedInstance('LaravelCrawlerDetect');
         });
     }
