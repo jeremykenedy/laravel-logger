@@ -14,7 +14,7 @@ tools:
 build:
   environment:
     php:
-      version: '8.3'
+      version: '8.2'
   dependencies:
     override:
       - composer update --no-interaction --prefer-dist
