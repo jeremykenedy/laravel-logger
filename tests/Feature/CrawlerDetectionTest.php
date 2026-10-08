@@ -10,6 +10,7 @@ use jeremykenedy\LaravelLogger\App\Models\Activity;
 use jeremykenedy\LaravelLogger\CrawlerDetectServiceProvider;
 use jeremykenedy\LaravelLogger\Facades\Crawler;
 use jeremykenedy\LaravelLogger\Support\CrawlerDetect;
+use jeremykenedy\LaravelLogger\Support\CrawlerPatterns;
 use jeremykenedy\LaravelLogger\Tests\TestCase;
 
 class CrawlerDetectionTest extends TestCase
@@ -115,6 +116,34 @@ class CrawlerDetectionTest extends TestCase
         $this->app->instance('request', Request::create('/custom'));
         $this->assertSame($custom, Crawler::getFacadeRoot());
         $this->assertTrue(Crawler::isCrawler());
+    }
+
+    public function test_detector_subclasses_can_customize_headers_and_matching_without_changing_other_instances(): void
+    {
+        $detector = new class(['HTTP_CUSTOM_AGENT' => 'CompanyMonitor/1.0']) extends CrawlerDetect
+        {
+            public function getUaHttpHeaders()
+            {
+                return ['HTTP_CUSTOM_AGENT'];
+            }
+
+            public function compileRegex($patterns)
+            {
+                return parent::compileRegex($patterns === CrawlerPatterns::CRAWLERS ? array_merge($patterns, ['CompanyMonitor']) : $patterns);
+            }
+
+            public function restrictToCrawler($pattern)
+            {
+                $this->compiledRegex = $this->compileRegex([$pattern]);
+            }
+        };
+        $this->assertTrue($detector->isCrawler());
+        $this->assertSame('CompanyMonitor', $detector->getMatches());
+        $detector->restrictToCrawler('SpecialSpider');
+        $this->assertTrue($detector->isCrawler('SpecialSpider/1.0'));
+        $this->assertFalse($detector->isCrawler('Googlebot/2.1'));
+        $this->assertFalse((new CrawlerDetect)->isCrawler('CompanyMonitor/1.0'));
+        $this->assertTrue((new CrawlerDetect)->isCrawler('Googlebot/2.1'));
     }
 
     public function test_legacy_provider_facade_and_detector_names_remain_available(): void

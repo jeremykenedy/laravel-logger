@@ -10,6 +10,10 @@ class CrawlerDetect
 
     protected $matches = [];
 
+    protected $compiledRegex;
+
+    protected $compiledExclusions;
+
     protected static $crawlerRegex;
 
     protected static $exclusionRegex;
@@ -17,9 +21,12 @@ class CrawlerDetect
     public function __construct(?array $headers = null, $userAgent = null)
     {
         if (self::$crawlerRegex === null) {
-            self::$crawlerRegex = $this->compileRegex(CrawlerPatterns::CRAWLERS);
-            self::$exclusionRegex = $this->compileRegex(CrawlerPatterns::EXCLUSIONS);
+            self::$crawlerRegex = self::compileRegex(CrawlerPatterns::CRAWLERS);
+            self::$exclusionRegex = self::compileRegex(CrawlerPatterns::EXCLUSIONS);
         }
+
+        $this->compiledRegex = get_class($this) === self::class ? self::$crawlerRegex : $this->compileRegex(CrawlerPatterns::CRAWLERS);
+        $this->compiledExclusions = get_class($this) === self::class ? self::$exclusionRegex : $this->compileRegex(CrawlerPatterns::EXCLUSIONS);
 
         $this->setHttpHeaders($headers);
         $this->setUserAgent($userAgent);
@@ -33,7 +40,9 @@ class CrawlerDetect
     public function setHttpHeaders($httpHeaders = null)
     {
         $headers = is_array($httpHeaders) && $httpHeaders !== [] ? $httpHeaders : $_SERVER;
-        $this->httpHeaders = array_intersect_key($headers, array_flip($this->getUaHttpHeaders()));
+        $this->httpHeaders = array_filter($headers, function ($key) {
+            return strpos($key, 'HTTP_') === 0;
+        }, ARRAY_FILTER_USE_KEY);
     }
 
     public function getUaHttpHeaders()
@@ -59,12 +68,12 @@ class CrawlerDetect
     public function isCrawler($userAgent = null)
     {
         $this->matches = [];
-        $agent = preg_replace('/'.self::$exclusionRegex.'/i', '', $userAgent ?: $this->userAgent ?: '');
+        $agent = preg_replace('/'.$this->compiledExclusions.'/i', '', $userAgent ?: $this->userAgent ?: '');
         if ($agent === null || trim($agent) === '') {
             return false;
         }
 
-        if (preg_match('/'.self::$crawlerRegex.'/i', trim($agent), $this->matches) !== 1) {
+        if (preg_match('/'.$this->compiledRegex.'/i', trim($agent), $this->matches) !== 1) {
             $this->matches = [];
 
             return false;
