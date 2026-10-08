@@ -40,7 +40,7 @@
 
 `composer update` does not switch frameworks or replace your views or configuration. The default remains Bootstrap 4 with the existing Blade views. Modern views can also be selected explicitly for Bootstrap 3 or 4.
 
-The test matrix covers Laravel 8 through 13. The Composer runtime PHP constraint is unchanged. The package's existing anonymous migration requires PHP 8.0 or later for fresh migrations. Earlier framework installations are historical compatibility targets, not newly verified by this matrix. Cursor pagination requires a Laravel version that provides `cursorPaginate`.
+The test matrix covers Laravel 8 through 13, including Laravel 8 on PHP 7.3. The Composer runtime PHP constraint is unchanged. The existing anonymous migration requires Laravel's anonymous migration loader, available in Laravel 8.37 and later. Earlier framework installations are historical compatibility targets, not newly verified by this matrix. Cursor pagination requires a Laravel version that provides `cursorPaginate`.
 
 The dashboard is rendered by Blade. Livewire, Vue, React, and Svelte applications can link to it without installing another frontend runtime. This package does not ship separate client-side dashboards.
 

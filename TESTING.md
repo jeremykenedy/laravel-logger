@@ -15,7 +15,7 @@ The PHP suite boots the package with Orchestra Testbench and SQLite `:memory:`. 
 
 Browser tests use a local fixture server that boots Testbench, creates an in-memory database, registers the real package routes, and renders the real package views. The fixture is only reachable on the loopback address. Browser cases cover legacy Bootstrap 3/4 and modern Bootstrap 5/Tailwind views, desktop/mobile layouts, theme changes, date filters, details, and exports.
 
-GitHub Actions runs Laravel 8 through 13 across compatible PHP versions, plus formatting, static analysis, Composer validation, dependency auditing, browser tests, and coverage. The lowest-dependency job uses crawler-detect 1.1 or later, since earlier providers call Laravel's removed `share()` method. Legacy matrix jobs allow Composer to resolve historical framework dependencies; the current dependency audit remains strict. Composer's runtime PHP constraint and the original default framework are unchanged.
+GitHub Actions runs Laravel 8 through 13 across compatible PHP versions, including Laravel 8 on PHP 7.3, plus formatting, static analysis, Composer validation, dependency auditing, browser tests, and coverage. The PHP 7.3 job omits Pint, which requires PHP 8; formatting runs separately on current PHP. The lowest-dependency job uses crawler-detect 1.1 or later, since earlier providers call Laravel's removed `share()` method. Legacy matrix jobs allow Composer to resolve historical framework dependencies; the current dependency audit remains strict. Composer's runtime PHP constraint and the original default framework are unchanged.
 
 To generate coverage when a coverage driver is enabled:
 
@@ -23,4 +23,4 @@ To generate coverage when a coverage driver is enabled:
 vendor/bin/phpunit --coverage-clover coverage/clover.xml
 ```
 
-Historical migrations are kept unchanged. The existing 2025 anonymous migration requires PHP 8.0 for execution; its rollback can fail on SQLite because it drops an indexed column before dropping the index. The suite runs forward migrations against disposable databases rather than applying that rollback to user data.
+Historical migrations are kept unchanged. The existing 2025 anonymous migration requires Laravel 8.37 or later to load; its rollback can fail on SQLite because it drops an indexed column before dropping the index. The suite runs forward migrations against disposable databases rather than applying that rollback to user data.

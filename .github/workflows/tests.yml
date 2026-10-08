@@ -17,6 +17,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - {php: '7.3', laravel: '^8.40', testbench: '^6.23', dependencies: highest}
           - {php: '8.0', laravel: '^8.40', testbench: '^6.23', dependencies: highest}
           - {php: '8.1', laravel: '^9.0', testbench: '^7.0', dependencies: highest}
           - {php: '8.1', laravel: '^10.0', testbench: '^8.0', dependencies: highest}
@@ -36,6 +37,9 @@ jobs:
       - name: Resolve test framework
         run: |
           composer config audit.block-insecure false
+          if [ '${{ matrix.php }}' = '7.3' ]; then
+            composer remove --dev laravel/pint --no-update
+          fi
           composer require --dev "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-update
           if [ '${{ matrix.dependencies }}' = 'lowest' ]; then
             composer require 'jaybizzle/laravel-crawler-detect:^1.1' --no-update
